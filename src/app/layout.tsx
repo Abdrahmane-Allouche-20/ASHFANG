@@ -70,7 +70,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable}`}>
-      <body className="grain antialiased">
+      <body className="antialiased">
         <ScrollProgress />
         <Cursor />
         <SmoothScroll>{children}</SmoothScroll>
