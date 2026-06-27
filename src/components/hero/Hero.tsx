@@ -7,7 +7,7 @@ import { ArrowRight, ShieldCheck, ChevronDown } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { SITE } from "@/lib/site";
 
-const Scene = dynamic(() => import("./Scene"), { ssr: false });
+const Globe = dynamic(() => import("./Globe"), { ssr: false });
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -17,9 +17,9 @@ export default function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative flex min-h-[100svh] items-center justify-center overflow-hidden">
-      {/* 3D scene */}
-      <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
-        <Scene />
+      {/* 3D globe */}
+      <motion.div style={{ y, opacity }} className="absolute inset-0 z-0 flex items-center justify-center">
+        <Globe />
       </motion.div>
 
       {/* Background layers */}
