@@ -1,32 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/site";
 
-// liquid-glass-react reads `navigator` at render → must be client-only
-const LiquidGlass = dynamic(() => import("liquid-glass-react"), { ssr: false });
-
 export default function Nav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 h-20">
-      <LiquidGlass
-        style={{ position: "absolute", top: "50%", left: "50%", pointerEvents: "auto" }}
-        displacementScale={90}
-        blurAmount={0.09}
-        saturation={170}
-        aberrationIntensity={3}
-        elasticity={0.14}
-        cornerRadius={30}
-        padding="10px 16px"
-        mode="standard"
+    <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4">
+      {/* SVG displacement filter — pipes the backdrop through feDisplacementMap for a real liquid warp */}
+      <svg aria-hidden className="pointer-events-none absolute h-0 w-0">
+        <filter id="cyngard-liquid" x="-20%" y="-20%" width="140%" height="140%" colorInterpolationFilters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.006 0.013" numOctaves={2} seed={7} result="turb" />
+          <feGaussianBlur in="turb" stdDeviation={2.5} result="soft" />
+          <feDisplacementMap in="SourceGraphic" in2="soft" scale={42} xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
+
+      <motion.div
+        initial={{ y: -24, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.21, 0.5, 0.3, 1] }}
+        className="liquid-nav pointer-events-auto px-4 py-2.5"
       >
-        <nav className="flex items-center gap-5 sm:gap-7">
+        <nav className="relative z-10 flex items-center gap-5 sm:gap-7">
           <a href="#top" className="flex items-center gap-2.5">
             <Image
               src="/brand/logo-mark.png"
@@ -44,7 +44,7 @@ export default function Nav() {
               <a
                 key={l.href}
                 href={l.href}
-                className="group relative text-sm text-white/70 transition-colors hover:text-white"
+                className="group relative text-sm text-white/75 transition-colors hover:text-white"
               >
                 {l.label}
                 <span className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-violet to-cyan transition-all duration-300 group-hover:w-full" />
@@ -67,7 +67,7 @@ export default function Nav() {
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </nav>
-      </LiquidGlass>
+      </motion.div>
 
       <AnimatePresence>
         {open && (
@@ -75,7 +75,7 @@ export default function Nav() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="glass-panel pointer-events-auto fixed inset-x-4 top-24 rounded-2xl p-5 md:hidden"
+            className="glass-panel pointer-events-auto fixed inset-x-4 top-20 rounded-2xl p-5 md:hidden"
           >
             <div className="flex flex-col gap-4">
               {NAV_LINKS.map((l) => (
