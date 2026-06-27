@@ -1,16 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-base: #07070b;
-  --color-ink: #0b0b12;
-  --color-surface: #101019;
-  --color-line: #1c1c28;
+  --color-base: #08080f;
+  --color-ink: #0c0c16;
+  --color-surface: #14141f;
+  --color-surface-2: #1b1b29;
+  --color-line: #27273a;
   --color-violet: #8b5cf6;
   --color-violet-soft: #a78bfa;
   --color-cyan: #22d3ee;
   --color-cyan-soft: #67e8f9;
-  --color-fg: #f4f4f8;
-  --color-muted: #9a9ab0;
+  --color-fg: #f7f7fc;
+  --color-muted: #adaec8;
 
   --font-display: var(--font-space-grotesk);
   --font-sans: var(--font-inter);
@@ -40,8 +41,24 @@ body {
   overflow-x: hidden;
 }
 
+/* Atmospheric depth — fixed light pools so the page reads as a designed dark space,
+   never a flat black void. This is the foundation for the whole site's clarity. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 45% at 50% -6%, rgba(139, 92, 246, 0.22), transparent 62%),
+    radial-gradient(42% 40% at 86% 16%, rgba(34, 211, 238, 0.11), transparent 60%),
+    radial-gradient(45% 40% at 8% 52%, rgba(139, 92, 246, 0.13), transparent 60%),
+    radial-gradient(50% 42% at 92% 78%, rgba(34, 211, 238, 0.09), transparent 60%),
+    radial-gradient(60% 50% at 50% 108%, rgba(139, 92, 246, 0.1), transparent 62%);
+}
+
 ::selection {
-  background: rgba(139, 92, 246, 0.35);
+  background: rgba(139, 92, 246, 0.4);
   color: #fff;
 }
 
@@ -74,50 +91,39 @@ body {
   animation: shimmer 6s linear infinite;
 }
 
+/* Frosted panel */
 .glass-panel {
-  background: rgba(16, 16, 25, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(20, 20, 32, 0.72);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
 }
 
-/* ---------- Real liquid glass (nav) ----------
-   Frost via backdrop blur + saturate, and a genuine refraction warp by piping
-   the backdrop through an SVG feDisplacementMap (#cyngard-liquid). The url() in
-   backdrop-filter is Chromium-only; Safari/Firefox fall back to frost (-webkit-). */
-.liquid-nav {
+/* Elevated content card */
+.card {
   position: relative;
-  border-radius: 30px;
-  overflow: hidden;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04));
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  -webkit-backdrop-filter: blur(18px) saturate(185%) brightness(1.08);
-  backdrop-filter: blur(18px) saturate(185%) brightness(1.08);
-  box-shadow:
-    inset 0 1px 1px rgba(255, 255, 255, 0.6),
-    inset 0 -2px 10px rgba(255, 255, 255, 0.08),
-    inset 0 0 22px rgba(139, 92, 246, 0.12),
-    0 14px 48px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.06), 0 8px 30px -12px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
 }
-/* Chrome-only liquid refraction enhancement (opt-in via .liquid-warp) */
-@supports (backdrop-filter: url(#x)) {
-  .liquid-nav.liquid-warp {
-    backdrop-filter: blur(4px) saturate(185%) brightness(1.08) url(#cyngard-liquid);
-  }
+.card:hover {
+  border-color: rgba(139, 92, 246, 0.42);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 24px 55px -22px rgba(139, 92, 246, 0.55);
 }
-/* moving specular sheen */
-.liquid-nav::before {
+
+/* Section ambient glow (apply to a relatively-positioned section) */
+.glow-top::before {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: inherit;
+  z-index: 0;
   pointer-events: none;
-  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
-  background-size: 250% 100%;
-  animation: sheen 7s linear infinite;
+  background: radial-gradient(60% 70% at 50% -10%, rgba(139, 92, 246, 0.12), transparent 60%);
 }
-@keyframes sheen { to { background-position: -250% 0; } }
-@media (prefers-reduced-motion: reduce) { .liquid-nav::before { animation: none; } }
 
 .ring-gradient {
   position: relative;
@@ -128,18 +134,18 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(140deg, rgba(139, 92, 246, 0.6), rgba(34, 211, 238, 0.25), transparent 60%);
+  background: linear-gradient(140deg, rgba(139, 92, 246, 0.75), rgba(34, 211, 238, 0.4), transparent 62%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
 }
 
-/* Background helpers */
+/* Background grid */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
@@ -154,18 +160,47 @@ body {
   inset: -200%;
   z-index: 9998;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain 0.6s steps(2) infinite;
 }
 
-/* Hide native cursor only when custom cursor is active (desktop) */
 .cursor-none, .cursor-none * { cursor: none !important; }
 
-/* ---------- Keyframes ---------- */
-@keyframes shimmer {
-  to { background-position: 250% center; }
+/* ---------- Real liquid glass (nav) ---------- */
+.liquid-nav {
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(18px) saturate(185%) brightness(1.08);
+  backdrop-filter: blur(18px) saturate(185%) brightness(1.08);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 10px rgba(255, 255, 255, 0.08),
+    inset 0 0 22px rgba(139, 92, 246, 0.12),
+    0 14px 48px rgba(0, 0, 0, 0.5);
 }
+@supports (backdrop-filter: url(#x)) {
+  .liquid-nav.liquid-warp {
+    backdrop-filter: blur(4px) saturate(185%) brightness(1.08) url(#cyngard-liquid);
+  }
+}
+.liquid-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+  background-size: 250% 100%;
+  animation: sheen 7s linear infinite;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes shimmer { to { background-position: 250% center; } }
+@keyframes sheen { to { background-position: -250% 0; } }
 @keyframes grain {
   0%, 100% { transform: translate(0, 0); }
   25% { transform: translate(-3%, 2%); }
@@ -178,18 +213,13 @@ body {
 }
 .animate-float { animation: float-slow 7s ease-in-out infinite; }
 
-@keyframes marquee {
-  to { transform: translateX(-50%); }
-}
+@keyframes marquee { to { transform: translateX(-50%); } }
 .animate-marquee { animation: marquee 28s linear infinite; }
 
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .text-gradient-anim { animation: none; }
-  .grain::after { animation: none; }
-  .animate-float, .animate-marquee { animation: none; }
+  .text-gradient-anim,
+  .grain::after,
+  .liquid-nav::before,
+  .animate-float,
+  .animate-marquee { animation: none; }
 }
