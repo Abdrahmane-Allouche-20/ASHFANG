@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
+import RadialGlowButton from "@/components/vendor/radial-glow-button";
 
 export default function CTA() {
   return (
@@ -15,12 +16,13 @@ export default function CTA() {
             Book a free, no-obligation security assessment. We&apos;ll show you where you stand —
             and exactly what to fix first.
           </p>
-          <a
-            href="#contact"
-            className="mt-9 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet to-cyan px-8 py-4 text-sm font-medium text-[#07070b] shadow-glow transition-shadow hover:shadow-[0_0_70px_-10px_rgba(34,211,238,0.7)]"
-          >
-            Get started <ArrowRight size={16} />
-          </a>
+          <div className="mt-9 flex justify-center">
+            <RadialGlowButton href="#contact">
+              <span className="inline-flex items-center gap-2">
+                Get started <ArrowRight size={16} />
+              </span>
+            </RadialGlowButton>
+          </div>
         </div>
       </Reveal>
     </section>

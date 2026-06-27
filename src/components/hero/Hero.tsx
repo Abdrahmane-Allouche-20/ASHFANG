@@ -7,11 +7,13 @@ import { ArrowRight, ShieldCheck, ChevronDown } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { SITE } from "@/lib/site";
 import AuroraBackground from "@/components/vendor/aurora-background";
+import CyberGlitchText from "@/components/vendor/cyber-glitch-text";
+import RadialGlowButton from "@/components/vendor/radial-glow-button";
 
 const Globe = dynamic(() => import("./Globe"), { ssr: false });
 
-// Hero background: "globe" (default, verified) or "aurora" (VengeanceUI aurora — flip to enable).
-const HERO_BG = "globe" as "globe" | "aurora";
+// Hero background: "globe" or "aurora" (VengeanceUI aurora).
+const HERO_BG = "aurora" as "globe" | "aurora";
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -59,7 +61,7 @@ export default function Hero() {
           className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
         >
           Security that thinks <br className="hidden sm:block" />
-          like <span className="text-gradient-anim">an attacker.</span>
+          like <CyberGlitchText text="an attacker." className="text-gradient-anim" />
         </motion.h1>
 
         <motion.p
@@ -78,9 +80,11 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.5 }}
           className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
-          <MagneticButton href="#contact" variant="primary">
-            Book a free assessment <ArrowRight size={16} />
-          </MagneticButton>
+          <RadialGlowButton href="#contact">
+            <span className="inline-flex items-center gap-2">
+              Book a free assessment <ArrowRight size={16} />
+            </span>
+          </RadialGlowButton>
           <MagneticButton href="#services" variant="ghost">
             Explore our services
           </MagneticButton>
