@@ -22,7 +22,7 @@ export default function WhyCyngard() {
               <Reveal
                 key={w.title}
                 delay={i * 0.08}
-                className="group bg-base p-7 transition-colors hover:bg-surface"
+                className="group bg-surface/80 p-7 transition-colors hover:bg-surface-2"
               >
                 <div className="mb-4 font-mono text-sm text-violet-soft">{String(i + 1).padStart(2, "0")}</div>
                 <h3 className="font-display text-lg font-semibold">{w.title}</h3>

@@ -18,7 +18,7 @@ export default function Contact() {
   };
 
   const field =
-    "w-full rounded-xl border border-line bg-ink/60 px-4 py-3 text-sm text-fg outline-none transition-colors placeholder:text-muted/60 focus:border-violet/60";
+    "w-full rounded-xl border border-white/10 bg-surface/70 px-4 py-3 text-sm text-fg outline-none transition-colors placeholder:text-muted/60 focus:border-violet/60 focus:bg-surface-2";
 
   return (
     <section id="contact" className="relative mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
