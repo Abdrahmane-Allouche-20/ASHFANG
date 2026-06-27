@@ -11,6 +11,7 @@ import {
 import { Check } from "lucide-react";
 import { SERVICES, type Service } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
+import BorderBeam from "@/components/vendor/border-beam";
 
 function TiltCard({ service, index }: { service: Service; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -51,6 +52,7 @@ function TiltCard({ service, index }: { service: Service; index: number }) {
         className="card ring-gradient group relative h-full overflow-hidden p-7"
       >
         <motion.div style={{ background: spotlight }} className="pointer-events-none absolute inset-0" />
+        <BorderBeam size={240} duration={9} delay={index * 1.5} className="opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         <div style={{ transform: "translateZ(40px)" }} className="relative">
           <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet/30 to-cyan/15 ring-1 ring-white/15 shadow-[0_0_20px_-6px_rgba(139,92,246,0.6)]">
             <Icon size={22} className={accent} />

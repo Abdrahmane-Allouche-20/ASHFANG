@@ -6,8 +6,12 @@ import { useRef } from "react";
 import { ArrowRight, ShieldCheck, ChevronDown } from "lucide-react";
 import MagneticButton from "@/components/ui/MagneticButton";
 import { SITE } from "@/lib/site";
+import AuroraBackground from "@/components/vendor/aurora-background";
 
 const Globe = dynamic(() => import("./Globe"), { ssr: false });
+
+// Hero background: "globe" (default, verified) or "aurora" (VengeanceUI aurora — flip to enable).
+const HERO_BG = "globe" as "globe" | "aurora";
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -17,9 +21,15 @@ export default function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative flex min-h-[100svh] items-center justify-center overflow-hidden">
-      {/* 3D globe */}
-      <motion.div style={{ y, opacity }} className="absolute inset-0 z-0 flex items-center justify-center">
-        <Globe />
+      {/* Hero background */}
+      <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
+        {HERO_BG === "aurora" ? (
+          <AuroraBackground />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <Globe />
+          </div>
+        )}
       </motion.div>
 
       {/* Background layers */}
