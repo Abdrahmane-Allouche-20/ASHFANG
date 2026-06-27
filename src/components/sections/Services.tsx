@@ -48,7 +48,7 @@ function TiltCard({ service, index }: { service: Service; index: number }) {
         onMouseMove={onMove}
         onMouseLeave={reset}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="ring-gradient group relative h-full overflow-hidden rounded-2xl glass p-7 transition-shadow duration-500 hover:shadow-glow"
+        className="ring-gradient group relative h-full overflow-hidden rounded-2xl glass-panel p-7 transition-shadow duration-500 hover:shadow-glow"
       >
         <motion.div style={{ background: spotlight }} className="pointer-events-none absolute inset-0" />
         <div style={{ transform: "translateZ(40px)" }} className="relative">

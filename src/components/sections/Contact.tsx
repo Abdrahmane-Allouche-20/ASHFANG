@@ -35,7 +35,7 @@ export default function Contact() {
 
           <a
             href={`mailto:${SITE.email}`}
-            className="mt-8 inline-flex items-center gap-3 rounded-xl glass px-5 py-4 transition-colors hover:border-violet/40"
+            className="mt-8 inline-flex items-center gap-3 rounded-xl glass-panel px-5 py-4 transition-colors hover:border-violet/40"
           >
             <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-violet/20 to-cyan/10 ring-1 ring-white/10">
               <Mail size={18} className="text-cyan" />
@@ -49,7 +49,7 @@ export default function Contact() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <form onSubmit={onSubmit} className="ring-gradient rounded-2xl glass p-6 sm:p-8">
+          <form onSubmit={onSubmit} className="ring-gradient rounded-2xl glass-panel p-6 sm:p-8">
             <div className="grid gap-4 sm:grid-cols-2">
               <input
                 required
@@ -83,7 +83,7 @@ export default function Contact() {
             />
             <button
               type="submit"
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet to-cyan px-6 py-3.5 text-sm font-medium text-base transition-shadow hover:shadow-glow"
+              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet to-cyan px-6 py-3.5 text-sm font-medium text-[#07070b] transition-shadow hover:shadow-glow"
             >
               Send message <Send size={15} />
             </button>

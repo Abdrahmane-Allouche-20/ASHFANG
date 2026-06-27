@@ -43,8 +43,8 @@ export default function MagneticButton({
       className={clsx(
         "group relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium tracking-wide transition-colors",
         variant === "primary"
-          ? "bg-gradient-to-r from-violet to-cyan text-base shadow-glow hover:shadow-[0_0_70px_-10px_rgba(34,211,238,0.7)]"
-          : "glass text-fg hover:border-violet/40",
+          ? "bg-gradient-to-r from-violet to-cyan text-[#07070b] shadow-glow hover:shadow-[0_0_70px_-10px_rgba(34,211,238,0.7)]"
+          : "glass-panel text-fg hover:border-violet/40",
         className,
       )}
     >

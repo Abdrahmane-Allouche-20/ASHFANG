@@ -34,7 +34,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 font-mono text-xs text-muted"
+          className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full glass-panel px-4 py-1.5 font-mono text-xs text-muted"
         >
           <ShieldCheck size={14} className="text-cyan" />
           CYBERSECURITY · ENGINEERED

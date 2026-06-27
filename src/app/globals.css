@@ -74,7 +74,7 @@ body {
   animation: shimmer 6s linear infinite;
 }
 
-.glass {
+.glass-panel {
   background: rgba(16, 16, 25, 0.6);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
