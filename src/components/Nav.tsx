@@ -17,13 +17,14 @@ export default function Nav() {
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 h-20">
       <LiquidGlass
         style={{ position: "absolute", top: "50%", left: "50%", pointerEvents: "auto" }}
-        displacementScale={64}
-        blurAmount={0.06}
-        saturation={130}
-        aberrationIntensity={2}
-        elasticity={0.1}
-        cornerRadius={28}
-        padding="8px 14px"
+        displacementScale={90}
+        blurAmount={0.09}
+        saturation={170}
+        aberrationIntensity={3}
+        elasticity={0.14}
+        cornerRadius={30}
+        padding="10px 16px"
+        mode="standard"
       >
         <nav className="flex items-center gap-5 sm:gap-7">
           <a href="#top" className="flex items-center gap-2.5">
