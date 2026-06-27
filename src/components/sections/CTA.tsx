@@ -4,7 +4,7 @@ import Reveal from "@/components/ui/Reveal";
 export default function CTA() {
   return (
     <section className="relative mx-auto max-w-6xl px-6 py-24">
-      <Reveal className="ring-gradient relative overflow-hidden rounded-3xl glass px-8 py-16 text-center sm:px-16">
+      <Reveal className="ring-gradient relative overflow-hidden rounded-3xl glass-panel px-8 py-16 text-center sm:px-16">
         <div className="pointer-events-none absolute -left-20 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-violet/20 blur-[120px]" />
         <div className="pointer-events-none absolute -right-20 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-cyan/15 blur-[120px]" />
         <div className="relative">
@@ -17,7 +17,7 @@ export default function CTA() {
           </p>
           <a
             href="#contact"
-            className="mt-9 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet to-cyan px-8 py-4 text-sm font-medium text-base shadow-glow transition-shadow hover:shadow-[0_0_70px_-10px_rgba(34,211,238,0.7)]"
+            className="mt-9 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-violet to-cyan px-8 py-4 text-sm font-medium text-[#07070b] shadow-glow transition-shadow hover:shadow-[0_0_70px_-10px_rgba(34,211,238,0.7)]"
           >
             Get started <ArrowRight size={16} />
           </a>

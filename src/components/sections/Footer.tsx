@@ -31,7 +31,7 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg glass text-muted transition-colors hover:text-fg"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg glass-panel text-muted transition-colors hover:text-fg"
                 >
                   <s.icon size={18} />
                 </a>
