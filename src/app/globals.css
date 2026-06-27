@@ -81,6 +81,12 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* Liquid-glass nav island: a faint fill so the panel reads on the dark hero
+   (the library leaves .glass background-less and relies on bright content behind) */
+header .glass {
+  background: rgba(255, 255, 255, 0.05);
+}
+
 .ring-gradient {
   position: relative;
 }

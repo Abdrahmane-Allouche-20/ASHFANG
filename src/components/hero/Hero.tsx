@@ -24,6 +24,8 @@ export default function Hero() {
 
       {/* Background layers */}
       <div className="pointer-events-none absolute inset-0 z-0 bg-grid" />
+      {/* Bright band behind the nav so the liquid glass has something vivid to refract */}
+      <div className="animate-float pointer-events-none absolute -top-24 left-1/2 z-0 h-[320px] w-[1100px] max-w-[120vw] -translate-x-1/2 rounded-[100%] bg-gradient-to-r from-violet/40 via-fuchsia-500/30 to-cyan/40 blur-[80px]" />
       <div className="pointer-events-none absolute -top-1/3 left-1/2 z-0 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-violet/20 blur-[140px]" />
       <div className="pointer-events-none absolute bottom-0 left-1/4 z-0 h-[400px] w-[400px] rounded-full bg-cyan/10 blur-[120px]" />
       <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-base/10 via-transparent to-base" />
