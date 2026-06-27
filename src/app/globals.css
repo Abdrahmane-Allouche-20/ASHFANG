@@ -41,8 +41,8 @@ body {
   overflow-x: hidden;
 }
 
-/* Atmospheric depth — fixed light pools so the page reads as a designed dark space,
-   never a flat black void. This is the foundation for the whole site's clarity. */
+/* Atmospheric depth — clean, smooth, symmetric light so the page has subtle
+   dimension without looking blotchy or noisy. Stable and even. */
 body::before {
   content: "";
   position: fixed;
@@ -50,11 +50,8 @@ body::before {
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(55% 45% at 50% -6%, rgba(139, 92, 246, 0.22), transparent 62%),
-    radial-gradient(42% 40% at 86% 16%, rgba(34, 211, 238, 0.11), transparent 60%),
-    radial-gradient(45% 40% at 8% 52%, rgba(139, 92, 246, 0.13), transparent 60%),
-    radial-gradient(50% 42% at 92% 78%, rgba(34, 211, 238, 0.09), transparent 60%),
-    radial-gradient(60% 50% at 50% 108%, rgba(139, 92, 246, 0.1), transparent 62%);
+    radial-gradient(75% 55% at 50% -12%, rgba(139, 92, 246, 0.16), transparent 70%),
+    radial-gradient(70% 50% at 50% 112%, rgba(34, 211, 238, 0.07), transparent 72%);
 }
 
 ::selection {

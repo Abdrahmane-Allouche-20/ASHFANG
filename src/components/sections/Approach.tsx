@@ -19,8 +19,8 @@ export default function Approach() {
         <div className="grid gap-8 lg:grid-cols-4">
           {APPROACH.map((a, i) => (
             <Reveal key={a.step} delay={i * 0.1} className="relative">
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl glass-panel ring-gradient font-display text-lg font-bold text-gradient">
-                {a.step}
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl glass-panel ring-gradient">
+                <span className="font-display text-lg font-bold text-gradient">{a.step}</span>
               </div>
               <h3 className="font-display text-lg font-semibold">{a.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{a.text}</p>
