@@ -43,7 +43,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-base/10 via-transparent to-base" />
 
       {/* Content */}
-      <motion.div style={{ opacity }} className="relative z-10 mx-auto max-w-4xl px-6 text-center">
+      <motion.div style={{ opacity }} className="relative z-10 mx-auto max-w-5xl px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2, ease: [0.21, 0.5, 0.3, 1] }}
-          className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
+          className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-[5rem]"
         >
           Security that thinks <br className="hidden sm:block" />
           like <CyberGlitchText text="an attacker." className="text-gradient-anim" />
