@@ -93,11 +93,11 @@ function ServiceCard({
 
           {feature && (
             <>
-              <p className="mt-4 max-w-lg text-sm leading-relaxed text-fg/65">{FEATURE.why}</p>
+              <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/65">{FEATURE.why}</p>
 
               <ul className="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
                 {FEATURE.includes.map((it) => (
-                  <li key={it} className="flex items-start gap-2 text-sm text-fg/85">
+                  <li key={it} className="flex items-start gap-2 text-sm text-white/85">
                     <Check size={15} className="mt-0.5 shrink-0 text-cyan" />
                     {it}
                   </li>
@@ -115,7 +115,7 @@ function ServiceCard({
             {service.points.map((p) => (
               <span
                 key={p}
-                className="rounded-md border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[11px] text-fg/65 transition-colors group-hover:border-white/15 group-hover:text-fg/85"
+                className="rounded-md border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[11px] text-white/65 transition-colors group-hover:border-white/15 group-hover:text-white/85"
               >
                 {p}
               </span>
