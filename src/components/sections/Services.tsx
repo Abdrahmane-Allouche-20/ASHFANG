@@ -5,6 +5,7 @@ import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { Check } from "lucide-react";
 import { SERVICES, type Service } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
+import Parallax from "@/components/ui/Parallax";
 import { cn } from "@/lib/cn";
 
 // Asymmetric bento spans (12-col grid). First card is the feature, spans 2 rows.
@@ -128,8 +129,8 @@ function ServiceCard({
 
 export default function Services() {
   return (
-    <section id="services" className="relative scroll-mt-24 px-6 py-24">
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(55%_45%_at_18%_0%,rgba(139,92,246,0.13),transparent_60%),radial-gradient(45%_45%_at_92%_55%,rgba(34,211,238,0.08),transparent_60%)]" />
+    <section id="services" className="relative scroll-mt-24 overflow-hidden px-6 py-24">
+      <Parallax speed={0.22} className="pointer-events-none absolute inset-[-20%] z-0 bg-[radial-gradient(50%_40%_at_18%_18%,rgba(139,92,246,0.14),transparent_60%),radial-gradient(42%_42%_at_90%_60%,rgba(34,211,238,0.09),transparent_60%)]" />
 
       <div className="relative z-10 mx-auto max-w-6xl">
         <Reveal className="mb-12 flex flex-col gap-5 border-b border-white/[0.08] pb-8 md:flex-row md:items-end md:justify-between">
