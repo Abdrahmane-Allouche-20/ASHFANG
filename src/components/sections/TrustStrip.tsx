@@ -21,7 +21,7 @@ export default function TrustStrip() {
           {[...TAGS, ...TAGS].map((t, i) => (
             <span
               key={i}
-              className="whitespace-nowrap font-display text-lg font-semibold text-muted/70 transition-colors hover:text-fg"
+              className="whitespace-nowrap font-display text-lg font-semibold text-muted transition-colors hover:text-fg"
             >
               {t}
             </span>

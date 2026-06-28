@@ -59,7 +59,7 @@ export default function Nav() {
                   href={l.href}
                   className={cn(
                     "group relative text-sm transition-colors duration-300",
-                    isActive ? "text-white" : "text-white/65 hover:text-white",
+                    isActive ? "text-white" : "text-white hover:text-white",
                   )}
                 >
                   {l.label}
