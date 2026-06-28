@@ -1,80 +1,87 @@
 "use client";
 
 import { useRef } from "react";
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "framer-motion";
-import { Check } from "lucide-react";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { SERVICES, type Service } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
-import BorderBeam from "@/components/vendor/border-beam";
+import { cn } from "@/lib/cn";
 
-function TiltCard({ service, index }: { service: Service; index: number }) {
+// Asymmetric bento spans (12-col grid). First card is the feature, spans 2 rows.
+const SPANS = [
+  "lg:col-span-7 lg:row-span-2",
+  "lg:col-span-5",
+  "lg:col-span-5",
+  "lg:col-span-6",
+  "lg:col-span-6",
+];
+
+function ServiceCard({
+  service,
+  index,
+  span,
+  feature,
+}: {
+  service: Service;
+  index: number;
+  span: string;
+  feature: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
-  const mx = useMotionValue(0.5);
-  const my = useMotionValue(0.5);
   const px = useMotionValue(50);
   const py = useMotionValue(50);
-
-  const rotateX = useSpring(useTransform(my, [0, 1], [7, -7]), { stiffness: 180, damping: 18 });
-  const rotateY = useSpring(useTransform(mx, [0, 1], [-7, 7]), { stiffness: 180, damping: 18 });
-  const spotlight = useMotionTemplate`radial-gradient(320px circle at ${px}% ${py}%, rgba(139,92,246,0.16), transparent 65%)`;
+  const spotlight = useMotionTemplate`radial-gradient(420px circle at ${px}% ${py}%, rgba(139,92,246,0.15), transparent 60%)`;
 
   const onMove = (e: React.MouseEvent) => {
     const r = ref.current?.getBoundingClientRect();
     if (!r) return;
-    const x = (e.clientX - r.left) / r.width;
-    const y = (e.clientY - r.top) / r.height;
-    mx.set(x);
-    my.set(y);
-    px.set(x * 100);
-    py.set(y * 100);
-  };
-  const reset = () => {
-    mx.set(0.5);
-    my.set(0.5);
+    px.set(((e.clientX - r.left) / r.width) * 100);
+    py.set(((e.clientY - r.top) / r.height) * 100);
   };
 
   const Icon = service.icon;
   const accent = service.accent === "violet" ? "text-violet" : "text-cyan";
 
   return (
-    <Reveal delay={index * 0.06} className="[perspective:1200px]">
-      <motion.div
+    <Reveal delay={index * 0.05} className={cn("group relative", span)}>
+      <div
         ref={ref}
         onMouseMove={onMove}
-        onMouseLeave={reset}
-        whileHover={{ y: -6 }}
-        transition={{ type: "spring", stiffness: 300, damping: 22 }}
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="card group relative h-full overflow-hidden p-7"
+        className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 transition-colors duration-500 hover:border-violet/40"
       >
-        <motion.div style={{ background: spotlight }} className="pointer-events-none absolute inset-0" />
-        <BorderBeam
-          size={180}
-          duration={8}
-          className="opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        {/* cursor spotlight */}
+        <motion.div
+          style={{ background: spotlight }}
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         />
-        <div style={{ transform: "translateZ(40px)" }} className="relative">
-          <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet/30 to-cyan/15 ring-1 ring-white/15 shadow-[0_0_20px_-6px_rgba(139,92,246,0.6)]">
-            <Icon size={22} className={accent} />
-          </div>
-          <h3 className="font-display text-xl font-semibold">{service.title}</h3>
-          <p className="mt-2.5 text-sm leading-relaxed text-muted">{service.blurb}</p>
-          <ul className="mt-5 space-y-2">
+        {/* HUD corner brackets */}
+        <span className="pointer-events-none absolute left-3 top-3 h-4 w-4 border-l border-t border-white/15 transition-colors duration-500 group-hover:border-cyan/70" />
+        <span className="pointer-events-none absolute bottom-3 right-3 h-4 w-4 border-b border-r border-white/15 transition-colors duration-500 group-hover:border-violet/70" />
+        {/* ghost numeral */}
+        <span className="pointer-events-none absolute right-5 top-4 select-none font-mono text-5xl font-bold leading-none text-white/[0.045] transition-colors duration-500 group-hover:text-white/[0.08]">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+
+        <div className="relative flex h-full flex-col">
+          <Icon size={feature ? 30 : 22} className={cn(accent, "mb-5 drop-shadow-[0_0_14px_rgba(139,92,246,0.5)]")} />
+          <h3 className={cn("font-display font-semibold tracking-tight", feature ? "text-2xl sm:text-3xl" : "text-xl")}>
+            {service.title}
+          </h3>
+          <p className={cn("mt-3 leading-relaxed text-muted", feature ? "max-w-md text-base" : "text-sm")}>
+            {service.blurb}
+          </p>
+
+          <div className="mt-auto flex flex-wrap gap-2 pt-7">
             {service.points.map((p) => (
-              <li key={p} className="flex items-center gap-2 text-sm text-fg/80">
-                <Check size={14} className={accent} />
+              <span
+                key={p}
+                className="rounded-md border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[11px] text-fg/65 transition-colors group-hover:border-white/15 group-hover:text-fg/85"
+              >
                 {p}
-              </li>
+              </span>
             ))}
-          </ul>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </Reveal>
   );
 }
@@ -82,22 +89,26 @@ function TiltCard({ service, index }: { service: Service; index: number }) {
 export default function Services() {
   return (
     <section id="services" className="relative scroll-mt-24 px-6 py-24">
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(55%_45%_at_18%_0%,rgba(139,92,246,0.13),transparent_60%),radial-gradient(45%_45%_at_88%_50%,rgba(34,211,238,0.09),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(55%_45%_at_18%_0%,rgba(139,92,246,0.13),transparent_60%),radial-gradient(45%_45%_at_92%_55%,rgba(34,211,238,0.08),transparent_60%)]" />
+
       <div className="relative z-10 mx-auto max-w-6xl">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-cyan">01 / What we do</p>
-          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
-            Full-spectrum <span className="text-gradient">security</span>
-          </h2>
-          <p className="mx-auto mt-4 text-muted">
-            Offense, defense, and secure engineering — the complete coverage most companies stitch
-            together from three vendors, delivered by one team.
+        {/* Editorial, left-aligned header */}
+        <Reveal className="mb-12 flex flex-col gap-5 border-b border-white/[0.08] pb-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="mb-4 font-mono text-xs tracking-[0.3em] text-cyan">// 01 — WHAT WE DO</p>
+            <h2 className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">
+              Full-spectrum <span className="text-gradient">security.</span>
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm leading-relaxed text-muted md:text-right">
+            Offense, defense, and secure engineering — the coverage most companies stitch from three
+            vendors, delivered by one.
           </p>
         </Reveal>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 lg:auto-rows-fr lg:grid-cols-12">
           {SERVICES.map((s, i) => (
-            <TiltCard key={s.title} service={s} index={i} />
+            <ServiceCard key={s.title} service={s} index={i} span={SPANS[i]} feature={i === 0} />
           ))}
         </div>
       </div>
