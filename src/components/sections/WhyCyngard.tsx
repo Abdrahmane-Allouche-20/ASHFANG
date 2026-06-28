@@ -1,6 +1,7 @@
 import { WHY } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
 import Parallax from "@/components/ui/Parallax";
+import Spotlight from "@/components/ui/Spotlight";
 
 export default function WhyCyngard() {
   return (
@@ -19,16 +20,16 @@ export default function WhyCyngard() {
             </p>
           </Reveal>
 
-          <div className="grid gap-px overflow-hidden rounded-2xl bg-line/60 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {WHY.map((w, i) => (
-              <Reveal
-                key={w.title}
-                delay={i * 0.08}
-                className="group bg-surface/80 p-7 transition-colors hover:bg-surface-2"
-              >
-                <div className="mb-4 font-mono text-sm text-violet-soft">{String(i + 1).padStart(2, "0")}</div>
-                <h3 className="font-display text-lg font-semibold">{w.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{w.text}</p>
+              <Reveal key={w.title} delay={i * 0.08}>
+                <Spotlight className="h-full rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-violet/40">
+                  <div className="mb-4 font-mono text-2xl font-bold text-gradient opacity-50 transition-opacity duration-300 group-hover:opacity-100">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <h3 className="font-display text-lg font-semibold">{w.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{w.text}</p>
+                </Spotlight>
               </Reveal>
             ))}
           </div>

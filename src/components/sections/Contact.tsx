@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Mail, Send, ArrowUpRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
 import Parallax from "@/components/ui/Parallax";
+import Spotlight from "@/components/ui/Spotlight";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
@@ -19,7 +21,7 @@ export default function Contact() {
   };
 
   const field =
-    "w-full rounded-xl border border-white/10 bg-surface/70 px-4 py-3 text-sm text-fg outline-none transition-colors placeholder:text-muted/60 focus:border-violet/60 focus:bg-surface-2";
+    "w-full rounded-xl border border-white/10 bg-surface/70 px-4 py-3 text-sm text-fg outline-none transition-all placeholder:text-muted/60 focus:border-violet/60 focus:bg-surface-2 focus:ring-2 focus:ring-violet/25";
 
   return (
     <section id="contact" className="relative scroll-mt-24 overflow-hidden px-6 py-28">
@@ -37,7 +39,7 @@ export default function Contact() {
 
           <a
             href={`mailto:${SITE.email}`}
-            className="mt-8 inline-flex items-center gap-3 rounded-xl glass-panel px-5 py-4 transition-colors hover:border-violet/40"
+            className="mt-8 inline-flex items-center gap-3 rounded-xl glass-panel px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-violet/40 hover:shadow-glow"
           >
             <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-violet/20 to-cyan/10 ring-1 ring-white/10">
               <Mail size={18} className="text-cyan" />
@@ -51,7 +53,8 @@ export default function Contact() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <form onSubmit={onSubmit} className="ring-gradient rounded-2xl glass-panel p-6 sm:p-8">
+          <Spotlight className="ring-gradient rounded-2xl glass-panel p-6 sm:p-8">
+          <form onSubmit={onSubmit}>
             <div className="grid gap-4 sm:grid-cols-2">
               <input
                 required
@@ -83,13 +86,16 @@ export default function Contact() {
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               className={`${field} mt-4 resize-none`}
             />
-            <button
+            <motion.button
               type="submit"
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet to-cyan px-6 py-3.5 text-sm font-medium text-[#07070b] transition-shadow hover:shadow-glow"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className="group mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-violet to-cyan px-6 py-3.5 text-sm font-medium text-[#07070b] transition-shadow hover:shadow-glow"
             >
-              Send message <Send size={15} />
-            </button>
+              Send message <Send size={15} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+            </motion.button>
           </form>
+          </Spotlight>
         </Reveal>
       </div>
     </section>

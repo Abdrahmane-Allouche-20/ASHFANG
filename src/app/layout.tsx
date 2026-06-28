@@ -3,7 +3,6 @@ import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
-import Cursor from "@/components/Cursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 
 const spaceGrotesk = Space_Grotesk({
@@ -72,7 +71,6 @@ export default function RootLayout({
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable}`}>
       <body className="antialiased">
         <ScrollProgress />
-        <Cursor />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
