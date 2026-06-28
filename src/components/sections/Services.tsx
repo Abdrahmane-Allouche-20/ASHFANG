@@ -48,11 +48,17 @@ function TiltCard({ service, index }: { service: Service; index: number }) {
         ref={ref}
         onMouseMove={onMove}
         onMouseLeave={reset}
+        whileHover={{ y: -6 }}
+        transition={{ type: "spring", stiffness: 300, damping: 22 }}
         style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="card ring-gradient group relative h-full overflow-hidden p-7"
+        className="card group relative h-full overflow-hidden p-7"
       >
         <motion.div style={{ background: spotlight }} className="pointer-events-none absolute inset-0" />
-        <BorderBeam size={240} duration={9} delay={index * 1.5} />
+        <BorderBeam
+          size={180}
+          duration={8}
+          className="opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        />
         <div style={{ transform: "translateZ(40px)" }} className="relative">
           <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-violet/30 to-cyan/15 ring-1 ring-white/15 shadow-[0_0_20px_-6px_rgba(139,92,246,0.6)]">
             <Icon size={22} className={accent} />
@@ -75,22 +81,25 @@ function TiltCard({ service, index }: { service: Service; index: number }) {
 
 export default function Services() {
   return (
-    <section id="services" className="relative mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
-      <Reveal className="mx-auto max-w-2xl text-center">
-        <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-cyan">01 / What we do</p>
-        <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
-          Full-spectrum <span className="text-gradient">security</span>
-        </h2>
-        <p className="mx-auto mt-4 text-muted">
-          Offense, defense, and secure engineering — the complete coverage most companies stitch
-          together from three vendors, delivered by one team.
-        </p>
-      </Reveal>
+    <section id="services" className="relative scroll-mt-24 px-6 py-24">
+      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(55%_45%_at_18%_0%,rgba(139,92,246,0.13),transparent_60%),radial-gradient(45%_45%_at_88%_50%,rgba(34,211,238,0.09),transparent_60%)]" />
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-cyan">01 / What we do</p>
+          <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            Full-spectrum <span className="text-gradient">security</span>
+          </h2>
+          <p className="mx-auto mt-4 text-muted">
+            Offense, defense, and secure engineering — the complete coverage most companies stitch
+            together from three vendors, delivered by one team.
+          </p>
+        </Reveal>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {SERVICES.map((s, i) => (
-          <TiltCard key={s.title} service={s} index={i} />
-        ))}
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICES.map((s, i) => (
+            <TiltCard key={s.title} service={s} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );
