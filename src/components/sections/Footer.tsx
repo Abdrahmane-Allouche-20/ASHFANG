@@ -45,7 +45,7 @@ export default function Footer() {
               <ul className="mt-4 space-y-3">
                 {NAV_LINKS.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href} className="text-sm text-white/80 transition-colors hover:text-fg">
+                    <a href={l.href} className="text-sm text-white transition-colors hover:text-fg">
                       {l.label}
                     </a>
                   </li>
@@ -58,7 +58,7 @@ export default function Footer() {
                 <li>
                   <a
                     href={`mailto:${SITE.email}`}
-                    className="font-mono text-sm text-white/80 transition-colors hover:text-fg"
+                    className="font-mono text-sm text-white transition-colors hover:text-fg"
                   >
                     {SITE.email}
                   </a>

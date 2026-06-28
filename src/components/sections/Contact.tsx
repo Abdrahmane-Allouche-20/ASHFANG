@@ -21,7 +21,7 @@ export default function Contact() {
   };
 
   const field =
-    "w-full rounded-xl border border-white/10 bg-surface/70 px-4 py-3 text-sm text-fg outline-none transition-all placeholder:text-muted/60 focus:border-violet/60 focus:bg-surface-2 focus:ring-2 focus:ring-violet/25";
+    "w-full rounded-xl border border-white/10 bg-surface/70 px-4 py-3 text-sm text-fg outline-none transition-all placeholder:text-muted focus:border-violet/60 focus:bg-surface-2 focus:ring-2 focus:ring-violet/25";
 
   return (
     <section id="contact" className="relative scroll-mt-24 overflow-hidden px-6 py-28">

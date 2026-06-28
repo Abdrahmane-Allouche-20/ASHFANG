@@ -35,7 +35,7 @@ export default function Approach() {
                 <h3 className="font-display text-xl font-semibold tracking-tight text-fg sm:text-2xl">
                   {a.title}
                 </h3>
-                <p className="mt-2.5 max-w-2xl text-[15px] leading-relaxed text-white/65 sm:text-base">
+                <p className="mt-2.5 max-w-2xl text-[15px] leading-relaxed text-white sm:text-base">
                   {a.text}
                 </p>
               </div>
