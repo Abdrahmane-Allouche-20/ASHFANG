@@ -1,11 +1,12 @@
 "use client";
 
-// Ported from VengeanceUI (Ashutoshx7/VengeanceUI) — CyberGlitchText.
+// Adapted from VengeanceUI (Ashutoshx7/VengeanceUI) — CyberGlitchText.
+// Kept the clean scramble/decode effect; removed the chromatic-aberration ghost
+// layers (they misaligned over a large multi-line headline word).
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
-import { motion } from "framer-motion";
 
-const CHARS = "!<>-_\\/[]{}—=+*^?#_";
+const CHARS = "!<>-_\\/[]{}—=+*^?#_:.";
 
 interface CyberGlitchTextProps {
   text: string;
@@ -21,7 +22,6 @@ export function CyberGlitchText({
   scrambleDuration = 45,
 }: CyberGlitchTextProps) {
   const [displayText, setDisplayText] = useState(text);
-  const [isHovered, setIsHovered] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const scramble = () => {
@@ -57,37 +57,10 @@ export function CyberGlitchText({
 
   return (
     <span
-      className={cn("group relative inline-block", className)}
-      onMouseEnter={() => {
-        setIsHovered(true);
-        scramble();
-      }}
-      onMouseLeave={() => setIsHovered(false)}
+      className={cn("inline-block whitespace-nowrap tabular-nums", className)}
+      onMouseEnter={scramble}
     >
-      <span className="relative z-10">{displayText}</span>
-
-      {isHovered && (
-        <>
-          <motion.span
-            className="absolute left-[-2px] top-0 z-0 text-rose-500 opacity-70 mix-blend-screen"
-            initial={{ x: 0, opacity: 0 }}
-            animate={{ x: [-2, 2, -1, 3, 0], opacity: [0, 0.8, 0.4, 0.9, 0] }}
-            transition={{ duration: 0.2, repeat: Infinity, repeatType: "mirror" }}
-            aria-hidden="true"
-          >
-            {displayText}
-          </motion.span>
-          <motion.span
-            className="absolute left-[2px] top-0 z-0 text-cyan opacity-70 mix-blend-screen"
-            initial={{ x: 0, opacity: 0 }}
-            animate={{ x: [2, -2, 1, -3, 0], opacity: [0, 0.8, 0.4, 0.9, 0] }}
-            transition={{ duration: 0.2, repeat: Infinity, repeatType: "mirror", delay: 0.05 }}
-            aria-hidden="true"
-          >
-            {displayText}
-          </motion.span>
-        </>
-      )}
+      {displayText}
     </span>
   );
 }
