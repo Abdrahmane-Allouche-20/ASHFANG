@@ -30,7 +30,7 @@ function Stat({ value, suffix, label }: { value: number; suffix: string; label: 
         {n}
         {suffix}
       </div>
-      <p className="mt-2 text-xs uppercase tracking-wider text-muted transition-colors duration-300 group-hover:text-fg/80 sm:text-sm">
+      <p className="mt-2 text-xs uppercase tracking-wider text-muted transition-colors duration-300 group-hover:text-white/80 sm:text-sm">
         {label}
       </p>
     </div>
