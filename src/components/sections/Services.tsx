@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import { Check } from "lucide-react";
 import { SERVICES, type Service } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
@@ -14,6 +15,18 @@ const SPANS = [
   "lg:col-span-6",
   "lg:col-span-6",
 ];
+
+// Rich content for the feature card (Penetration Testing).
+const FEATURE = {
+  why: "Every system has a way in. We think and move like a real adversary — across your web apps, APIs, and internal network — then hand you the exact map to close every door before someone else walks through it.",
+  includes: [
+    "Real-world attack simulation, not just automated scans",
+    "Findings ranked by genuine business impact",
+    "Clear, step-by-step remediation guidance",
+    "A free retest once you've fixed the gaps",
+  ],
+  stat: { value: "9 / 10", label: "breaches start with a gap a pentest would have caught" },
+};
 
 function ServiceCard({
   service,
@@ -29,7 +42,7 @@ function ServiceCard({
   const ref = useRef<HTMLDivElement>(null);
   const px = useMotionValue(50);
   const py = useMotionValue(50);
-  const spotlight = useMotionTemplate`radial-gradient(420px circle at ${px}% ${py}%, rgba(139,92,246,0.15), transparent 60%)`;
+  const spotlight = useMotionTemplate`radial-gradient(440px circle at ${px}% ${py}%, rgba(139,92,246,0.15), transparent 60%)`;
 
   const onMove = (e: React.MouseEvent) => {
     const r = ref.current?.getBoundingClientRect();
@@ -42,13 +55,12 @@ function ServiceCard({
   const accent = service.accent === "violet" ? "text-violet" : "text-cyan";
 
   return (
-    <Reveal delay={index * 0.05} className={cn("group relative", span)}>
+    <Reveal delay={index * 0.12} className={cn("group relative", span)}>
       <div
         ref={ref}
         onMouseMove={onMove}
         className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] p-7 transition-colors duration-500 hover:border-violet/40"
       >
-        {/* cursor spotlight */}
         <motion.div
           style={{ background: spotlight }}
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
@@ -62,13 +74,41 @@ function ServiceCard({
         </span>
 
         <div className="relative flex h-full flex-col">
-          <Icon size={feature ? 30 : 22} className={cn(accent, "mb-5 drop-shadow-[0_0_14px_rgba(139,92,246,0.5)]")} />
-          <h3 className={cn("font-display font-semibold tracking-tight", feature ? "text-2xl sm:text-3xl" : "text-xl")}>
+          <Icon
+            size={feature ? 30 : 22}
+            className={cn(accent, "mb-5 drop-shadow-[0_0_14px_rgba(139,92,246,0.5)]")}
+          />
+          <h3
+            className={cn(
+              "font-display font-semibold tracking-tight",
+              feature ? "text-2xl sm:text-3xl" : "text-xl",
+            )}
+          >
             {service.title}
           </h3>
-          <p className={cn("mt-3 leading-relaxed text-muted", feature ? "max-w-md text-base" : "text-sm")}>
+          <p className={cn("mt-3 leading-relaxed text-muted", feature ? "max-w-lg text-base" : "text-sm")}>
             {service.blurb}
           </p>
+
+          {feature && (
+            <>
+              <p className="mt-4 max-w-lg text-sm leading-relaxed text-fg/65">{FEATURE.why}</p>
+
+              <ul className="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+                {FEATURE.includes.map((it) => (
+                  <li key={it} className="flex items-start gap-2 text-sm text-fg/85">
+                    <Check size={15} className="mt-0.5 shrink-0 text-cyan" />
+                    {it}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-7 flex items-baseline gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-3">
+                <span className="font-display text-2xl font-bold text-gradient">{FEATURE.stat.value}</span>
+                <span className="text-xs leading-snug text-muted">{FEATURE.stat.label}</span>
+              </div>
+            </>
+          )}
 
           <div className="mt-auto flex flex-wrap gap-2 pt-7">
             {service.points.map((p) => (
@@ -92,7 +132,6 @@ export default function Services() {
       <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(55%_45%_at_18%_0%,rgba(139,92,246,0.13),transparent_60%),radial-gradient(45%_45%_at_92%_55%,rgba(34,211,238,0.08),transparent_60%)]" />
 
       <div className="relative z-10 mx-auto max-w-6xl">
-        {/* Editorial, left-aligned header */}
         <Reveal className="mb-12 flex flex-col gap-5 border-b border-white/[0.08] pb-8 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="mb-4 font-mono text-xs tracking-[0.3em] text-cyan">// 01 — WHAT WE DO</p>
