@@ -9,10 +9,10 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     if (prefersReduced) return;
 
     const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.12, // frame-rate-independent follow — smooth but responsive (not floaty)
+      wheelMultiplier: 1.1, // cover more ground per scroll = snappier exploring
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      touchMultiplier: 2,
     });
 
     let raf = 0;

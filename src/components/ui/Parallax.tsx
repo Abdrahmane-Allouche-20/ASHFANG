@@ -24,7 +24,7 @@ export default function Parallax({
   const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [range, -range]);
 
   return (
-    <motion.div ref={ref} style={{ y }} className={className} aria-hidden>
+    <motion.div ref={ref} style={{ y, willChange: "transform" }} className={className} aria-hidden>
       {children}
     </motion.div>
   );
