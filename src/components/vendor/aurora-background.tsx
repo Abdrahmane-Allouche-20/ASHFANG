@@ -32,8 +32,9 @@ export default function AuroraBackground({ className }: { className?: string }) 
           background-image: var(--stripes), var(--rainbow);
           background-size: 300%, 200%;
           background-position: 50% 50%, 50% 50%;
-          filter: blur(24px) saturate(155%);
+          filter: blur(16px) saturate(150%);
           opacity: 0.5;
+          transform: translateZ(0);
           mask-image: radial-gradient(ellipse 105% 95% at 50% 22%, #000 45%, transparent 85%);
           -webkit-mask-image: radial-gradient(ellipse 105% 95% at 50% 22%, #000 45%, transparent 85%);
         }
@@ -43,8 +44,9 @@ export default function AuroraBackground({ className }: { className?: string }) 
           inset: 0;
           background-image: var(--stripes), var(--rainbow);
           background-size: 200%, 100%;
-          animation: ven-aurora-move 60s linear infinite;
+          animation: ven-aurora-move 70s linear infinite;
           opacity: 0.55;
+          will-change: background-position;
         }
         @media (prefers-reduced-motion: reduce) {
           .ven-aurora::after { animation: none; }

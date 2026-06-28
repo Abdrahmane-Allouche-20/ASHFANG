@@ -56,7 +56,7 @@ function ServiceCard({
   const accent = service.accent === "violet" ? "text-violet" : "text-cyan";
 
   return (
-    <Reveal delay={index * 0.12} className={cn("group relative", span)}>
+    <Reveal delay={index * 0.07} className={cn("group relative", span)}>
       <div
         ref={ref}
         onMouseMove={onMove}
