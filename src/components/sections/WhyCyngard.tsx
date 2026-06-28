@@ -1,13 +1,15 @@
 import { WHY } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
+import Parallax from "@/components/ui/Parallax";
 
 export default function WhyCyngard() {
   return (
-    <section id="why" className="relative scroll-mt-24 border-y border-line/60 bg-ink/30 py-28">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="why" className="relative scroll-mt-24 overflow-hidden border-y border-line/60 bg-ink/30 py-28">
+      <Parallax speed={0.2} className="pointer-events-none absolute inset-[-20%] z-0 bg-[radial-gradient(45%_40%_at_10%_20%,rgba(139,92,246,0.12),transparent_60%),radial-gradient(40%_40%_at_95%_80%,rgba(34,211,238,0.07),transparent_60%)]" />
+      <div className="relative z-10 mx-auto max-w-6xl px-6">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <Reveal>
-            <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-cyan">02 / Why Cyngard</p>
+            <p className="mb-4 font-mono text-xs tracking-[0.3em] text-cyan">// 02 — WHY CYNGARD</p>
             <h2 className="font-display text-3xl font-bold leading-tight tracking-tight sm:text-5xl">
               The team that breaks it <span className="text-gradient">knows how to guard it.</span>
             </h2>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Mail, Send, ArrowUpRight } from "lucide-react";
 import { SITE } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
+import Parallax from "@/components/ui/Parallax";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
@@ -21,8 +22,9 @@ export default function Contact() {
     "w-full rounded-xl border border-white/10 bg-surface/70 px-4 py-3 text-sm text-fg outline-none transition-colors placeholder:text-muted/60 focus:border-violet/60 focus:bg-surface-2";
 
   return (
-    <section id="contact" className="relative mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+    <section id="contact" className="relative scroll-mt-24 overflow-hidden px-6 py-28">
+      <Parallax speed={0.2} className="pointer-events-none absolute inset-[-20%] z-0 bg-[radial-gradient(45%_45%_at_25%_20%,rgba(139,92,246,0.12),transparent_60%),radial-gradient(40%_45%_at_85%_80%,rgba(34,211,238,0.08),transparent_60%)]" />
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:gap-20">
         <Reveal>
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.25em] text-cyan">04 / Get in touch</p>
           <h2 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">

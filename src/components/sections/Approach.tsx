@@ -1,10 +1,11 @@
 import { APPROACH } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
+import Parallax from "@/components/ui/Parallax";
 
 export default function Approach() {
   return (
-    <section id="approach" className="relative scroll-mt-24 px-6 py-20">
-      <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(50%_45%_at_50%_0%,rgba(139,92,246,0.12),transparent_60%),radial-gradient(40%_40%_at_88%_70%,rgba(34,211,238,0.07),transparent_60%)]" />
+    <section id="approach" className="relative scroll-mt-24 overflow-hidden px-6 py-20">
+      <Parallax speed={0.22} className="pointer-events-none absolute inset-[-20%] z-0 bg-[radial-gradient(48%_42%_at_50%_15%,rgba(139,92,246,0.13),transparent_60%),radial-gradient(40%_40%_at_88%_72%,rgba(34,211,238,0.08),transparent_60%)]" />
 
       <div className="relative z-10 mx-auto max-w-5xl">
         {/* Editorial, left-aligned header */}
