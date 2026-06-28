@@ -26,16 +26,16 @@ export default function Approach() {
             <Reveal
               key={a.step}
               delay={i * 0.08}
-              className="group grid grid-cols-[3rem_1fr] items-start gap-4 rounded-2xl px-3 py-7 transition-colors duration-300 hover:bg-white/[0.025] sm:grid-cols-[7rem_1fr] sm:gap-8"
+              className="group grid grid-cols-[auto_1fr] items-start gap-5 rounded-2xl px-3 py-8 transition-colors duration-300 hover:bg-white/[0.03] sm:gap-10"
             >
-              <span className="select-none font-display text-5xl font-bold leading-none text-gradient opacity-25 transition-opacity duration-300 group-hover:opacity-100 sm:text-7xl">
+              <span className="w-[3.5rem] select-none font-display text-5xl font-bold leading-none text-gradient opacity-35 transition-opacity duration-300 group-hover:opacity-100 sm:w-[6rem] sm:text-7xl">
                 {a.step}
               </span>
-              <div className="pt-1">
-                <h3 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
+              <div>
+                <h3 className="font-display text-xl font-semibold tracking-tight text-fg sm:text-2xl">
                   {a.title}
                 </h3>
-                <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
+                <p className="mt-2.5 max-w-2xl text-[15px] leading-relaxed text-fg/65 sm:text-base">
                   {a.text}
                 </p>
               </div>
