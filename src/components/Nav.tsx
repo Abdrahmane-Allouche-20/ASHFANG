@@ -1,26 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { NAV_LINKS } from "@/lib/site";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { NAV_LINKS, SITE } from "@/lib/site";
 import { cn } from "@/lib/cn";
+import { getLenis } from "@/components/SmoothScroll";
+import Logo from "@/components/ui/Logo";
+
+const MOBILE_LINKS = [...NAV_LINKS, { label: "Contact", href: "#contact" }];
 
 export default function Nav() {
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<string>("");
+  const [active, setActive] = useState("");
+  const [hovered, setHovered] = useState<string | null>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
-  // Scroll-spy: highlight the nav link for the section currently in view.
+  // Condense the bar into a floating glass pill once the page scrolls.
   useEffect(() => {
-    const ids = NAV_LINKS.map((l) => l.href.slice(1));
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Scroll-spy: highlight the link for the section currently in view.
+  useEffect(() => {
+    const ids = ["top", ...MOBILE_LINKS.map((l) => l.href.slice(1))];
     const observer = new IntersectionObserver(
       (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) setActive(`#${e.target.id}`);
-        }
+        for (const e of entries) if (e.isIntersecting) setActive(`#${e.target.id}`);
       },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+      { rootMargin: "-45% 0px -50% 0px" },
     );
     for (const id of ids) {
       const el = document.getElementById(id);
@@ -29,98 +41,182 @@ export default function Nav() {
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4">
-      <motion.div
-        initial={{ y: -24, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.21, 0.5, 0.3, 1] }}
-        className="liquid-nav pointer-events-auto py-2.5 pl-3 pr-2.5"
-      >
-        <nav className="relative z-10 flex items-center gap-4 sm:gap-6">
-          <a href="#top" className="flex items-center gap-2.5 pr-1">
-            <Image
-              src="/brand/logo-mark.png"
-              alt="Cyngard"
-              width={30}
-              height={30}
-              className="h-7 w-7 drop-shadow-[0_0_12px_rgba(139,92,246,0.6)]"
-              priority
-            />
-            <span className="font-display text-base font-bold tracking-tight text-white">Cyngard</span>
-          </a>
+  const unlock = useCallback(() => {
+    document.documentElement.style.removeProperty("overflow");
+    document.querySelectorAll("main, footer").forEach((el) => el.removeAttribute("inert"));
+    getLenis()?.start();
+  }, []);
 
-          <div className="hidden items-center gap-6 md:flex">
+  // Closing unlocks scrolling synchronously so a tapped anchor can scroll right away.
+  const close = useCallback(() => {
+    setOpen(false);
+    unlock();
+  }, [unlock]);
+
+  // Mobile menu: lock the page behind it, close on Escape or when widening.
+  useEffect(() => {
+    if (!open) return;
+    getLenis()?.stop();
+    document.documentElement.style.overflow = "hidden";
+    document.querySelectorAll("main, footer").forEach((el) => el.setAttribute("inert", ""));
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        close();
+        toggleRef.current?.focus();
+      }
+    };
+    const mq = window.matchMedia("(min-width: 768px)");
+    const onWide = () => mq.matches && close();
+    window.addEventListener("keydown", onKey);
+    mq.addEventListener("change", onWide);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      mq.removeEventListener("change", onWide);
+      unlock();
+    };
+  }, [open, close, unlock]);
+
+  return (
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div
+        data-scrolled={scrolled || open}
+        className="nav-shell relative z-10 mx-auto grid grid-cols-[1fr_auto] items-center md:grid-cols-[1fr_auto_1fr]"
+      >
+        <a href="#top" aria-label="Cyngard — back to top" className="justify-self-start rounded-full">
+          <Logo priority />
+        </a>
+
+        <nav aria-label="Primary" className="hidden md:block">
+          <ul className="flex items-center gap-0.5" onMouseLeave={() => setHovered(null)}>
             {NAV_LINKS.map((l) => {
               const isActive = active === l.href;
               return (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className={cn(
-                    "group relative text-sm transition-colors duration-300",
-                    isActive ? "text-white" : "text-white hover:text-white",
-                  )}
-                >
-                  {l.label}
-                  <span
+                <li key={l.href} className="relative">
+                  <a
+                    href={l.href}
+                    onMouseEnter={() => setHovered(l.href)}
+                    onFocus={() => setHovered(l.href)}
+                    onBlur={() => setHovered(null)}
+                    aria-current={isActive ? "true" : undefined}
                     className={cn(
-                      "absolute -bottom-1.5 left-0 h-px bg-gradient-to-r from-violet to-cyan transition-all duration-300",
-                      isActive ? "w-full" : "w-0 group-hover:w-full",
+                      "relative z-10 block rounded-full px-3 py-1.5 text-[0.84rem] transition-colors duration-300 lg:px-3.5",
+                      isActive || hovered === l.href ? "text-fg" : "text-muted",
                     )}
-                  />
-                </a>
+                  >
+                    {l.label}
+                  </a>
+                  {hovered === l.href && (
+                    <motion.span
+                      layoutId="nav-hover"
+                      className="absolute inset-0 rounded-full bg-fill-strong"
+                      transition={{ type: "spring", bounce: 0.18, duration: 0.45 }}
+                    />
+                  )}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute -bottom-1 left-1/2 h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-cyan shadow-[0_0_8px_rgba(34,211,238,0.9)]"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
+                    />
+                  )}
+                </li>
               );
             })}
-          </div>
+          </ul>
+        </nav>
 
-          <a
-            href="#contact"
-            className="hidden rounded-full bg-gradient-to-r from-violet to-cyan px-4 py-1.5 text-sm font-medium text-[#07070b] shadow-[0_0_0_1px_rgba(255,255,255,0.12)] transition-shadow duration-300 hover:shadow-glow md:inline-flex"
-          >
+        <div className="flex items-center justify-self-end gap-2">
+          <a href="#contact" className="btn btn-primary btn-sm hidden md:inline-flex">
             Book assessment
+            <ArrowRight size={15} className="btn-arrow" />
           </a>
 
           <button
-            onClick={() => setOpen((o) => !o)}
-            className="ml-1 text-white md:hidden"
-            aria-label="Toggle menu"
+            ref={toggleRef}
+            type="button"
+            onClick={() => (open ? close() : setOpen(true))}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="relative -mr-1.5 flex h-10 w-10 items-center justify-center rounded-full text-fg md:hidden"
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            <span
+              className={cn(
+                "absolute h-[1.5px] w-[18px] rounded-full bg-current transition-transform duration-300 ease-premium",
+                open ? "rotate-45" : "-translate-y-[4px]",
+              )}
+            />
+            <span
+              className={cn(
+                "absolute h-[1.5px] w-[18px] rounded-full bg-current transition-transform duration-300 ease-premium",
+                open ? "-rotate-45" : "translate-y-[4px]",
+              )}
+            />
           </button>
-        </nav>
-      </motion.div>
+        </div>
+      </div>
 
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="glass-panel pointer-events-auto fixed inset-x-4 top-20 rounded-2xl p-5 md:hidden"
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 md:hidden"
           >
-            <div className="flex flex-col gap-1">
-              {NAV_LINKS.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "rounded-lg px-3 py-2.5 text-sm transition-colors",
-                    active === l.href ? "bg-white/[0.06] text-fg" : "text-muted hover:bg-white/[0.04] hover:text-fg",
-                  )}
-                >
-                  {l.label}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
-                className="mt-3 rounded-full bg-gradient-to-r from-violet to-cyan px-5 py-2.5 text-center text-sm font-medium text-[#07070b]"
+            <div
+              className="absolute inset-0 bg-[rgba(7,7,11,0.94)] backdrop-blur-xl"
+              onClick={close}
+              aria-hidden
+            />
+            <nav aria-label="Mobile" className="relative flex h-full flex-col px-6 pb-10 pt-28">
+              <ul>
+                {MOBILE_LINKS.map((l, i) => (
+                  <motion.li
+                    key={l.href}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.04 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <a
+                      href={l.href}
+                      onClick={close}
+                      className={cn(
+                        "flex items-center justify-between border-b border-line py-5 text-[1.75rem] font-medium tracking-tight",
+                        active === l.href ? "text-fg" : "text-muted",
+                      )}
+                    >
+                      {l.label}
+                      <ArrowUpRight size={20} className="text-subtle" />
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="mt-auto space-y-5"
               >
-                Book assessment
-              </a>
-            </div>
+                <a href="#contact" onClick={close} className="btn btn-primary btn-lg w-full">
+                  Book a free assessment
+                  <ArrowRight size={16} className="btn-arrow" />
+                </a>
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="block text-center font-mono text-sm text-muted"
+                >
+                  {SITE.email}
+                </a>
+              </motion.div>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

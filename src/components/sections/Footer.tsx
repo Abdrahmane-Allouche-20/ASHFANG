@@ -1,78 +1,109 @@
-import Image from "next/image";
-import { Linkedin, Twitter, Github } from "lucide-react";
-import { NAV_LINKS, SITE } from "@/lib/site";
+import { ArrowUp, ArrowUpRight, Github, Linkedin, Twitter } from "lucide-react";
+import { NAV_LINKS, SERVICES, SITE, SOCIALS } from "@/lib/site";
+import Logo from "@/components/ui/Logo";
 
-const SOCIALS = [
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "X" },
-  { icon: Github, href: "#", label: "GitHub" },
-];
+const SOCIAL_ICONS = { LinkedIn: Linkedin, X: Twitter, GitHub: Github };
 
 export default function Footer() {
-  return (
-    <footer className="relative border-t border-line/60 bg-ink/40">
-      <div className="mx-auto max-w-6xl px-6 py-14">
-        <div className="flex flex-col justify-between gap-10 md:flex-row">
-          <div className="max-w-sm">
-            <div className="flex items-center gap-2.5">
-              <Image
-                src="/brand/logo-mark.png"
-                alt="Cyngard"
-                width={32}
-                height={32}
-                className="h-8 w-8 drop-shadow-[0_0_12px_rgba(139,92,246,0.6)]"
-              />
-              <span className="font-display text-lg font-bold tracking-tight">Cyngard</span>
-            </div>
-            <p className="mt-4 text-sm text-muted">{SITE.tagline}</p>
-            <div className="mt-6 flex gap-3">
-              {SOCIALS.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-lg glass-panel text-muted transition-colors hover:text-fg"
-                >
-                  <s.icon size={18} />
-                </a>
-              ))}
-            </div>
-          </div>
+  const socials = SOCIALS.filter((s) => s.href);
 
-          <div className="flex gap-16">
-            <div>
-              <h4 className="font-mono text-xs uppercase tracking-wider text-muted">Navigate</h4>
-              <ul className="mt-4 space-y-3">
-                {NAV_LINKS.map((l) => (
-                  <li key={l.href}>
-                    <a href={l.href} className="text-sm text-white transition-colors hover:text-fg">
-                      {l.label}
+  return (
+    <footer className="relative isolate overflow-hidden border-t border-line">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_100%,rgba(139,92,246,0.14),transparent_70%)]" />
+
+      <div className="container-page grid grid-cols-1 gap-12 pb-10 pt-16 sm:grid-cols-2 md:pt-20 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:gap-8">
+        <div className="max-w-xs">
+          <Logo />
+          <p className="mt-5 text-[14.5px] leading-relaxed text-muted">{SITE.tagline}</p>
+          {socials.length > 0 && (
+            <ul className="mt-6 flex gap-2">
+              {socials.map((s) => {
+                const Icon = SOCIAL_ICONS[s.label];
+                return (
+                  <li key={s.label}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      className="flex h-9 w-9 items-center justify-center rounded-full border border-line-strong text-muted transition-colors hover:border-[rgba(255,255,255,0.22)] hover:text-fg"
+                    >
+                      <Icon size={15} />
                     </a>
                   </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-mono text-xs uppercase tracking-wider text-muted">Contact</h4>
-              <ul className="mt-4 space-y-3">
-                <li>
-                  <a
-                    href={`mailto:${SITE.email}`}
-                    className="font-mono text-sm text-white transition-colors hover:text-fg"
-                  >
-                    {SITE.email}
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+                );
+              })}
+            </ul>
+          )}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-line/60 pt-6 text-xs text-muted sm:flex-row">
+        <FooterColumn title="Services">
+          {SERVICES.map((s) => (
+            <li key={s.id}>
+              <a href={`#${s.id}`} className="footer-link">
+                {s.title}
+              </a>
+            </li>
+          ))}
+        </FooterColumn>
+
+        <FooterColumn title="Company">
+          {NAV_LINKS.slice(1).map((l) => (
+            <li key={l.href}>
+              <a href={l.href} className="footer-link">
+                {l.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href="#contact" className="footer-link">
+              Contact
+            </a>
+          </li>
+        </FooterColumn>
+
+        <FooterColumn title="Get in touch">
+          <li>
+            <a href={`mailto:${SITE.email}`} className="footer-link font-mono text-[13px]">
+              {SITE.email}
+            </a>
+          </li>
+          <li>
+            <a href="#contact" className="group inline-flex items-center gap-1.5 text-[14px] text-fg">
+              Book a free assessment
+              <ArrowUpRight size={14} className="text-violet-soft transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+          </li>
+        </FooterColumn>
+      </div>
+
+      <div className="container-page">
+        <div className="divider-x" />
+        <div className="flex flex-col items-center justify-between gap-4 py-7 text-[12.5px] text-subtle sm:flex-row">
           <p>© {new Date().getFullYear()} Cyngard. All rights reserved.</p>
-          <p className="font-mono">Cybersecurity · Engineered</p>
+          <p className="font-mono tracking-[0.08em]">CYBERSECURITY · ENGINEERED</p>
+          <a href="#top" className="group inline-flex items-center gap-1.5 transition-colors hover:text-fg">
+            Back to top
+            <ArrowUp size={13} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
+          </a>
         </div>
       </div>
+
+      {/* Oversized wordmark */}
+      <div aria-hidden className="pointer-events-none select-none overflow-hidden">
+        <p className="-mb-[0.2em] text-center font-display text-[18.5vw] font-semibold leading-[0.9] tracking-[0.06em] text-[transparent] [-webkit-background-clip:text] [background-clip:text] bg-[linear-gradient(180deg,rgba(255,255,255,0.11)_0%,rgba(255,255,255,0.02)_70%,transparent)] xl:text-[15rem]">
+          CYNGARD
+        </p>
+      </div>
     </footer>
+  );
+}
+
+function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h2 className="font-mono text-[11px] uppercase tracking-[0.16em] text-subtle">{title}</h2>
+      <ul className="mt-5 space-y-3">{children}</ul>
+    </div>
   );
 }
