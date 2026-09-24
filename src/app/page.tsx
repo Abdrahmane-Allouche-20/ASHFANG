@@ -1,10 +1,11 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/hero/Hero";
-import TrustStrip from "@/components/sections/TrustStrip";
+import Frameworks from "@/components/sections/Frameworks";
 import Services from "@/components/sections/Services";
+import Manifesto from "@/components/sections/Manifesto";
 import WhyCyngard from "@/components/sections/WhyCyngard";
 import Approach from "@/components/sections/Approach";
-import Stats from "@/components/sections/Stats";
+import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
@@ -13,13 +14,14 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="main" tabIndex={-1}>
         <Hero />
-        <TrustStrip />
+        <Frameworks />
         <Services />
+        <Manifesto />
         <WhyCyngard />
         <Approach />
-        <Stats />
+        <FAQ />
         <CTA />
         <Contact />
       </main>
