@@ -1,6 +1,6 @@
 # Cyngard — Landing Page
 
-The official landing site for **Cyngard** — a cybersecurity company delivering offensive testing, defensive solutions, and secure development.
+The official website of **Cyngard** — an international cybersecurity company building PhishNode and LeakShield and delivering managed SOC, penetration testing, code review, and security engineering.
 
 > Think like an attacker. Defend like an engineer.
 
@@ -25,16 +25,27 @@ npm run typecheck
 
 ```
 src/
-  app/                 layout, page, global styles, icons, Open Graph image
+  app/
+    page.tsx                 home
+    products/                products overview, /phishnode, /leakshield
+    services/                services catalog + /services/[slug] detail pages
+    company/  contact/  privacy/
+    layout.tsx               shared nav + footer, metadata, fonts
   components/
-    Nav.tsx            condensing glass nav + accessible mobile menu
-    hero/              hero + animated sample-engagement console
-    sections/          Services, Manifesto, Why Cyngard, Approach, FAQ, CTA, Contact, Footer
-    ui/                shared primitives (Reveal, SectionHeading, SpotlightGroup, Globe, Logo)
-  lib/site.ts          all site copy: services, FAQ, stats, contact details, socials
+    Nav.tsx                  Products / Services dropdowns + mobile menu
+    home/  products/  layout/  sections/  ui/
+  lib/site.ts                all site copy: services, products, FAQ, contact details
 ```
 
-Most copy changes only need `src/lib/site.ts`. Social links in the footer appear once a URL is added to `SOCIALS` there.
+Most content changes only need `src/lib/site.ts` — adding a service there creates its page
+automatically. Footer social links appear once a URL is added to `SOCIALS`.
+
+## Products
+
+| Product | What it does | Live |
+| --- | --- | --- |
+| PhishNode | Phishing reporting, enrichment, and triage platform | https://phishnode.org |
+| LeakShield | Offline secret and credential leak scanner | https://leakshield.vercel.app |
 
 ## Brand
 

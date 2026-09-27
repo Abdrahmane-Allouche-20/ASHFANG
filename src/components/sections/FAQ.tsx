@@ -12,12 +12,12 @@ export default function FAQ() {
   const baseId = useId();
 
   return (
-    <section id="faq" aria-labelledby="faq-title" className="relative py-28 md:py-36">
+    <section id="faq" aria-labelledby="faq-title" className="relative border-t border-line py-24 md:py-28">
       <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
         <Reveal className="lg:sticky lg:top-32 lg:self-start">
           <p className="eyebrow">FAQ</p>
           <h2 id="faq-title" className="heading-lg mt-5">
-            Questions, <span className="accent text-gradient">answered.</span>
+            Questions, <span className="heading-dim">answered.</span>
           </h2>
           <p className="lede mt-5 max-w-sm">
             Straight answers about how we work. Anything else? Ask an engineer directly.

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import Nav from "@/components/Nav";
-import Footer from "@/components/sections/Footer";
-import Contact from "@/components/sections/Contact";
+import CTABand from "@/components/layout/CTABand";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { FeatureGrid, ProductHero, Section, StatStrip, Steps } from "@/components/products/Blocks";
@@ -22,19 +20,19 @@ export const metadata: Metadata = {
 export default function LeakShieldPage() {
   return (
     <>
-      <Nav base="/" />
-      <main id="main" tabIndex={-1}>
         <ProductHero
           mark={<LeakShieldMark className="h-11 w-11" />}
           name="LeakShield"
           category={product.category}
           title={
             <>
-              Stop secrets <span className="accent text-gradient">before they leak.</span>
+              Stop secrets <span className="heading-dim">before they leak.</span>
             </>
           }
           lede="API keys, bot tokens, and environment files have a way of ending up in the wrong place. LeakShield finds them in your projects — fully offline — scores the risk, and shows you exactly how to fix each one."
           visual={<LeakShieldScan />}
+          site={product.url}
+          demoHref="/contact?topic=LeakShield%20demo"
           secondary={{ label: "See what it detects", href: "#detects" }}
         />
 
@@ -52,7 +50,7 @@ export default function LeakShieldPage() {
             eyebrow="How it works"
             title={
               <>
-                Your final line of defense, <span className="accent text-gradient">on your machine.</span>
+                Your final line of defense, <span className="heading-dim">on your machine.</span>
               </>
             }
             description="Run it before every push, in CI, or as part of an audit. LeakShield turns a sprawling codebase into a short, prioritized list of fixes."
@@ -65,7 +63,7 @@ export default function LeakShieldPage() {
             <Reveal>
               <p className="eyebrow">Detection</p>
               <h2 className="heading-lg mt-5">
-                Finds what <span className="accent text-gradient">shouldn&apos;t be there.</span>
+                Finds what <span className="heading-dim">shouldn&apos;t be there.</span>
               </h2>
               <p className="lede mt-5 max-w-md">
                 Known token formats, high-entropy strings, and sensitive files — each ranked by
@@ -94,7 +92,7 @@ export default function LeakShieldPage() {
             eyebrow="Privacy first"
             title={
               <>
-                Your code never <span className="accent text-gradient">leaves the room.</span>
+                Your code never <span className="heading-dim">leaves the room.</span>
               </>
             }
             description="Built for teams that can't send source code to someone else's cloud — from startups to regulated and air-gapped environments."
@@ -114,9 +112,12 @@ export default function LeakShieldPage() {
           </Reveal>
         </Section>
 
-        <Contact defaultTopic="LeakShield demo" />
-      </main>
-      <Footer base="/" />
+        <CTABand
+          title="See LeakShield in action."
+          text="Book a walkthrough with our team. We'll show you the product and how it fits your environment."
+          href="/contact?topic=LeakShield%20demo"
+          label="Request a demo"
+        />
     </>
   );
 }

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Check } from "lucide-react";
-import Nav from "@/components/Nav";
-import Footer from "@/components/sections/Footer";
-import Contact from "@/components/sections/Contact";
+import CTABand from "@/components/layout/CTABand";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { FeatureGrid, ProductHero, Section, StatStrip, Steps } from "@/components/products/Blocks";
@@ -20,19 +18,19 @@ export const metadata: Metadata = {
 export default function PhishNodePage() {
   return (
     <>
-      <Nav base="/" />
-      <main id="main" tabIndex={-1}>
         <ProductHero
           mark={<PhishNodeMark className="h-11 w-11" />}
           name="PhishNode"
           category={product.category}
           title={
             <>
-              Every reported email, <span className="accent text-gradient">answered.</span>
+              Every reported email, <span className="heading-dim">answered.</span>
             </>
           }
           lede="Employees report suspicious emails in one click, right from their inbox. PhishNode enriches every report with threat intelligence in seconds, puts it in front of an analyst, and closes the loop the moment a verdict is set."
           visual={<PhishNodeConsole />}
+          site={product.url}
+          demoHref="/contact?topic=PhishNode%20demo"
           secondary={{ label: "See how it works", href: "#how" }}
         />
 
@@ -50,7 +48,7 @@ export default function PhishNodePage() {
             eyebrow="How it works"
             title={
               <>
-                From <span className="accent text-gradient">report</span> to response, automatically.
+                From <span className="heading-dim">report</span> to response, automatically.
               </>
             }
             description="The gap between “an employee suspects a phishing email” and “security has acted on it” is where attackers win. PhishNode closes it end to end."
@@ -63,7 +61,7 @@ export default function PhishNodePage() {
             <Reveal>
               <p className="eyebrow">Enrichment</p>
               <h2 className="heading-lg mt-5">
-                Evidence first, <span className="accent text-gradient">verdict second.</span>
+                Evidence first, <span className="heading-dim">verdict second.</span>
               </h2>
               <p className="lede mt-5 max-w-md">
                 Every report fans out to multiple checks in parallel. Each is time-boxed and
@@ -101,7 +99,7 @@ export default function PhishNodePage() {
             eyebrow="Platform"
             title={
               <>
-                Built for security teams — <span className="accent text-gradient">and the MSSPs</span> that serve them.
+                Built for security teams — <span className="heading-dim">and the MSSPs</span> that serve them.
               </>
             }
           />
@@ -113,7 +111,7 @@ export default function PhishNodePage() {
             eyebrow="Service tiers"
             title={
               <>
-                Run it yourself, or <span className="accent text-gradient">let us run it.</span>
+                Run it yourself, or <span className="heading-dim">let us run it.</span>
               </>
             }
             description="Choose the model that fits your team. Switch as you grow."
@@ -142,9 +140,12 @@ export default function PhishNodePage() {
           </div>
         </Section>
 
-        <Contact defaultTopic="PhishNode demo" />
-      </main>
-      <Footer base="/" />
+        <CTABand
+          title="See PhishNode in action."
+          text="Book a walkthrough with our team. We'll show you the product and how it fits your environment."
+          href="/contact?topic=PhishNode%20demo"
+          label="Request a demo"
+        />
     </>
   );
 }

@@ -4,6 +4,8 @@ import "./globals.css";
 import { SITE } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ui/ScrollProgress";
+import Nav from "@/components/Nav";
+import Footer from "@/components/sections/Footer";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -85,7 +87,13 @@ export default function RootLayout({
           Skip to content
         </a>
         <ScrollProgress />
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <Nav />
+          <main id="main" tabIndex={-1}>
+            {children}
+          </main>
+          <Footer />
+        </SmoothScroll>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
