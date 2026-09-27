@@ -3,14 +3,14 @@ import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Stats from "@/components/sections/why/Stats";
 
-/** Why Cyngard — plain principles plus key numbers. */
+/** Why Cynguard — plain principles plus key numbers. */
 export default function Principles() {
   return (
     <section id="why" aria-labelledby="why-title" className="relative py-24 md:py-32">
       <div className="container-page">
         <SectionHeading
           id="why-title"
-          eyebrow="Why Cyngard"
+          eyebrow="Why Cynguard"
           title={
             <>
               The team that breaks it <span className="heading-dim">knows how to guard it.</span>

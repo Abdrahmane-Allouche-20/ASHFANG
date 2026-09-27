@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   publisher: SITE.name,
   category: "Cybersecurity",
   keywords: [
-    "Cyngard",
+    "Cynguard",
     "cybersecurity company",
     "managed SOC",
     "penetration testing",

@@ -29,7 +29,7 @@ export function llmsTxt() {
   return lines.join("\n");
 }
 
-/** Everything an assistant needs to answer questions about Cyngard accurately. */
+/** Everything an assistant needs to answer questions about Cynguard accurately. */
 export function llmsFullTxt() {
   const out: string[] = [llmsTxt(), "", "---", ""];
   out.push("# PhishNode", "", PRODUCTS[0].summary, "", "## How it works");

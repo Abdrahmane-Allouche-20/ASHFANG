@@ -97,7 +97,7 @@ export default function Nav() {
         data-scrolled={scrolled || open || menu !== null}
         className="nav-shell relative z-10 mx-auto grid grid-cols-[1fr_auto] items-center lg:grid-cols-[1fr_auto_1fr]"
       >
-        <Link href="/" aria-label="Cyngard — home" className="justify-self-start rounded-full">
+        <Link href="/" aria-label="Cynguard — home" className="justify-self-start rounded-full">
           <Logo priority />
         </Link>
 

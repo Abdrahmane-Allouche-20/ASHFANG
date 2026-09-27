@@ -27,7 +27,7 @@ export default function HomeHero() {
             <span className="heading-dim">can&apos;t afford to get breached.</span>
           </h1>
           <p className="lede fade-up mt-7 max-w-xl sm:text-lg" style={{ "--d": "220ms" } as CSSProperties}>
-            Cyngard builds security products — PhishNode and LeakShield — and delivers managed SOC,
+            Cynguard builds security products — PhishNode and LeakShield — and delivers managed SOC,
             penetration testing, code review, and security engineering for clients around the world.
           </p>
           <div

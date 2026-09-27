@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Cybersecurity Services — Managed SOC & Pentesting",
   description:
-    "Managed SOC, penetration testing, red teaming, code review, incident response, breach monitoring, cloud security, and compliance — by Cyngard engineers.",
+    "Managed SOC, penetration testing, red teaming, code review, incident response, breach monitoring, cloud security, and compliance — by Cynguard engineers.",
   path: "/services",
 });
 

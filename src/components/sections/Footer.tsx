@@ -78,7 +78,7 @@ export default function Footer() {
         <FooterColumn title="Company">
           <li>
             <Link href="/company" className="footer-link">
-              About Cyngard
+              About Cynguard
             </Link>
           </li>
           <li>
@@ -111,7 +111,7 @@ export default function Footer() {
       <div className="container-page">
         <div className="divider-x" />
         <div className="flex flex-col items-center justify-between gap-4 py-7 text-[12.5px] text-subtle sm:flex-row">
-          <p>© {new Date().getFullYear()} Cyngard. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Cynguard. All rights reserved.</p>
           <p>{SITE.tagline}</p>
         </div>
       </div>

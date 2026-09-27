@@ -1,6 +1,6 @@
-# Cyngard — Landing Page
+# Cynguard — Landing Page
 
-The official website of **Cyngard** — an international cybersecurity company building PhishNode and LeakShield and delivering managed SOC, penetration testing, code review, and security engineering.
+The official website of **Cynguard** — an international cybersecurity company building PhishNode and LeakShield and delivering managed SOC, penetration testing, code review, and security engineering.
 
 > Think like an attacker. Defend like an engineer.
 
