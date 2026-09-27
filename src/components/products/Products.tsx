@@ -4,7 +4,7 @@ import { PRODUCTS } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightGroup from "@/components/ui/SpotlightGroup";
-import { LeakShieldMark, LeakShieldScan, PhishNodeFlow, PhishNodeMark } from "@/components/products/ProductVisuals";
+import { LeakShieldAlerts, LeakShieldMark, PhishNodeFlow, PhishNodeMark } from "@/components/products/ProductVisuals";
 
 export default function Products({ heading = true }: { heading?: boolean }) {
   return (
@@ -19,7 +19,7 @@ export default function Products({ heading = true }: { heading?: boolean }) {
               Our products. <span className="heading-dim">Built from the front line.</span>
             </>
           }
-          description="We build the tools our own engineers rely on — and make them available to your team. They catch phishing and leaked secrets before they become incidents."
+          description="We build the tools our own engineers rely on — and make them available to your team. They catch phishing and data exposures before they become incidents."
         />
         )}
 
@@ -36,7 +36,7 @@ export default function Products({ heading = true }: { heading?: boolean }) {
                       </div>
                     ) : (
                       <div className="w-full px-6">
-                        <LeakShieldScan compact />
+                        <LeakShieldAlerts compact />
                       </div>
                     )}
                   </div>
@@ -65,6 +65,7 @@ export default function Products({ heading = true }: { heading?: boolean }) {
                       Explore {p.name}
                       <ArrowRight size={15} className="btn-arrow" />
                     </Link>
+                    {p.url && (
                     <a
                       href={p.url}
                       target="_blank"
@@ -74,6 +75,7 @@ export default function Products({ heading = true }: { heading?: boolean }) {
                       {p.url.replace(/^https:\/\//, "")}
                       <ArrowUpRight size={14} className="text-violet-soft transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </a>
+                    )}
                   </div>
                 </div>
               </article>

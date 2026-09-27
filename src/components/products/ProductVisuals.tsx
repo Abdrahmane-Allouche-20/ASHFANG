@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Check, Lock, Paperclip, ShieldCheck, X } from "lucide-react";
+import { Check, Lock, Paperclip, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 /* Illustrative product views for PhishNode and LeakShield (sample data only). */
@@ -195,89 +195,77 @@ export function PhishNodeFlow() {
 
 /* ---------------- LeakShield ---------------- */
 
-const FINDINGS = [
-  { file: "src/auth/jwt.ts", type: "Hardcoded JWT secret", sev: "critical" },
-  { file: "src/bot/config.ts", type: "Discord bot token", sev: "critical" },
-  { file: "scripts/deploy.sh", type: "GitHub token", sev: "critical" },
-  { file: ".env.production", type: "Sensitive file", sev: "high" },
+const ALERTS = [
+  { title: "Credentials for 3 accounts in a new breach dump", source: "Breach database", time: "2m", sev: "critical" },
+  { title: "yourcompany.com mentioned on a paste site", source: "Paste site", time: "18m", sev: "high" },
+  { title: "Known CVE matches web server on api.yourcompany.com", source: "NVD", time: "1h", sev: "high" },
+  { title: "Brand keyword in newly indexed forum post", source: "OSINT", time: "3h", sev: "medium" },
 ] as const;
 
-/** Terminal-style offline scan. */
-export function LeakShieldScan({ compact }: { compact?: boolean }) {
+const SEV_CLASS = { critical: "sev sev-critical", high: "sev sev-high", medium: "sev sev-medium" };
+
+/** Real-time exposure alert feed, as seen in the LeakShield dashboard. */
+export function LeakShieldAlerts({ compact }: { compact?: boolean }) {
   return (
-    <Window title="leakshield · local scan" right={<span className="flex items-center gap-1.5">OFFLINE</span>}>
-      <div className={cn("font-mono text-[11px] leading-[1.9] sm:text-[11.5px]", compact ? "p-4" : "p-5")}>
-        <p className="text-subtle">
-          Scanning <span className="text-[#d9d9e6]">./your-project</span>
-        </p>
-        <p className="text-muted">
-          <span className="text-ok">✓</span> Local scan · files never leave this machine
-        </p>
-        <div className="mt-2 space-y-0.5">
-          {FINDINGS.slice(0, compact ? 3 : 4).map((f, i) => (
-            <div
-              key={f.file}
-              className="grid grid-cols-[1fr_auto] items-center gap-3 opacity-0 [animation:fade-up_0.5s_cubic-bezier(0.22,1,0.36,1)_forwards]"
-              style={{ animationDelay: `${300 + i * 220}ms` }}
-            >
-              <span className="min-w-0 truncate text-[#d9d9e6]">
-                <span className={f.sev === "critical" ? "text-critical" : "text-high"}>✗</span> {f.file}
-                <span className="hidden text-subtle sm:inline"> — {f.type}</span>
-              </span>
-              <span className={cn("sev", f.sev === "critical" ? "sev-critical" : "sev-high")}>{f.sev}</span>
-            </div>
-          ))}
-        </div>
-        <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-line bg-fill px-3 py-2">
-          <span className="text-muted">
-            <span className="text-critical">3 critical</span> · <span className="text-high">1 high</span>
-          </span>
-          <span className="text-ok">fix steps ready →</span>
-        </div>
+    <Window title="leakshield · exposure alerts" right={<span className="hidden sm:inline">SAMPLE</span>}>
+      <div className="flex items-center gap-2.5 border-b border-line px-4 py-2.5">
+        <span className="live-dot scale-75" />
+        <span className="font-mono text-[10px] tracking-[0.12em] text-subtle">MONITORING</span>
+        <span className="truncate font-mono text-[11px] text-fg">yourcompany.com · 4 keywords · 12 assets</span>
       </div>
+      <ul>
+        {ALERTS.slice(0, compact ? 3 : 4).map((a, i) => (
+          <li
+            key={a.title}
+            className="flex items-center gap-3 border-b border-line px-4 py-2.5 opacity-0 last:border-0 [animation:fade-up_0.5s_cubic-bezier(0.22,1,0.36,1)_forwards]"
+            style={{ animationDelay: `${250 + i * 200}ms` }}
+          >
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-[12.5px] text-fg">{a.title}</span>
+              <span className="font-mono text-[10px] text-subtle">
+                {a.source} · {a.time} ago
+              </span>
+            </span>
+            <span className={cn(SEV_CLASS[a.sev], "shrink-0")}>{a.sev}</span>
+          </li>
+        ))}
+      </ul>
     </Window>
   );
 }
 
-/** Insecure vs. secure code, as shown in a LeakShield finding. */
-export function LeakShieldFix() {
+/** A single exposure, with where it came from and what to do next. */
+export function LeakShieldExposure() {
   return (
     <div className="card overflow-hidden p-0">
       <div className="flex items-center justify-between gap-3 border-b border-line px-5 py-3">
         <div className="flex items-center gap-2.5">
-          <span className="sev sev-critical">Immediate</span>
-          <span className="text-[13px] font-medium text-fg">Secure API key</span>
+          <span className="sev sev-critical">Critical</span>
+          <span className="text-[13px] font-medium text-fg">Leaked credentials</span>
         </div>
-        <span className="font-mono text-[10.5px] text-subtle">src/payments/client.ts</span>
+        <span className="font-mono text-[10.5px] text-subtle">SAMPLE ALERT</span>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2">
-        <div className="border-b border-line p-4 sm:border-b-0 sm:border-r">
-          <p className="mb-2 flex items-center gap-1.5 font-mono text-[10px] tracking-[0.14em] text-critical">
-            <X size={11} /> INSECURE
-          </p>
-          <pre className="overflow-hidden whitespace-pre-wrap break-all rounded-lg bg-[rgba(251,113,133,0.06)] p-3 font-mono text-[11px] text-[#fdba74]">
-            {'const API_KEY = "sk_live_4f9a…c21";'}
-          </pre>
-        </div>
-        <div className="p-4">
-          <p className="mb-2 flex items-center gap-1.5 font-mono text-[10px] tracking-[0.14em] text-ok">
-            <Check size={11} /> SECURE
-          </p>
-          <pre className="overflow-hidden whitespace-pre-wrap break-all rounded-lg bg-[rgba(52,211,153,0.06)] p-3 font-mono text-[11px] text-[#86efac]">
-            {"const API_KEY = process.env.API_KEY;"}
-          </pre>
-        </div>
+      <dl className="grid grid-cols-1 gap-3 px-5 py-4 text-[13px] sm:grid-cols-[8rem_1fr]">
+        <dt className="text-subtle">Source</dt>
+        <dd className="text-[#d6d6e2]">Newly published breach dump</dd>
+        <dt className="text-subtle">Matched asset</dt>
+        <dd className="font-mono text-[12px] text-[#d6d6e2]">@yourcompany.com · 3 accounts</dd>
+        <dt className="text-subtle">First seen</dt>
+        <dd className="text-[#d6d6e2]">2 minutes ago</dd>
+      </dl>
+      <div className="border-t border-line px-5 py-4">
+        <p className="font-mono text-[10px] tracking-[0.14em] text-subtle">RECOMMENDED ACTIONS</p>
+        <ol className="mt-2.5 space-y-1.5 text-[12.5px] text-muted">
+          {["Force a password reset for the affected accounts", "Revoke active sessions and enforce MFA", "Check sign-in logs for suspicious access"].map(
+            (s, i) => (
+              <li key={s} className="flex gap-2.5">
+                <span className="font-mono text-[11px] text-subtle">{i + 1}.</span>
+                {s}
+              </li>
+            ),
+          )}
+        </ol>
       </div>
-      <ol className="space-y-1.5 border-t border-line px-5 py-4 text-[12.5px] text-muted">
-        {["Rotate the exposed key immediately", "Move it to an environment variable", "Add .env to .gitignore"].map(
-          (s, i) => (
-            <li key={s} className="flex gap-2.5">
-              <span className="font-mono text-[11px] text-subtle">{i + 1}.</span>
-              {s}
-            </li>
-          ),
-        )}
-      </ol>
     </div>
   );
 }

@@ -120,7 +120,7 @@ export const SERVICES: Service[] = [
     includes: [
       "Manual review of critical code paths",
       "Automated static and dependency analysis",
-      "Secret and credential exposure scanning with LeakShield",
+      "Secret and credential exposure checks",
       "Authentication, authorization, and injection flaws",
       "Fix-first guidance with code examples",
     ],
@@ -129,7 +129,6 @@ export const SERVICES: Service[] = [
       "Secure code examples for each issue",
       "Developer walkthrough session",
     ],
-    product: "leakshield",
   },
   {
     slug: "managed-soc",
@@ -202,18 +201,19 @@ export const SERVICES: Service[] = [
     category: "defense",
     icon: ShieldAlert,
     title: "Data Leak & Breach Monitoring",
-    summary: "Know the moment your credentials, secrets, or data are exposed.",
+    summary: "Know the moment your credentials, data, or assets are exposed.",
     intro:
-      "Leaks happen in two places: in your own code and on the open web. We scan your projects for exposed secrets with LeakShield and monitor public sources for your domains and credentials, so you can act before attackers do.",
+      "Breaches rarely announce themselves. We use LeakShield to continuously watch public sources, paste sites, and breach databases for your domains, keywords, and credentials — and to match your assets against known vulnerabilities — so you can act before attackers do.",
     includes: [
-      "Secret scanning of your code with LeakShield",
-      "Continuous OSINT monitoring",
-      "Domain and email coverage",
-      "Exposure alerts with remediation guidance",
+      "Automated OSINT monitoring of your domains and keywords",
+      "Paste site and breach-database watching",
+      "Leaked credential detection",
+      "Vulnerability correlation with the NVD",
+      "Real-time alerts with remediation guidance",
     ],
     deliverables: [
-      "Exposure alerts as they surface",
-      "Credential rotation guidance",
+      "Real-time exposure alerts",
+      "Exposure history and asset health dashboard",
       "Periodic exposure reports",
     ],
     product: "leakshield",
@@ -386,7 +386,7 @@ export const FAQS = [
   },
   {
     q: "What are PhishNode and LeakShield?",
-    a: "Our two in-house platforms. PhishNode turns every suspicious email your employees report into an enriched, analyst-confirmed verdict. LeakShield finds exposed API keys, tokens, and secret files in your code — fully offline — and shows you how to fix each one.",
+    a: "Our two in-house platforms. PhishNode turns every suspicious email your employees report into an enriched, analyst-confirmed verdict. LeakShield continuously monitors breach data, paste sites, and other public sources for your domains and credentials, and alerts you the moment something is exposed.",
   },
   {
     q: "What does the free assessment include?",
@@ -420,8 +420,8 @@ export type Product = {
   slug: "phishnode" | "leakshield";
   name: string;
   href: string;
-  /** Live product site. */
-  url: string;
+  /** Live product site, if public. */
+  url?: string;
   category: string;
   tagline: string;
   summary: string;
@@ -446,12 +446,11 @@ export const PRODUCTS: Product[] = [
     slug: "leakshield",
     name: "LeakShield",
     href: "/products/leakshield",
-    url: "https://leakshield.vercel.app",
-    category: "Secret & credential leak prevention",
-    tagline: "Stop secrets before they leak.",
+    category: "Breach & OSINT monitoring",
+    tagline: "Know the moment your data is exposed.",
     summary:
-      "LeakShield scans your projects for exposed API keys, bot tokens, and sensitive files — 100% offline — rates the risk of each finding, and shows you how to fix it.",
-    highlights: ["100% offline scanning", "A risk score for every finding", "Guided, code-level fixes"],
+      "LeakShield continuously monitors public sources, paste sites, and breach databases for your domains, keywords, and credentials — correlates your assets with known vulnerabilities — and alerts you in real time.",
+    highlights: ["Automated OSINT pipelines", "Vulnerability correlation with the NVD", "Real-time alerts and dashboard"],
     accent: "violet",
   },
 ];
@@ -528,35 +527,46 @@ export const PHISHNODE = {
 export const LEAKSHIELD = {
   steps: [
     {
-      title: "Discover",
-      text: "LeakShield identifies high-risk files first — environment files, configs, and anything that tends to hold secrets.",
+      title: "Define",
+      text: "Tell LeakShield what matters: your domains, brand keywords, email addresses, and the assets you run.",
     },
     {
-      title: "Crawl",
-      text: "It walks your project recursively, skipping dependencies and irrelevant directories so large repos stay fast.",
+      title: "Monitor",
+      text: "Automated OSINT pipelines continuously watch public sources, paste sites, and breach notification databases.",
     },
     {
-      title: "Analyze",
-      text: "Pattern matching and context checks flag each exposure, rank its severity, and give it a 0–100 risk score.",
+      title: "Correlate",
+      text: "Discovered assets are matched against threat-intelligence feeds, including the National Vulnerability Database.",
     },
     {
-      title: "Fix",
-      text: "Each finding comes with a priority, step-by-step remediation, and the insecure code next to its secure version.",
+      title: "Alert",
+      text: "You get real-time alerts, and analysts see active threats, exposure history, and asset health in one dashboard.",
     },
   ],
-  detects: [
-    { name: "GitHub tokens", severity: "critical" },
-    { name: "Discord bot tokens", severity: "critical" },
-    { name: "JWT secrets", severity: "critical" },
-    { name: "Hardcoded credentials", severity: "critical" },
-    { name: "Telegram bot tokens", severity: "high" },
-    { name: "API keys", severity: "medium" },
-    { name: ".env & sensitive files", severity: "high" },
-  ] as { name: string; severity: "critical" | "high" | "medium" }[],
-  privacy: [
-    { title: "No cloud processing", text: "Your code never leaves your machine. There is nothing to upload." },
-    { title: "Runs fully offline", text: "Scanning happens on your machine with no uploads — suitable for air-gapped and regulated environments." },
-    { title: "No data collection", text: "No telemetry, no accounts, no tracking of what you scan." },
-    { title: "Open & transparent", text: "The detection logic is open source, so your team can audit exactly what it does." },
+  watches: [
+    { name: "Leaked credentials", text: "Employee and customer credentials surfacing in breach dumps." },
+    { name: "Paste sites", text: "Mentions of your domains, keywords, and data on public paste sites." },
+    { name: "Breach notifications", text: "New entries in breach notification databases that involve you." },
+    { name: "Brand & keyword mentions", text: "Targeted keywords and domains across monitored public sources." },
+    { name: "Known vulnerabilities", text: "Your assets correlated with CVEs from the National Vulnerability Database." },
   ],
+  features: [
+    {
+      title: "Automated OSINT pipelines",
+      text: "Continuous collection from public data sources, paste sites, and breach databases — no manual searching.",
+    },
+    {
+      title: "Vulnerability intelligence",
+      text: "Native NVD integration links what LeakShield finds about your assets to known, published vulnerabilities.",
+    },
+    {
+      title: "Built for scale",
+      text: "An asynchronous task queue runs heavy monitoring in the background, so alerts stay real-time as coverage grows.",
+    },
+    {
+      title: "Centralized dashboard",
+      text: "Active threats, historical exposure logs, and asset health status in one place for your analysts.",
+    },
+  ],
+  stack: ["Next.js", "FastAPI", "Celery", "Redis", "PostgreSQL", "MongoDB Atlas", "NVD API"],
 };

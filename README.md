@@ -45,7 +45,7 @@ automatically. Footer social links appear once a URL is added to `SOCIALS`.
 | Product | What it does | Live |
 | --- | --- | --- |
 | PhishNode | Phishing reporting, enrichment, and triage platform | https://phishnode.org |
-| LeakShield | Offline secret and credential leak scanner | https://leakshield.vercel.app |
+| LeakShield | Data-breach and OSINT monitoring platform | — |
 
 ## Brand
 
