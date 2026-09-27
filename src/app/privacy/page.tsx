@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Privacy",
-  description: "How the Cyngard website handles your information — no analytics, no trackers, and a contact form that never stores your data.",
+  description: "How the Cynguard website handles your information — no analytics, no trackers, and a contact form that never stores your data.",
   path: "/privacy",
 });
 

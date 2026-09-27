@@ -30,7 +30,7 @@ export default async function OpengraphImage() {
         <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={markSrc} width={58} height={76} alt="" />
-          <div style={{ fontSize: 30, fontWeight: 600, letterSpacing: 9 }}>CYNGARD</div>
+          <div style={{ fontSize: 30, fontWeight: 600, letterSpacing: 9 }}>CYNGUARD</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", fontSize: 82, fontWeight: 700, letterSpacing: -3, lineHeight: 1.04 }}>
@@ -40,7 +40,7 @@ export default async function OpengraphImage() {
 
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, color: "#a3a3b8" }}>
           <div>PhishNode · LeakShield · Offensive testing · Secure development</div>
-          <div style={{ color: "#67e8f9" }}>cyngard.com</div>
+          <div style={{ color: "#67e8f9" }}>{SITE.url.replace(/^https:\/\//, "")}</div>
         </div>
       </div>
     ),

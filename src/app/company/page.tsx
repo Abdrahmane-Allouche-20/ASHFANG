@@ -11,9 +11,9 @@ import JsonLd from "@/components/seo/JsonLd";
 import { absolute, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Cyngard — International Cybersecurity Company",
+  title: "About Cynguard — International Cybersecurity Company",
   description:
-    "Cyngard combines in-house security products with engineer-led services for clients across North America, Europe, Africa & the Middle East, and Asia-Pacific.",
+    "Cynguard combines in-house security products with engineer-led services for clients across North America, Europe, Africa & the Middle East, and Asia-Pacific.",
   path: "/company",
 });
 
@@ -51,7 +51,7 @@ export default function CompanyPage() {
         data={{
           "@type": "AboutPage",
           url: absolute("/company"),
-          name: "About Cyngard",
+          name: "About Cynguard",
           about: { "@id": `${absolute("/")}/#organization` },
         }}
       />
@@ -60,10 +60,10 @@ export default function CompanyPage() {
         eyebrow="Company"
         title={
           <>
-            About Cyngard. <span className="heading-dim">Think like an attacker, defend like an engineer.</span>
+            About Cynguard. <span className="heading-dim">Think like an attacker, defend like an engineer.</span>
           </>
         }
-        lede="Cyngard is an international cybersecurity company. We combine in-house security products with engineer-led services to help organizations find their weaknesses, watch for threats, and respond when it matters."
+        lede="Cynguard is an international cybersecurity company. We combine in-house security products with engineer-led services to help organizations find their weaknesses, watch for threats, and respond when it matters."
       />
 
       <section className="relative pb-16">

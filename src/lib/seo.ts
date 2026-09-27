@@ -39,7 +39,7 @@ export function organizationSchema() {
     name: SITE.name,
     url: SITE.url,
     email: SITE.email,
-    logo: absolute("/brand/logo-full.png"),
+    logo: absolute("/brand/icon-square-512.png"),
     image: absolute("/opengraph-image"),
     slogan: SITE.tagline,
     description: SITE.description,

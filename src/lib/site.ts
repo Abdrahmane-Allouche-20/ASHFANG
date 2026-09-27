@@ -22,10 +22,10 @@ function resolveSiteUrl() {
 }
 
 export const SITE = {
-  name: "Cyngard",
+  name: "Cynguard",
   tagline: "Think like an attacker. Defend like an engineer.",
   description:
-    "Cyngard is an international cybersecurity company. We build PhishNode and LeakShield, and deliver managed SOC, penetration testing, code review, and security engineering to organizations worldwide.",
+    "Cynguard is an international cybersecurity company. We build PhishNode and LeakShield, and deliver managed SOC, penetration testing, code review, and security engineering to organizations worldwide.",
   email: "cyngard.support@gmail.com",
   /**
    * Canonical origin. Set NEXT_PUBLIC_SITE_URL once a custom domain is live;
@@ -149,7 +149,7 @@ export const SERVICES: Service[] = [
     title: "Managed SOC",
     summary: "Our analysts monitor, triage, and respond to threats for you — no in-house SOC required.",
     intro:
-      "Building a security operations center takes people, tooling, and years. With Cyngard, you get an operating SOC from day one: our analysts watch your environment, triage what matters, and escalate with context when action is needed.",
+      "Building a security operations center takes people, tooling, and years. With Cynguard, you get an operating SOC from day one: our analysts watch your environment, triage what matters, and escalate with context when action is needed.",
     includes: [
       "Continuous alert monitoring and triage",
       "Phishing report triage on PhishNode",
@@ -530,8 +530,8 @@ export const PHISHNODE = {
     },
     {
       name: "Managed service",
-      text: "Cyngard analysts run triage for you. Your team keeps full visibility while we handle the queue.",
-      points: ["Triage by Cyngard analysts", "Service activity reports", "Shared intelligence coverage"],
+      text: "Cynguard analysts run triage for you. Your team keeps full visibility while we handle the queue.",
+      points: ["Triage by Cynguard analysts", "Service activity reports", "Shared intelligence coverage"],
     },
   ],
 };

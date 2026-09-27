@@ -23,9 +23,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return pageMetadata({
     title: `${service.title} Services`,
     description:
-      service.summary.length < 110 ? `${service.summary} Delivered by Cyngard engineers, worldwide.` : service.summary,
+      service.summary.length < 110 ? `${service.summary} Delivered by Cynguard engineers, worldwide.` : service.summary,
     path: `/services/${service.slug}`,
-    keywords: [service.title, `${service.title} services`, `${service.title} company`, "Cyngard"],
+    keywords: [service.title, `${service.title} services`, `${service.title} company`, "Cynguard"],
   });
 }
 

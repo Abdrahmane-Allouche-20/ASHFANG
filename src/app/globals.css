@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Cyngard design tokens
+   Cynguard design tokens
    Colors that need transparency are defined as explicit rgba() tokens instead
    of Tailwind opacity modifiers (e.g. `text-fg/70`), which rely on color-mix()
    and render too dark in some browsers.

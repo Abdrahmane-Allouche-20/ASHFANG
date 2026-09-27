@@ -22,7 +22,7 @@ export default function Logo({
         className={cn("h-7 w-auto drop-shadow-[0_0_14px_rgba(139,92,246,0.45)]", markClassName)}
       />
       <span className="font-display text-[0.95rem] font-semibold tracking-[0.24em] text-fg">
-        CYNGARD
+        CYNGUARD
       </span>
     </span>
   );
