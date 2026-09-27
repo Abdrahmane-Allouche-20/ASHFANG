@@ -450,8 +450,8 @@ export const PRODUCTS: Product[] = [
     category: "Secret & credential leak prevention",
     tagline: "Stop secrets before they leak.",
     summary:
-      "LeakShield scans your projects for exposed API keys, bot tokens, and environment files — 100% offline — scores the risk, and shows you exactly how to fix each finding.",
-    highlights: ["100% offline scanning", "Risk scoring 0–100", "Guided, code-level fixes"],
+      "LeakShield scans your projects for exposed API keys, bot tokens, and sensitive files — 100% offline — rates the risk of each finding, and shows you how to fix it.",
+    highlights: ["100% offline scanning", "A risk score for every finding", "Guided, code-level fixes"],
     accent: "violet",
   },
 ];
@@ -537,7 +537,7 @@ export const LEAKSHIELD = {
     },
     {
       title: "Analyze",
-      text: "Pattern matching, context analysis, and a 0–100 risk score separate real exposures from noise.",
+      text: "Pattern matching and context checks flag each exposure, rank its severity, and give it a 0–100 risk score.",
     },
     {
       title: "Fix",
@@ -550,12 +550,12 @@ export const LEAKSHIELD = {
     { name: "JWT secrets", severity: "critical" },
     { name: "Hardcoded credentials", severity: "critical" },
     { name: "Telegram bot tokens", severity: "high" },
-    { name: "API keys", severity: "high" },
+    { name: "API keys", severity: "medium" },
     { name: ".env & sensitive files", severity: "high" },
-  ] as { name: string; severity: "critical" | "high" }[],
+  ] as { name: string; severity: "critical" | "high" | "medium" }[],
   privacy: [
     { title: "No cloud processing", text: "Your code never leaves your machine. There is nothing to upload." },
-    { title: "Zero network requests", text: "Scans run fully offline — safe for air-gapped and regulated environments." },
+    { title: "Runs fully offline", text: "Scanning happens on your machine with no uploads — suitable for air-gapped and regulated environments." },
     { title: "No data collection", text: "No telemetry, no accounts, no tracking of what you scan." },
     { title: "Open & transparent", text: "The detection logic is open source, so your team can audit exactly what it does." },
   ],

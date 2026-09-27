@@ -39,9 +39,9 @@ export default function LeakShieldPage() {
         <StatStrip
           stats={[
             { value: "100%", label: "Offline — nothing leaves your machine" },
-            { value: "10,000+", label: "Files per scan" },
-            { value: "50+", label: "Languages supported" },
-            { value: "0–100", label: "Risk score per project" },
+            { value: "50+", label: "File types scanned" },
+            { value: "0–100", label: "Risk score per finding" },
+            { value: "MIT", label: "Open-source license" },
           ]}
         />
 
@@ -73,7 +73,7 @@ export default function LeakShieldPage() {
                 {LEAKSHIELD.detects.map((d) => (
                   <li key={d.name} className="flex items-center justify-between gap-4 px-5 py-3.5">
                     <span className="text-[14.5px] text-fg">{d.name}</span>
-                    <span className={cn("sev", d.severity === "critical" ? "sev-critical" : "sev-high")}>
+                    <span className={cn("sev", `sev-${d.severity}`)}>
                       {d.severity}
                     </span>
                   </li>
