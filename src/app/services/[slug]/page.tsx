@@ -7,6 +7,8 @@ import PageHeader from "@/components/layout/PageHeader";
 import CTABand from "@/components/layout/CTABand";
 import Reveal from "@/components/ui/Reveal";
 import { LeakShieldMark, PhishNodeMark } from "@/components/products/ProductVisuals";
+import JsonLd from "@/components/seo/JsonLd";
+import { pageMetadata, serviceSchema } from "@/lib/seo";
 
 type Params = { slug: string };
 
@@ -18,11 +20,13 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params;
   const service = SERVICES.find((s) => s.slug === slug);
   if (!service) return {};
-  return {
-    title: service.title,
-    description: service.summary,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+  return pageMetadata({
+    title: `${service.title} Services`,
+    description:
+      service.summary.length < 110 ? `${service.summary} Delivered by Cyngard engineers, worldwide.` : service.summary,
+    path: `/services/${service.slug}`,
+    keywords: [service.title, `${service.title} services`, `${service.title} company`, "Cyngard"],
+  });
 }
 
 export default async function ServicePage({ params }: { params: Promise<Params> }) {
@@ -38,7 +42,12 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
   return (
     <>
+      <JsonLd data={serviceSchema(service)} />
       <PageHeader
+        crumbs={[
+          { name: "Services", path: "/services" },
+          { name: service.title, path: `/services/${service.slug}` },
+        ]}
         eyebrow={category.name}
         title={
           <span className="inline-flex flex-col gap-5">

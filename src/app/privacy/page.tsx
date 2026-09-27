@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/layout/PageHeader";
 import { SITE } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy",
-  description: "How the Cyngard website handles your information.",
-  alternates: { canonical: "/privacy" },
-};
+  description: "How the Cyngard website handles your information — no analytics, no trackers, and a contact form that never stores your data.",
+  path: "/privacy",
+});
 
 const SECTIONS = [
   {
@@ -34,7 +35,7 @@ const SECTIONS = [
 export default function PrivacyPage() {
   return (
     <>
-      <PageHeader eyebrow="Legal" title="Privacy" lede="A plain-language summary of how this website handles your information." />
+      <PageHeader crumbs={[{ name: "Privacy", path: "/privacy" }]} eyebrow="Legal" title="Privacy" lede="A plain-language summary of how this website handles your information." />
       <section className="relative pb-24">
         <div className="container-page">
           <div className="max-w-3xl divide-y divide-line border-y border-line">

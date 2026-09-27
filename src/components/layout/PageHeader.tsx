@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
+import Breadcrumbs, { type Crumb } from "@/components/seo/Breadcrumbs";
 
 /** Top-of-page header for inner pages. */
 export default function PageHeader({
@@ -6,11 +7,13 @@ export default function PageHeader({
   title,
   lede,
   children,
+  crumbs,
 }: {
   eyebrow: string;
   title: ReactNode;
   lede?: ReactNode;
   children?: ReactNode;
+  crumbs?: Crumb[];
 }) {
   return (
     <section className="relative isolate overflow-hidden pb-16 pt-36 sm:pt-44 md:pb-20">
@@ -19,6 +22,7 @@ export default function PageHeader({
         <div className="hero-beam absolute inset-x-0 top-0 h-[600px] opacity-70" />
       </div>
       <div className="container-page">
+        {crumbs && <Breadcrumbs items={crumbs} />}
         <p className="eyebrow fade-up" style={{ "--d": "0ms" } as CSSProperties}>
           {eyebrow}
         </p>

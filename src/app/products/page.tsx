@@ -5,12 +5,14 @@ import PageHeader from "@/components/layout/PageHeader";
 import CTABand from "@/components/layout/CTABand";
 import Products from "@/components/products/Products";
 import Reveal from "@/components/ui/Reveal";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Products",
-  description: "PhishNode for phishing detection and triage, and LeakShield for breach and OSINT monitoring — built by Cyngard.",
-  alternates: { canonical: "/products" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Security Products — PhishNode & LeakShield",
+  description:
+    "PhishNode for phishing reporting and triage, and LeakShield for data breach and OSINT monitoring — use them on your own or with Cyngard's managed services.",
+  path: "/products",
+});
 
 const PAIRINGS = [
   {
@@ -31,6 +33,7 @@ export default function ProductsPage() {
   return (
     <>
       <PageHeader
+        crumbs={[{ name: "Products", path: "/products" }]}
         eyebrow="Products"
         title={
           <>

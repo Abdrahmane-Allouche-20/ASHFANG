@@ -40,6 +40,16 @@ src/
 Most content changes only need `src/lib/site.ts` — adding a service there creates its page
 automatically. Footer social links appear once a URL is added to `SOCIALS`.
 
+## SEO & discoverability
+
+- Canonical origin comes from `NEXT_PUBLIC_SITE_URL` (set it when a custom domain goes live);
+  otherwise Vercel's production URL is used.
+- Generated: `/sitemap.xml`, `/robots.txt` (search engines and AI crawlers allowed),
+  `/manifest.webmanifest`, `/opengraph-image`, and `/llms.txt` + `/llms-full.txt` —
+  plain-text summaries for AI assistants, built from `src/lib/site.ts`.
+- Structured data (schema.org): Organization, WebSite, Service, SoftwareApplication,
+  BreadcrumbList, FAQPage, and AboutPage — see `src/lib/seo.ts`.
+
 ## Products
 
 | Product | What it does | Live |

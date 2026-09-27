@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import Contact from "@/components/sections/Contact";
 import FAQ from "@/components/sections/FAQ";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: "Talk to a Cyngard engineer about managed SOC, penetration testing, PhishNode, LeakShield, or any security challenge.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Cyngard — Talk to a Security Engineer",
+  description:
+    "Contact Cyngard about managed SOC, penetration testing, PhishNode, LeakShield, or any security challenge. Free, no-obligation assessments.",
+  path: "/contact",
+});
 
 export default async function ContactPage({
   searchParams,

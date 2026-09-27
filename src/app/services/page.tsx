@@ -6,18 +6,20 @@ import PageHeader from "@/components/layout/PageHeader";
 import CTABand from "@/components/layout/CTABand";
 import Reveal from "@/components/ui/Reveal";
 import SpotlightGroup from "@/components/ui/SpotlightGroup";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services",
+export const metadata: Metadata = pageMetadata({
+  title: "Cybersecurity Services — Managed SOC & Pentesting",
   description:
-    "Managed SOC, penetration testing, red teaming, secure code review, incident response, cloud security, compliance, and more — delivered by Cyngard engineers.",
-  alternates: { canonical: "/services" },
-};
+    "Managed SOC, penetration testing, red teaming, code review, incident response, breach monitoring, cloud security, and compliance — by Cyngard engineers.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
     <>
       <PageHeader
+        crumbs={[{ name: "Services", path: "/services" }]}
         eyebrow="Services"
         title={
           <>
