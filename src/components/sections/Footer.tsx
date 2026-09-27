@@ -1,20 +1,22 @@
 import { ArrowUp, ArrowUpRight, Github, Linkedin, Twitter } from "lucide-react";
-import { NAV_LINKS, SERVICES, SITE, SOCIALS } from "@/lib/site";
+import { NAV_LINKS, PRODUCTS, SERVICES, SITE, SOCIALS } from "@/lib/site";
 import Logo from "@/components/ui/Logo";
 
 const SOCIAL_ICONS = { LinkedIn: Linkedin, X: Twitter, GitHub: Github };
 
-export default function Footer() {
+export default function Footer({ base = "" }: { base?: string }) {
   const socials = SOCIALS.filter((s) => s.href);
 
   return (
     <footer className="relative isolate overflow-hidden border-t border-line">
       <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_100%,rgba(139,92,246,0.14),transparent_70%)]" />
 
-      <div className="container-page grid grid-cols-1 gap-12 pb-10 pt-16 sm:grid-cols-2 md:pt-20 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] lg:gap-8">
+      <div className="container-page grid grid-cols-1 gap-12 pb-10 pt-16 sm:grid-cols-2 md:pt-20 lg:grid-cols-[1.3fr_0.8fr_1.1fr_0.8fr_1.1fr] lg:gap-8">
         <div className="max-w-xs">
           <Logo />
-          <p className="mt-5 text-[14.5px] leading-relaxed text-muted">{SITE.tagline}</p>
+          <p className="mt-5 text-[14.5px] leading-relaxed text-muted">
+            An international cybersecurity company. {SITE.tagline}
+          </p>
           {socials.length > 0 && (
             <ul className="mt-6 flex gap-2">
               {socials.map((s) => {
@@ -37,10 +39,20 @@ export default function Footer() {
           )}
         </div>
 
+        <FooterColumn title="Products">
+          {PRODUCTS.map((p) => (
+            <li key={p.slug}>
+              <a href={p.href} className="footer-link">
+                {p.name}
+              </a>
+            </li>
+          ))}
+        </FooterColumn>
+
         <FooterColumn title="Services">
           {SERVICES.map((s) => (
             <li key={s.id}>
-              <a href={`#${s.id}`} className="footer-link">
+              <a href={`${base}#${s.id}`} className="footer-link">
                 {s.title}
               </a>
             </li>
@@ -48,9 +60,9 @@ export default function Footer() {
         </FooterColumn>
 
         <FooterColumn title="Company">
-          {NAV_LINKS.slice(1).map((l) => (
+          {NAV_LINKS.slice(2).map((l) => (
             <li key={l.href}>
-              <a href={l.href} className="footer-link">
+              <a href={base + l.href} className="footer-link">
                 {l.label}
               </a>
             </li>

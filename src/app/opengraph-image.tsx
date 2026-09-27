@@ -39,7 +39,7 @@ export default async function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, color: "#a3a3b8" }}>
-          <div>Offensive testing · Defensive solutions · Secure development</div>
+          <div>PhishNode · LeakShield · Offensive testing · Secure development</div>
           <div style={{ color: "#67e8f9" }}>cyngard.com</div>
         </div>
       </div>
