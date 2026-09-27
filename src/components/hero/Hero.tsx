@@ -37,14 +37,14 @@ export default function Hero() {
 
       <div className="container-page text-center">
         <a
-          href="#contact"
+          href="#products"
           className="fade-up group inline-flex items-center gap-2.5 rounded-full border border-line bg-fill py-1 pl-1 pr-3.5 text-[13px] text-muted transition-colors duration-300 hover:border-line-strong hover:text-fg"
           style={{ "--d": "0ms" } as CSSProperties}
         >
           <span className="rounded-full border border-[rgba(167,139,250,0.35)] bg-[rgba(139,92,246,0.18)] px-2 py-0.5 font-mono text-[10px] tracking-[0.14em] text-violet-pale">
-            FREE
+            NEW
           </span>
-          Security assessment — no obligation
+          Meet PhishNode &amp; LeakShield
           <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-0.5" />
         </a>
 
@@ -73,8 +73,9 @@ export default function Hero() {
           className="fade-up lede mx-auto mt-7 max-w-2xl sm:text-lg"
           style={{ "--d": "650ms" } as CSSProperties}
         >
-          Offensive testing, defensive solutions, and secure development — built by engineers for
-          companies that can&apos;t afford to get breached.
+          Cyngard is an international cybersecurity company. We build security platforms and
+          deliver offensive testing, defense, and secure development for organizations that
+          can&apos;t afford to get breached.
         </p>
 
         <div
@@ -85,8 +86,8 @@ export default function Hero() {
             Book a free assessment
             <ArrowRight size={16} className="btn-arrow" />
           </a>
-          <a href="#services" className="btn btn-secondary btn-lg">
-            Explore services
+          <a href="#products" className="btn btn-secondary btn-lg">
+            Explore our platforms
           </a>
         </div>
 

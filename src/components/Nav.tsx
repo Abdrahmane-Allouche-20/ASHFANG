@@ -10,7 +10,11 @@ import Logo from "@/components/ui/Logo";
 
 const MOBILE_LINKS = [...NAV_LINKS, { label: "Contact", href: "#contact" }];
 
-export default function Nav() {
+/**
+ * `base` prefixes the home-page section links — "" on the home page,
+ * "/" on other pages so the links lead back to the right section.
+ */
+export default function Nav({ base = "" }: { base?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
@@ -27,6 +31,7 @@ export default function Nav() {
 
   // Scroll-spy: highlight the link for the section currently in view.
   useEffect(() => {
+    if (base) return;
     const ids = ["top", ...MOBILE_LINKS.map((l) => l.href.slice(1))];
     const observer = new IntersectionObserver(
       (entries) => {
@@ -39,7 +44,7 @@ export default function Nav() {
       if (el) observer.observe(el);
     }
     return () => observer.disconnect();
-  }, []);
+  }, [base]);
 
   const unlock = useCallback(() => {
     document.documentElement.style.removeProperty("overflow");
@@ -83,7 +88,7 @@ export default function Nav() {
         data-scrolled={scrolled || open}
         className="nav-shell relative z-10 mx-auto grid grid-cols-[1fr_auto] items-center md:grid-cols-[1fr_auto_1fr]"
       >
-        <a href="#top" aria-label="Cyngard — back to top" className="justify-self-start rounded-full">
+        <a href={base || "#top"} aria-label="Cyngard — home" className="justify-self-start rounded-full">
           <Logo priority />
         </a>
 
@@ -94,7 +99,7 @@ export default function Nav() {
               return (
                 <li key={l.href} className="relative">
                   <a
-                    href={l.href}
+                    href={base + l.href}
                     onMouseEnter={() => setHovered(l.href)}
                     onFocus={() => setHovered(l.href)}
                     onBlur={() => setHovered(null)}
@@ -185,7 +190,7 @@ export default function Nav() {
                     transition={{ delay: 0.04 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <a
-                      href={l.href}
+                      href={l.href === "#contact" ? l.href : base + l.href}
                       onClick={close}
                       className={cn(
                         "flex items-center justify-between border-b border-line py-5 text-[1.75rem] font-medium tracking-tight",

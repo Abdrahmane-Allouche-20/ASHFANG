@@ -1,4 +1,5 @@
-import { Check } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, Check } from "lucide-react";
 import { PENTEST_INCLUDES, SERVICES, type Service } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -117,6 +118,15 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
             </li>
           ))}
         </ul>
+        {service.product && (
+          <Link
+            href={service.product.href}
+            className="group mt-5 inline-flex items-center gap-1.5 self-start text-[13px] text-muted transition-colors hover:text-fg"
+          >
+            Powered by <span className="font-medium text-fg">{service.product.name}</span>
+            <ArrowUpRight size={14} className="text-violet-soft transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </Link>
+        )}
       </div>
     </article>
   );

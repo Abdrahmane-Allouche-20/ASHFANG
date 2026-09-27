@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/hero/Hero";
 import Frameworks from "@/components/sections/Frameworks";
+import Products from "@/components/products/Products";
 import Services from "@/components/sections/Services";
 import Manifesto from "@/components/sections/Manifesto";
 import WhyCyngard from "@/components/sections/WhyCyngard";
@@ -17,6 +18,7 @@ export default function Home() {
       <main id="main" tabIndex={-1}>
         <Hero />
         <Frameworks />
+        <Products />
         <Services />
         <Manifesto />
         <WhyCyngard />

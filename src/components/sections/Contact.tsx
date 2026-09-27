@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, Check, Copy, Mail, Send } from "lucide-react";
-import { SERVICES, SITE } from "@/lib/site";
+import { PRODUCTS, SERVICES, SITE } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 
-const TOPICS = [...SERVICES.map((s) => s.title), "Not sure yet"];
+const TOPICS = [...PRODUCTS.map((p) => `${p.name} demo`), ...SERVICES.map((s) => s.title), "Not sure yet"];
 
 const NEXT_STEPS = [
   { title: "We reply fast", text: "A real engineer answers, in plain language." },
@@ -17,9 +17,10 @@ const NEXT_STEPS = [
 
 const EMPTY = { name: "", email: "", company: "", message: "" };
 
-export default function Contact() {
+/** `defaultTopic` preselects a topic chip, e.g. "PhishNode demo" on its product page. */
+export default function Contact({ defaultTopic }: { defaultTopic?: string } = {}) {
   const [form, setForm] = useState(EMPTY);
-  const [topics, setTopics] = useState<string[]>([]);
+  const [topics, setTopics] = useState<string[]>(defaultTopic ? [defaultTopic] : []);
   const [sent, setSent] = useState(false);
 
   const toggleTopic = (t: string) =>
