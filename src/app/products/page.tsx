@@ -8,7 +8,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Products",
-  description: "PhishNode for phishing detection and triage, and LeakShield for secret and credential leak prevention — built by Cyngard.",
+  description: "PhishNode for phishing detection and triage, and LeakShield for breach and OSINT monitoring — built by Cyngard.",
   alternates: { canonical: "/products" },
 };
 
@@ -21,9 +21,9 @@ const PAIRINGS = [
   },
   {
     product: "LeakShield",
-    service: "Secure Code Review",
-    href: "/services/secure-code-review",
-    text: "Scan with LeakShield on your own machines, and bring in our engineers to review code and remediate what it finds.",
+    service: "Data Leak & Breach Monitoring",
+    href: "/services/breach-monitoring",
+    text: "Monitor your exposure with LeakShield yourself, or let our analysts watch the alerts and guide your response.",
   },
 ];
 

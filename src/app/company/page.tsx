@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const PILLARS = [
   {
     title: "We build",
-    text: "PhishNode and LeakShield — products that catch phishing and leaked secrets before they become incidents.",
+    text: "PhishNode and LeakShield — platforms that catch phishing and data exposures before they become incidents.",
     href: "/products",
     link: "Our products",
   },

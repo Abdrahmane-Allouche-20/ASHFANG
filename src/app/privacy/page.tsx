@@ -23,7 +23,7 @@ const SECTIONS = [
   },
   {
     title: "Our products",
-    body: "PhishNode and LeakShield each document how they handle data. LeakShield runs fully offline and never sends your code anywhere.",
+    body: "PhishNode and LeakShield each come with their own terms describing how they handle your data.",
   },
   {
     title: "Your rights",

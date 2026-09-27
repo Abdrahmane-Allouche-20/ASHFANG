@@ -24,8 +24,8 @@ export function ProductHero({
   lede: string;
   visual: ReactNode;
   secondary: { label: string; href: string };
-  /** Live product URL. */
-  site: string;
+  /** Live product URL, if public. */
+  site?: string;
   demoHref: string;
 }) {
   return (
@@ -54,18 +54,26 @@ export function ProductHero({
               Request a demo
               <ArrowRight size={16} className="btn-arrow" />
             </Link>
-            <a href={site} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-lg">
-              Visit {site.replace(/^https:\/\//, "")}
-              <ArrowUpRight size={16} />
-            </a>
+            {site ? (
+              <a href={site} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-lg">
+                Visit {site.replace(/^https:\/\//, "")}
+                <ArrowUpRight size={16} />
+              </a>
+            ) : (
+              <a href={secondary.href} className="btn btn-secondary btn-lg">
+                {secondary.label}
+              </a>
+            )}
           </div>
-          <a
-            href={secondary.href}
-            className="fade-up mt-5 inline-flex text-[14px] text-muted underline decoration-line-strong underline-offset-[6px] transition-colors hover:text-fg"
-            style={{ "--d": "450ms" } as CSSProperties}
-          >
-            {secondary.label}
-          </a>
+          {site && (
+            <a
+              href={secondary.href}
+              className="fade-up mt-5 inline-flex text-[14px] text-muted underline decoration-line-strong underline-offset-[6px] transition-colors hover:text-fg"
+              style={{ "--d": "450ms" } as CSSProperties}
+            >
+              {secondary.label}
+            </a>
+          )}
         </div>
         <div className="fade-up" style={{ "--d": "450ms" } as CSSProperties}>
           {visual}
@@ -116,9 +124,16 @@ export function Steps({ steps }: { steps: { title: string; text: string }[] }) {
   );
 }
 
-export function FeatureGrid({ items }: { items: { title: string; text: string }[] }) {
+export function FeatureGrid({
+  items,
+  twoUp,
+}: {
+  items: { title: string; text: string }[];
+  /** Two columns on large screens, for even counts. */
+  twoUp?: boolean;
+}) {
   return (
-    <SpotlightGroup className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <SpotlightGroup className={`grid grid-cols-1 gap-4 md:grid-cols-2 ${twoUp ? "" : "lg:grid-cols-3"}`}>
       {items.map((f, i) => (
         <Reveal key={f.title} delay={(i % 3) * 0.06} className="flex">
           <article data-spot className="card w-full min-w-0 p-6 sm:p-7">
