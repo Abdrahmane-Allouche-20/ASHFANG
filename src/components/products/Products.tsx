@@ -1,25 +1,27 @@
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { PRODUCTS } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SpotlightGroup from "@/components/ui/SpotlightGroup";
 import { LeakShieldMark, LeakShieldScan, PhishNodeFlow, PhishNodeMark } from "@/components/products/ProductVisuals";
 
-export default function Products() {
+export default function Products({ heading = true }: { heading?: boolean }) {
   return (
-    <section id="products" aria-labelledby="products-title" className="relative py-28 md:py-36">
+    <section id="products" aria-label="Products" className={heading ? "relative py-24 md:py-32" : "relative pb-20"}>
       <div className="container-page">
+        {heading && (
         <SectionHeading
           id="products-title"
-          eyebrow="Our platforms"
+          eyebrow="Products"
           title={
             <>
-              Two platforms. <span className="accent text-gradient">One mission.</span>
+              Our products. <span className="heading-dim">Built from the front line.</span>
             </>
           }
-          description="Beyond services, we build the tools we wish every organization had — software that catches phishing and leaked secrets before they turn into incidents."
+          description="We build the tools our own engineers rely on — and make them available to your team. They catch phishing and leaked secrets before they become incidents."
         />
+        )}
 
         <SpotlightGroup className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {PRODUCTS.map((p, i) => (
@@ -58,11 +60,20 @@ export default function Products() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-auto pt-8">
+                  <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 pt-8">
                     <Link href={p.href} className="btn btn-secondary">
                       Explore {p.name}
                       <ArrowRight size={15} className="btn-arrow" />
                     </Link>
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 font-mono text-[13px] text-muted transition-colors hover:text-fg"
+                    >
+                      {p.url.replace(/^https:\/\//, "")}
+                      <ArrowUpRight size={14} className="text-violet-soft transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </a>
                   </div>
                 </div>
               </article>

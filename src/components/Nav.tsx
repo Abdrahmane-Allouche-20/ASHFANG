@@ -1,27 +1,32 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { NAV_LINKS, SITE } from "@/lib/site";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { PRODUCTS, SERVICE_CATEGORIES, SITE, servicesIn } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { getLenis } from "@/components/SmoothScroll";
 import Logo from "@/components/ui/Logo";
+import { LeakShieldMark, PhishNodeMark } from "@/components/products/ProductVisuals";
 
-const MOBILE_LINKS = [...NAV_LINKS, { label: "Contact", href: "#contact" }];
+type Menu = "products" | "services" | null;
 
-/**
- * `base` prefixes the home-page section links — "" on the home page,
- * "/" on other pages so the links lead back to the right section.
- */
-export default function Nav({ base = "" }: { base?: string }) {
+const LINKS = [
+  { label: "Company", href: "/company" },
+  { label: "Contact", href: "/contact" },
+];
+
+export default function Nav() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("");
-  const [hovered, setHovered] = useState<string | null>(null);
+  const [menu, setMenu] = useState<Menu>(null);
+  const [mobileSection, setMobileSection] = useState<Menu>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Condense the bar into a floating glass pill once the page scrolls.
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -29,22 +34,11 @@ export default function Nav({ base = "" }: { base?: string }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Scroll-spy: highlight the link for the section currently in view.
+  // Close menus on navigation.
   useEffect(() => {
-    if (base) return;
-    const ids = ["top", ...MOBILE_LINKS.map((l) => l.href.slice(1))];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) if (e.isIntersecting) setActive(`#${e.target.id}`);
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    for (const id of ids) {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    }
-    return () => observer.disconnect();
-  }, [base]);
+    setMenu(null);
+    setOpen(false);
+  }, [pathname]);
 
   const unlock = useCallback(() => {
     document.documentElement.style.removeProperty("overflow");
@@ -52,26 +46,23 @@ export default function Nav({ base = "" }: { base?: string }) {
     getLenis()?.start();
   }, []);
 
-  // Closing unlocks scrolling synchronously so a tapped anchor can scroll right away.
   const close = useCallback(() => {
     setOpen(false);
     unlock();
   }, [unlock]);
 
-  // Mobile menu: lock the page behind it, close on Escape or when widening.
   useEffect(() => {
     if (!open) return;
     getLenis()?.stop();
     document.documentElement.style.overflow = "hidden";
     document.querySelectorAll("main, footer").forEach((el) => el.setAttribute("inert", ""));
-
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         close();
         toggleRef.current?.focus();
       }
     };
-    const mq = window.matchMedia("(min-width: 768px)");
+    const mq = window.matchMedia("(min-width: 1024px)");
     const onWide = () => mq.matches && close();
     window.addEventListener("keydown", onKey);
     mq.addEventListener("change", onWide);
@@ -82,61 +73,78 @@ export default function Nav({ base = "" }: { base?: string }) {
     };
   }, [open, close, unlock]);
 
-  return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div
-        data-scrolled={scrolled || open}
-        className="nav-shell relative z-10 mx-auto grid grid-cols-[1fr_auto] items-center md:grid-cols-[1fr_auto_1fr]"
-      >
-        <a href={base || "#top"} aria-label="Cyngard — home" className="justify-self-start rounded-full">
-          <Logo priority />
-        </a>
+  // Desktop dropdowns: open on hover/focus, close on Escape or leaving.
+  useEffect(() => {
+    if (!menu) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenu(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menu]);
 
-        <nav aria-label="Primary" className="hidden md:block">
-          <ul className="flex items-center gap-0.5" onMouseLeave={() => setHovered(null)}>
-            {NAV_LINKS.map((l) => {
-              const isActive = active === l.href;
-              return (
-                <li key={l.href} className="relative">
-                  <a
-                    href={base + l.href}
-                    onMouseEnter={() => setHovered(l.href)}
-                    onFocus={() => setHovered(l.href)}
-                    onBlur={() => setHovered(null)}
-                    aria-current={isActive ? "true" : undefined}
-                    className={cn(
-                      "relative z-10 block rounded-full px-3 py-1.5 text-[0.84rem] transition-colors duration-300 lg:px-3.5",
-                      isActive || hovered === l.href ? "text-fg" : "text-muted",
-                    )}
-                  >
-                    {l.label}
-                  </a>
-                  {hovered === l.href && (
-                    <motion.span
-                      layoutId="nav-hover"
-                      className="absolute inset-0 rounded-full bg-fill-strong"
-                      transition={{ type: "spring", bounce: 0.18, duration: 0.45 }}
-                    />
+  const enter = (m: Menu) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setMenu(m);
+  };
+  const leave = () => {
+    closeTimer.current = setTimeout(() => setMenu(null), 120);
+  };
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+
+  return (
+    <header className="fixed inset-x-0 top-0 z-50" onMouseLeave={leave}>
+      <div
+        data-scrolled={scrolled || open || menu !== null}
+        className="nav-shell relative z-10 mx-auto grid grid-cols-[1fr_auto] items-center lg:grid-cols-[1fr_auto_1fr]"
+      >
+        <Link href="/" aria-label="Cyngard — home" className="justify-self-start rounded-full">
+          <Logo priority />
+        </Link>
+
+        <nav aria-label="Primary" className="hidden lg:block">
+          <ul className="flex items-center gap-0.5">
+            {(["products", "services"] as const).map((m) => (
+              <li key={m} onMouseEnter={() => enter(m)}>
+                <button
+                  type="button"
+                  aria-expanded={menu === m}
+                  aria-controls={`menu-${m}`}
+                  onClick={() => setMenu(menu === m ? null : m)}
+                  className={cn(
+                    "flex items-center gap-1 rounded-full px-3.5 py-1.5 text-[0.86rem] capitalize transition-colors",
+                    menu === m || isActive(`/${m}`) ? "bg-fill-strong text-fg" : "text-muted hover:text-fg",
                   )}
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-active"
-                      className="absolute -bottom-1 left-1/2 h-[3px] w-[3px] -translate-x-1/2 rounded-full bg-cyan shadow-[0_0_8px_rgba(34,211,238,0.9)]"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
-                    />
+                >
+                  {m}
+                  <ChevronDown
+                    size={14}
+                    className={cn("transition-transform duration-300", menu === m && "rotate-180")}
+                  />
+                </button>
+              </li>
+            ))}
+            {LINKS.map((l) => (
+              <li key={l.href} onMouseEnter={() => setMenu(null)}>
+                <Link
+                  href={l.href}
+                  aria-current={isActive(l.href) ? "page" : undefined}
+                  className={cn(
+                    "block rounded-full px-3.5 py-1.5 text-[0.86rem] transition-colors",
+                    isActive(l.href) ? "bg-fill-strong text-fg" : "text-muted hover:text-fg",
                   )}
-                </li>
-              );
-            })}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
         <div className="flex items-center justify-self-end gap-2">
-          <a href="#contact" className="btn btn-primary btn-sm hidden md:inline-flex">
-            Book assessment
+          <Link href="/contact" className="btn btn-primary btn-sm hidden lg:inline-flex">
+            Talk to an expert
             <ArrowRight size={15} className="btn-arrow" />
-          </a>
-
+          </Link>
           <button
             ref={toggleRef}
             type="button"
@@ -144,7 +152,7 @@ export default function Nav({ base = "" }: { base?: string }) {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="relative -mr-1.5 flex h-10 w-10 items-center justify-center rounded-full text-fg md:hidden"
+            className="relative -mr-1.5 flex h-10 w-10 items-center justify-center rounded-full text-fg lg:hidden"
           >
             <span
               className={cn(
@@ -162,6 +170,27 @@ export default function Nav({ base = "" }: { base?: string }) {
         </div>
       </div>
 
+      {/* Desktop dropdown panels */}
+      <AnimatePresence>
+        {menu && (
+          <motion.div
+            key={menu}
+            id={`menu-${menu}`}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
+            onMouseEnter={() => enter(menu)}
+            className="absolute inset-x-0 top-[4.5rem] hidden px-4 lg:block"
+          >
+            <div className="glass mx-auto max-w-[980px] rounded-2xl p-3">
+              {menu === "products" ? <ProductsMenu /> : <ServicesMenu />}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -173,58 +202,140 @@ export default function Nav({ base = "" }: { base?: string }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 md:hidden"
+            className="fixed inset-0 lg:hidden"
           >
-            <div
-              className="absolute inset-0 bg-[rgba(7,7,11,0.94)] backdrop-blur-xl"
-              onClick={close}
-              aria-hidden
-            />
-            <nav aria-label="Mobile" className="relative flex h-full flex-col px-6 pb-10 pt-28">
+            <div className="absolute inset-0 bg-[rgba(7,7,11,0.97)] backdrop-blur-xl" onClick={close} aria-hidden />
+            <nav aria-label="Mobile" className="relative flex h-full flex-col overflow-y-auto px-6 pb-10 pt-24" data-lenis-prevent>
               <ul>
-                {MOBILE_LINKS.map((l, i) => (
-                  <motion.li
-                    key={l.href}
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.04 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <a
-                      href={l.href === "#contact" ? l.href : base + l.href}
-                      onClick={close}
-                      className={cn(
-                        "flex items-center justify-between border-b border-line py-5 text-[1.75rem] font-medium tracking-tight",
-                        active === l.href ? "text-fg" : "text-muted",
-                      )}
+                {(["products", "services"] as const).map((m) => (
+                  <li key={m} className="border-b border-line">
+                    <button
+                      type="button"
+                      aria-expanded={mobileSection === m}
+                      onClick={() => setMobileSection(mobileSection === m ? null : m)}
+                      className="flex w-full items-center justify-between py-5 text-left text-2xl font-medium capitalize tracking-tight"
                     >
+                      {m}
+                      <ChevronDown
+                        size={20}
+                        className={cn("text-subtle transition-transform duration-300", mobileSection === m && "rotate-180")}
+                      />
+                    </button>
+                    {mobileSection === m && (
+                      <ul className="space-y-1 pb-5">
+                        {m === "products"
+                          ? PRODUCTS.map((p) => (
+                              <li key={p.slug}>
+                                <Link href={p.href} onClick={close} className="block py-2 text-[15px] text-muted">
+                                  {p.name} <span className="text-subtle">— {p.category}</span>
+                                </Link>
+                              </li>
+                            ))
+                          : SERVICE_CATEGORIES.map((c) => (
+                              <li key={c.id} className="pt-2">
+                                <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-subtle">{c.name}</p>
+                                <ul className="mt-1">
+                                  {servicesIn(c.id).map((s) => (
+                                    <li key={s.slug}>
+                                      <Link href={`/services/${s.slug}`} onClick={close} className="block py-1.5 text-[15px] text-muted">
+                                        {s.title}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </li>
+                            ))}
+                        <li className="pt-2">
+                          <Link href={`/${m}`} onClick={close} className="text-[14px] text-fg">
+                            All {m} →
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
+                  </li>
+                ))}
+                {LINKS.map((l) => (
+                  <li key={l.href} className="border-b border-line">
+                    <Link href={l.href} onClick={close} className="block py-5 text-2xl font-medium tracking-tight">
                       {l.label}
-                      <ArrowUpRight size={20} className="text-subtle" />
-                    </a>
-                  </motion.li>
+                    </Link>
+                  </li>
                 ))}
               </ul>
-
-              <motion.div
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="mt-auto space-y-5"
-              >
-                <a href="#contact" onClick={close} className="btn btn-primary btn-lg w-full">
-                  Book a free assessment
+              <div className="mt-auto space-y-5 pt-10">
+                <Link href="/contact" onClick={close} className="btn btn-primary btn-lg w-full">
+                  Talk to an expert
                   <ArrowRight size={16} className="btn-arrow" />
-                </a>
-                <a
-                  href={`mailto:${SITE.email}`}
-                  className="block text-center font-mono text-sm text-muted"
-                >
+                </Link>
+                <a href={`mailto:${SITE.email}`} className="block text-center font-mono text-sm text-muted">
                   {SITE.email}
                 </a>
-              </motion.div>
+              </div>
             </nav>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
+  );
+}
+
+function ProductsMenu() {
+  return (
+    <div className="grid grid-cols-[1fr_1fr_0.8fr] gap-2">
+      {PRODUCTS.map((p) => (
+        <Link key={p.slug} href={p.href} className="group rounded-xl p-4 transition-colors hover:bg-fill-strong">
+          <div className="flex items-center gap-3">
+            {p.slug === "phishnode" ? <PhishNodeMark className="h-8 w-8" /> : <LeakShieldMark className="h-8 w-8" />}
+            <div>
+              <p className="text-[15px] font-semibold text-fg">{p.name}</p>
+              <p className="text-[12px] text-subtle">{p.category}</p>
+            </div>
+          </div>
+          <p className="mt-3 text-[13px] leading-relaxed text-muted">{p.tagline}</p>
+        </Link>
+      ))}
+      <div className="flex flex-col justify-between rounded-xl border border-line bg-fill p-4">
+        <p className="text-[13px] leading-relaxed text-muted">
+          Our platforms power our managed services — and are available to your own teams.
+        </p>
+        <Link href="/products" className="mt-4 inline-flex items-center gap-1.5 text-[13px] text-fg">
+          All products <ArrowRight size={13} />
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function ServicesMenu() {
+  return (
+    <div className="grid grid-cols-3 gap-2 p-2">
+      {SERVICE_CATEGORIES.map((c) => (
+        <div key={c.id} className="p-2">
+          <p className="px-2 font-mono text-[10.5px] uppercase tracking-[0.16em] text-subtle">{c.name}</p>
+          <ul className="mt-2">
+            {servicesIn(c.id).map((s) => {
+              const Icon = s.icon;
+              return (
+                <li key={s.slug}>
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-[13.5px] text-muted transition-colors hover:bg-fill-strong hover:text-fg"
+                  >
+                    <Icon size={15} className="shrink-0 text-violet-soft" />
+                    {s.title}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+      <div className="col-span-3 flex items-center justify-between border-t border-line px-4 pt-3 text-[13px]">
+        <span className="text-muted">Not sure what you need? We&apos;ll help you scope it.</span>
+        <Link href="/services" className="inline-flex items-center gap-1.5 text-fg">
+          All services <ArrowRight size={13} />
+        </Link>
+      </div>
+    </div>
   );
 }

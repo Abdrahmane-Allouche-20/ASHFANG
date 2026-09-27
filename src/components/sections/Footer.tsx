@@ -1,21 +1,24 @@
-import { ArrowUp, ArrowUpRight, Github, Linkedin, Twitter } from "lucide-react";
-import { NAV_LINKS, PRODUCTS, SERVICES, SITE, SOCIALS } from "@/lib/site";
+import Link from "next/link";
+import { ArrowUpRight, Github, Linkedin, Twitter } from "lucide-react";
+import { PRODUCTS, SERVICES, SITE, SOCIALS } from "@/lib/site";
 import Logo from "@/components/ui/Logo";
 
 const SOCIAL_ICONS = { LinkedIn: Linkedin, X: Twitter, GitHub: Github };
+const FEATURED_SERVICES = ["managed-soc", "penetration-testing", "secure-code-review", "incident-response", "phishing-protection"];
 
-export default function Footer({ base = "" }: { base?: string }) {
+export default function Footer() {
   const socials = SOCIALS.filter((s) => s.href);
 
   return (
     <footer className="relative isolate overflow-hidden border-t border-line">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_100%,rgba(139,92,246,0.14),transparent_70%)]" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_100%,rgba(139,92,246,0.12),transparent_70%)]" />
 
-      <div className="container-page grid grid-cols-1 gap-12 pb-10 pt-16 sm:grid-cols-2 md:pt-20 lg:grid-cols-[1.3fr_0.8fr_1.1fr_0.8fr_1.1fr] lg:gap-8">
+      <div className="container-page grid grid-cols-1 gap-12 pb-10 pt-16 sm:grid-cols-2 md:pt-20 lg:grid-cols-[1.4fr_0.9fr_1.2fr_0.8fr_1.1fr] lg:gap-8">
         <div className="max-w-xs">
           <Logo />
           <p className="mt-5 text-[14.5px] leading-relaxed text-muted">
-            An international cybersecurity company. {SITE.tagline}
+            An international cybersecurity company building security products and delivering expert
+            services to organizations worldwide.
           </p>
           {socials.length > 0 && (
             <ul className="mt-6 flex gap-2">
@@ -42,35 +45,51 @@ export default function Footer({ base = "" }: { base?: string }) {
         <FooterColumn title="Products">
           {PRODUCTS.map((p) => (
             <li key={p.slug}>
-              <a href={p.href} className="footer-link">
+              <Link href={p.href} className="footer-link">
                 {p.name}
-              </a>
-            </li>
-          ))}
-        </FooterColumn>
-
-        <FooterColumn title="Services">
-          {SERVICES.map((s) => (
-            <li key={s.id}>
-              <a href={`${base}#${s.id}`} className="footer-link">
-                {s.title}
-              </a>
-            </li>
-          ))}
-        </FooterColumn>
-
-        <FooterColumn title="Company">
-          {NAV_LINKS.slice(2).map((l) => (
-            <li key={l.href}>
-              <a href={base + l.href} className="footer-link">
-                {l.label}
-              </a>
+              </Link>
             </li>
           ))}
           <li>
-            <a href="#contact" className="footer-link">
+            <Link href="/products" className="footer-link">
+              All products
+            </Link>
+          </li>
+        </FooterColumn>
+
+        <FooterColumn title="Services">
+          {FEATURED_SERVICES.map((slug) => {
+            const s = SERVICES.find((x) => x.slug === slug)!;
+            return (
+              <li key={slug}>
+                <Link href={`/services/${slug}`} className="footer-link">
+                  {s.title}
+                </Link>
+              </li>
+            );
+          })}
+          <li>
+            <Link href="/services" className="footer-link">
+              All services
+            </Link>
+          </li>
+        </FooterColumn>
+
+        <FooterColumn title="Company">
+          <li>
+            <Link href="/company" className="footer-link">
+              About Cyngard
+            </Link>
+          </li>
+          <li>
+            <Link href="/contact" className="footer-link">
               Contact
-            </a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/privacy" className="footer-link">
+              Privacy
+            </Link>
           </li>
         </FooterColumn>
 
@@ -81,10 +100,10 @@ export default function Footer({ base = "" }: { base?: string }) {
             </a>
           </li>
           <li>
-            <a href="#contact" className="group inline-flex items-center gap-1.5 text-[14px] text-fg">
-              Book a free assessment
+            <Link href="/contact" className="group inline-flex items-center gap-1.5 text-[14px] text-fg">
+              Talk to an expert
               <ArrowUpRight size={14} className="text-violet-soft transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
+            </Link>
           </li>
         </FooterColumn>
       </div>
@@ -93,19 +112,8 @@ export default function Footer({ base = "" }: { base?: string }) {
         <div className="divider-x" />
         <div className="flex flex-col items-center justify-between gap-4 py-7 text-[12.5px] text-subtle sm:flex-row">
           <p>© {new Date().getFullYear()} Cyngard. All rights reserved.</p>
-          <p className="font-mono tracking-[0.08em]">CYBERSECURITY · ENGINEERED</p>
-          <a href="#top" className="group inline-flex items-center gap-1.5 transition-colors hover:text-fg">
-            Back to top
-            <ArrowUp size={13} className="transition-transform duration-300 group-hover:-translate-y-0.5" />
-          </a>
+          <p>{SITE.tagline}</p>
         </div>
-      </div>
-
-      {/* Oversized wordmark */}
-      <div aria-hidden className="pointer-events-none select-none overflow-hidden">
-        <p className="-mb-[0.2em] text-center font-display text-[18.5vw] font-semibold leading-[0.9] tracking-[0.06em] text-[transparent] [-webkit-background-clip:text] [background-clip:text] bg-[linear-gradient(180deg,rgba(255,255,255,0.11)_0%,rgba(255,255,255,0.02)_70%,transparent)] xl:text-[15rem]">
-          CYNGARD
-        </p>
       </div>
     </footer>
   );

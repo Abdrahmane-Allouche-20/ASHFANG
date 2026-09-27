@@ -196,10 +196,10 @@ export function PhishNodeFlow() {
 /* ---------------- LeakShield ---------------- */
 
 const FINDINGS = [
-  { file: ".env.production", type: "API key", sev: "critical" },
+  { file: "src/auth/jwt.ts", type: "Hardcoded JWT secret", sev: "critical" },
   { file: "src/bot/config.ts", type: "Discord bot token", sev: "critical" },
   { file: "scripts/deploy.sh", type: "GitHub token", sev: "critical" },
-  { file: "config/notify.json", type: "Telegram bot token", sev: "high" },
+  { file: ".env.production", type: "Sensitive file", sev: "high" },
 ] as const;
 
 /** Terminal-style offline scan. */
@@ -208,10 +208,10 @@ export function LeakShieldScan({ compact }: { compact?: boolean }) {
     <Window title="leakshield · local scan" right={<span className="flex items-center gap-1.5">OFFLINE</span>}>
       <div className={cn("font-mono text-[11px] leading-[1.9] sm:text-[11.5px]", compact ? "p-4" : "p-5")}>
         <p className="text-subtle">
-          <span className="text-violet-soft">$</span> leakshield scan ./your-project
+          Scanning <span className="text-[#d9d9e6]">./your-project</span>
         </p>
         <p className="text-muted">
-          <span className="text-ok">✓</span> 0 network requests · everything stays on this machine
+          <span className="text-ok">✓</span> Local scan · files never leave this machine
         </p>
         <div className="mt-2 space-y-0.5">
           {FINDINGS.slice(0, compact ? 3 : 4).map((f, i) => (
@@ -230,10 +230,9 @@ export function LeakShieldScan({ compact }: { compact?: boolean }) {
         </div>
         <div className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-line bg-fill px-3 py-2">
           <span className="text-muted">
-            Risk score <span className="text-critical">82</span>
-            <span className="text-subtle"> / 100</span>
+            <span className="text-critical">3 critical</span> · <span className="text-high">1 high</span>
           </span>
-          <span className="text-ok">fix plan ready →</span>
+          <span className="text-ok">fix steps ready →</span>
         </div>
       </div>
     </Window>

@@ -30,7 +30,7 @@ export default function Approach() {
           eyebrow="How we work"
           title={
             <>
-              A clear path to <span className="accent text-gradient">closed risk.</span>
+              A clear path to <span className="heading-dim">closed risk.</span>
             </>
           }
           description="No black boxes. Every engagement runs the same disciplined, transparent loop — and you always know which step we're on."

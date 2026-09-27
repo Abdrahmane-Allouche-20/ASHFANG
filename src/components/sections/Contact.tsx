@@ -20,7 +20,7 @@ const EMPTY = { name: "", email: "", company: "", message: "" };
 /** `defaultTopic` preselects a topic chip, e.g. "PhishNode demo" on its product page. */
 export default function Contact({ defaultTopic }: { defaultTopic?: string } = {}) {
   const [form, setForm] = useState(EMPTY);
-  const [topics, setTopics] = useState<string[]>(defaultTopic ? [defaultTopic] : []);
+  const [topics, setTopics] = useState<string[]>(defaultTopic && TOPICS.includes(defaultTopic) ? [defaultTopic] : []);
   const [sent, setSent] = useState(false);
 
   const toggleTopic = (t: string) =>
@@ -44,14 +44,14 @@ export default function Contact({ defaultTopic }: { defaultTopic?: string } = {}
   };
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="relative isolate py-24 md:py-28">
+    <section id="contact" aria-labelledby="contact-title" className="relative isolate pb-24 pt-36 sm:pt-44 md:pb-28">
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[700px] bg-[radial-gradient(45%_40%_at_22%_50%,rgba(139,92,246,0.10),transparent_70%)]" />
       <div className="container-page grid grid-cols-1 gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
         <Reveal>
           <p className="eyebrow">Contact</p>
-          <h2 id="contact-title" className="heading-lg mt-5">
-            Let&apos;s secure <span className="accent text-gradient">what matters.</span>
-          </h2>
+          <h1 id="contact-title" className="heading-lg mt-5">
+            Let&apos;s secure <span className="heading-dim">what matters.</span>
+          </h1>
           <p className="lede mt-5 max-w-md">
             Tell us what you&apos;re protecting. We reply fast, in plain language, with a clear next
             step — no sales runaround.

@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
-import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SpotlightGroup from "@/components/ui/SpotlightGroup";
 
@@ -13,6 +14,8 @@ export function ProductHero({
   lede,
   visual,
   secondary,
+  site,
+  demoHref,
 }: {
   mark: ReactNode;
   name: string;
@@ -21,6 +24,9 @@ export function ProductHero({
   lede: string;
   visual: ReactNode;
   secondary: { label: string; href: string };
+  /** Live product URL. */
+  site: string;
+  demoHref: string;
 }) {
   return (
     <section id="top" aria-labelledby="product-title" className="relative isolate overflow-hidden pb-20 pt-32 sm:pt-40">
@@ -44,14 +50,22 @@ export function ProductHero({
             {lede}
           </p>
           <div className="fade-up mt-9 flex flex-col gap-3 sm:flex-row" style={{ "--d": "380ms" } as CSSProperties}>
-            <a href="#contact" className="btn btn-primary btn-lg">
+            <Link href={demoHref} className="btn btn-primary btn-lg">
               Request a demo
               <ArrowRight size={16} className="btn-arrow" />
-            </a>
-            <a href={secondary.href} className="btn btn-secondary btn-lg">
-              {secondary.label}
+            </Link>
+            <a href={site} target="_blank" rel="noopener noreferrer" className="btn btn-secondary btn-lg">
+              Visit {site.replace(/^https:\/\//, "")}
+              <ArrowUpRight size={16} />
             </a>
           </div>
+          <a
+            href={secondary.href}
+            className="fade-up mt-5 inline-flex text-[14px] text-muted underline decoration-line-strong underline-offset-[6px] transition-colors hover:text-fg"
+            style={{ "--d": "450ms" } as CSSProperties}
+          >
+            {secondary.label}
+          </a>
         </div>
         <div className="fade-up" style={{ "--d": "450ms" } as CSSProperties}>
           {visual}

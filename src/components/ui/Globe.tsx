@@ -41,6 +41,12 @@ export default function Globe({ className }: { className?: string }) {
       globe.update({ phi: phi + drag.current.offset / 220, width: width * dpr, height: width * dpr });
       raf = requestAnimationFrame(frame);
     };
+    // The observer's first report can be stale for an element that is
+    // animating in, so confirm on-screen status from layout as well.
+    const onScreen = () => {
+      const r = canvas.getBoundingClientRect();
+      return r.bottom > -120 && r.top < window.innerHeight + 120;
+    };
     const play = () => {
       cancelAnimationFrame(raf);
       if (visible && globe) raf = requestAnimationFrame(frame);
@@ -51,7 +57,7 @@ export default function Globe({ className }: { className?: string }) {
     };
     const io = new IntersectionObserver(
       ([entry]) => {
-        visible = entry.isIntersecting;
+        visible = entry.isIntersecting || onScreen();
         play();
       },
       { rootMargin: "120px" },
@@ -77,6 +83,7 @@ export default function Globe({ className }: { className?: string }) {
         markers: MARKERS,
       });
       canvas.style.opacity = "1";
+      visible = visible || onScreen();
       play();
     });
 
