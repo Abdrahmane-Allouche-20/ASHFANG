@@ -13,13 +13,25 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
+function resolveSiteUrl() {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit) return explicit.replace(/\/$/, "");
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (vercel) return `https://${vercel}`;
+  return "https://cyngard.vercel.app";
+}
+
 export const SITE = {
   name: "Cyngard",
   tagline: "Think like an attacker. Defend like an engineer.",
   description:
     "Cyngard is an international cybersecurity company. We build PhishNode and LeakShield, and deliver managed SOC, penetration testing, code review, and security engineering to organizations worldwide.",
   email: "cyngard.support@gmail.com",
-  url: "https://cyngard.com",
+  /**
+   * Canonical origin. Set NEXT_PUBLIC_SITE_URL once a custom domain is live;
+   * otherwise Vercel's production URL is used.
+   */
+  url: resolveSiteUrl(),
 };
 
 /** Add a profile URL to show the icon in the footer. Empty links are hidden. */

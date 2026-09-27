@@ -6,6 +6,8 @@ import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Nav from "@/components/Nav";
 import Footer from "@/components/sections/Footer";
+import JsonLd from "@/components/seo/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/seo";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -25,51 +27,62 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
+// Kept under ~160 characters so search results show it in full.
+const META_DESCRIPTION =
+  "International cybersecurity company offering managed SOC, penetration testing, code review, and incident response — makers of PhishNode and LeakShield.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — ${SITE.tagline}`,
+    default: `${SITE.name} — International Cybersecurity Company`,
     template: `%s · ${SITE.name}`,
   },
-  description: SITE.description,
+  description: META_DESCRIPTION,
   applicationName: SITE.name,
+  authors: [{ name: SITE.name, url: SITE.url }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  category: "Cybersecurity",
   keywords: [
-    "cybersecurity",
-    "penetration testing",
-    "phishing protection",
-    "data leak monitoring",
-    "secure code review",
-    "secure development",
     "Cyngard",
+    "cybersecurity company",
+    "managed SOC",
+    "penetration testing",
+    "red teaming",
+    "secure code review",
+    "incident response",
+    "phishing protection",
+    "data breach monitoring",
+    "OSINT monitoring",
+    "PhishNode",
+    "LeakShield",
   ],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: `${SITE.name} — ${SITE.tagline}`,
-    description: SITE.description,
-    url: SITE.url,
+    title: `${SITE.name} — International Cybersecurity Company`,
+    description: META_DESCRIPTION,
+    url: "/",
     siteName: SITE.name,
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.tagline}`,
-    description: SITE.description,
+    title: `${SITE.name} — International Cybersecurity Company`,
+    description: META_DESCRIPTION,
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  formatDetection: { email: false, telephone: false, address: false },
+  other: { "llms-txt": "/llms.txt" },
 };
 
 export const viewport: Viewport = {
   themeColor: "#07070b",
   colorScheme: "dark",
-};
-
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: SITE.name,
-  url: SITE.url,
-  email: SITE.email,
-  logo: `${SITE.url}/brand/logo-full.png`,
-  slogan: SITE.tagline,
-  description: SITE.description,
 };
 
 export default function RootLayout({
@@ -82,6 +95,9 @@ export default function RootLayout({
       lang="en"
       className={`${geist.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
     >
+      <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary" />
+      </head>
       <body>
         <a href="#main" className="skip-link">
           Skip to content
@@ -94,10 +110,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </SmoothScroll>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
       </body>
     </html>
   );

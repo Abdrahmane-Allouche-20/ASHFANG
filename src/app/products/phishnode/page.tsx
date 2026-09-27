@@ -6,18 +6,23 @@ import Reveal from "@/components/ui/Reveal";
 import { FeatureGrid, ProductHero, Section, StatStrip, Steps } from "@/components/products/Blocks";
 import { PhishNodeConsole, PhishNodeMark } from "@/components/products/ProductVisuals";
 import { PHISHNODE, PRODUCTS } from "@/lib/site";
+import { pageMetadata, productSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 
 const product = PRODUCTS.find((p) => p.slug === "phishnode")!;
 
-export const metadata: Metadata = {
-  title: "PhishNode — phishing detection & triage",
-  description: product.summary,
-  alternates: { canonical: "/products/phishnode" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "PhishNode — Phishing Triage Platform",
+  description:
+    "PhishNode by Cyngard: one-click phishing reporting, threat-intelligence enrichment, analyst verdicts, and automatic response for SOC teams and MSSPs.",
+  path: "/products/phishnode",
+  keywords: ["PhishNode", "phishing triage", "phishing reporting", "SOC platform", "report phishing button", "email threat analysis"],
+});
 
 export default function PhishNodePage() {
   return (
     <>
+      <JsonLd data={productSchema(product, [...PHISHNODE.steps.map((x) => x.title), ...PHISHNODE.features.map((f) => f.title)])} />
         <ProductHero
           mark={<PhishNodeMark className="h-11 w-11" />}
           name="PhishNode"
@@ -31,6 +36,7 @@ export default function PhishNodePage() {
           visual={<PhishNodeConsole />}
           site={product.url}
           demoHref="/contact?topic=PhishNode%20demo"
+          crumbPath="/products/phishnode"
           secondary={{ label: "See how it works", href: "#how" }}
         />
 

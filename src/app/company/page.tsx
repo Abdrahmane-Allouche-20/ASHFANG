@@ -7,13 +7,15 @@ import Principles from "@/components/home/Principles";
 import Reveal from "@/components/ui/Reveal";
 import Globe from "@/components/ui/Globe";
 import Clocks from "@/components/sections/why/Clocks";
+import JsonLd from "@/components/seo/JsonLd";
+import { absolute, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Cyngard",
+export const metadata: Metadata = pageMetadata({
+  title: "About Cyngard — International Cybersecurity Company",
   description:
-    "Cyngard is an international cybersecurity company combining in-house security products with engineer-led services.",
-  alternates: { canonical: "/company" },
-};
+    "Cyngard combines in-house security products with engineer-led services for clients across North America, Europe, Africa & the Middle East, and Asia-Pacific.",
+  path: "/company",
+});
 
 const PILLARS = [
   {
@@ -45,7 +47,16 @@ const PILLARS = [
 export default function CompanyPage() {
   return (
     <>
+      <JsonLd
+        data={{
+          "@type": "AboutPage",
+          url: absolute("/company"),
+          name: "About Cyngard",
+          about: { "@id": `${absolute("/")}/#organization` },
+        }}
+      />
       <PageHeader
+        crumbs={[{ name: "Company", path: "/company" }]}
         eyebrow="Company"
         title={
           <>

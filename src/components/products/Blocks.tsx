@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
 import SpotlightGroup from "@/components/ui/SpotlightGroup";
 
 /* Building blocks shared by the product pages. */
@@ -16,6 +17,7 @@ export function ProductHero({
   secondary,
   site,
   demoHref,
+  crumbPath,
 }: {
   mark: ReactNode;
   name: string;
@@ -27,6 +29,8 @@ export function ProductHero({
   /** Live product URL, if public. */
   site?: string;
   demoHref: string;
+  /** Page path, for the breadcrumb trail. */
+  crumbPath: string;
 }) {
   return (
     <section id="top" aria-labelledby="product-title" className="relative isolate overflow-hidden pb-20 pt-32 sm:pt-40">
@@ -36,6 +40,7 @@ export function ProductHero({
       </div>
       <div className="container-page grid grid-cols-1 items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
         <div>
+          <Breadcrumbs items={[{ name: "Products", path: "/products" }, { name, path: crumbPath }]} />
           <div className="fade-up flex items-center gap-3.5" style={{ "--d": "0ms" } as CSSProperties}>
             {mark}
             <div>

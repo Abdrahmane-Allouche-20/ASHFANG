@@ -5,18 +5,23 @@ import Reveal from "@/components/ui/Reveal";
 import { FeatureGrid, ProductHero, Section, StatStrip, Steps } from "@/components/products/Blocks";
 import { LeakShieldAlerts, LeakShieldExposure, LeakShieldMark } from "@/components/products/ProductVisuals";
 import { LEAKSHIELD, PRODUCTS } from "@/lib/site";
+import { pageMetadata, productSchema } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 
 const product = PRODUCTS.find((p) => p.slug === "leakshield")!;
 
-export const metadata: Metadata = {
-  title: "LeakShield — breach & OSINT monitoring",
-  description: product.summary,
-  alternates: { canonical: "/products/leakshield" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "LeakShield — Breach & OSINT Monitoring",
+  description:
+    "LeakShield monitors paste sites, breach databases, and public sources for your domains and credentials, correlates assets with the NVD, and alerts in real time.",
+  path: "/products/leakshield",
+  keywords: ["LeakShield", "data breach monitoring", "OSINT monitoring", "leaked credentials", "dark web monitoring", "paste site monitoring", "NVD"],
+});
 
 export default function LeakShieldPage() {
   return (
     <>
+      <JsonLd data={productSchema(product, LEAKSHIELD.features.map((f) => f.title))} />
       <ProductHero
         mark={<LeakShieldMark className="h-11 w-11" />}
         name="LeakShield"
@@ -30,6 +35,7 @@ export default function LeakShieldPage() {
         visual={<LeakShieldAlerts />}
         site={product.url}
         demoHref="/contact?topic=LeakShield%20demo"
+        crumbPath="/products/leakshield"
         secondary={{ label: "See how it works", href: "#how" }}
       />
 
