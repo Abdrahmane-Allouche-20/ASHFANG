@@ -34,7 +34,6 @@ export default function ProductsPage() {
     <>
       <PageHeader
         crumbs={[{ name: "Products", path: "/products" }]}
-        eyebrow="Products"
         title={
           <>
             Security software, <span className="heading-dim">built by practitioners.</span>
@@ -46,8 +45,7 @@ export default function ProductsPage() {
       <section className="relative pb-8">
         <div className="container-page">
           <Reveal>
-            <p className="eyebrow">Products + services</p>
-            <h2 className="mt-5 font-display text-3xl font-semibold tracking-[-0.03em]">
+            <h2 className="font-display text-3xl font-semibold tracking-[-0.03em]">
               Use them on your own, or with our team.
             </h2>
           </Reveal>

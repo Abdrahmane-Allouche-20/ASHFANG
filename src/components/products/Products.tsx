@@ -15,7 +15,6 @@ export default function Products({ heading = true }: { heading?: boolean }) {
         {heading && (
         <SectionHeading
           id="products-title"
-          eyebrow="Products"
           title={
             <>
               Our products. <span className="heading-dim">Built from the front line.</span>

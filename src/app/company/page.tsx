@@ -57,7 +57,6 @@ export default function CompanyPage() {
       />
       <PageHeader
         crumbs={[{ name: "Company", path: "/company" }]}
-        eyebrow="Company"
         title={
           <>
             About Cynguard. <span className="heading-dim">Think like an attacker, defend like an engineer.</span>
@@ -88,8 +87,7 @@ export default function CompanyPage() {
       <section aria-labelledby="global-title" className="relative py-24 md:py-32">
         <div className="container-page grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <Reveal>
-            <p className="eyebrow">Global reach</p>
-            <h2 id="global-title" className="heading-lg mt-5">
+            <h2 id="global-title" className="heading-lg">
               International by design.
             </h2>
             <p className="lede mt-5 max-w-lg">

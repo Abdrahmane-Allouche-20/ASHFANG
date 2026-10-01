@@ -52,7 +52,6 @@ export default function PhishNodePage() {
 
         <Section id="how">
           <SectionHeading
-            eyebrow="How it works"
             title={
               <>
                 From <span className="heading-dim">report</span> to response, automatically.
@@ -66,8 +65,7 @@ export default function PhishNodePage() {
         <Section className="pt-0 md:pt-0">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
             <Reveal>
-              <p className="eyebrow">Enrichment</p>
-              <h2 className="heading-lg mt-5">
+              <h2 className="heading-lg">
                 Evidence first, <span className="heading-dim">verdict second.</span>
               </h2>
               <p className="lede mt-5 max-w-md">
@@ -103,7 +101,6 @@ export default function PhishNodePage() {
 
         <Section className="pt-0 md:pt-0">
           <SectionHeading
-            eyebrow="Platform"
             title={
               <>
                 Built for security teams — <span className="heading-dim">and the MSSPs</span> that serve them.
@@ -115,7 +112,6 @@ export default function PhishNodePage() {
 
         <Section className="pt-0 md:pt-0">
           <SectionHeading
-            eyebrow="Service tiers"
             title={
               <>
                 Run it yourself, or <span className="heading-dim">let us run it.</span>

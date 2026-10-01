@@ -35,7 +35,7 @@ const SECTIONS = [
 export default function PrivacyPage() {
   return (
     <>
-      <PageHeader crumbs={[{ name: "Privacy", path: "/privacy" }]} eyebrow="Legal" title="Privacy" lede="A plain-language summary of how this website handles your information." />
+      <PageHeader crumbs={[{ name: "Privacy", path: "/privacy" }]} title="Privacy" lede="A plain-language summary of how this website handles your information." />
       <section className="relative pb-24">
         <div className="container-page">
           <div className="max-w-3xl divide-y divide-line border-y border-line">

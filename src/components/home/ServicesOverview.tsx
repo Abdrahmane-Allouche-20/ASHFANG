@@ -11,7 +11,6 @@ export default function ServicesOverview() {
       <div className="container-page">
         <SectionHeading
           id="services-title"
-          eyebrow="Services"
           title={
             <>
               One partner for your security. <span className="heading-dim">End to end.</span>
@@ -24,10 +23,7 @@ export default function ServicesOverview() {
           {SERVICE_CATEGORIES.map((c, i) => (
             <Reveal key={c.id} delay={i * 0.08} className="flex">
               <article data-spot className="card flex w-full min-w-0 flex-col p-6 sm:p-8">
-                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-subtle">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-4 font-display text-2xl font-semibold tracking-[-0.025em]">{c.name}</h3>
+                <h3 className="font-display text-2xl font-semibold tracking-[-0.025em]">{c.name}</h3>
                 <p className="mt-2.5 text-[14.5px] leading-relaxed text-muted">{c.blurb}</p>
                 <ul className="mt-6 divide-y divide-line border-y border-line">
                   {servicesIn(c.id).map((s) => {

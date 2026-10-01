@@ -31,8 +31,7 @@ export default function FAQ({
     <section id="faq" aria-labelledby="faq-title" className="relative border-t border-line py-24 md:py-28">
       <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-20">
         <Reveal className="lg:sticky lg:top-32 lg:self-start">
-          <p className="eyebrow">FAQ</p>
-          <h2 id="faq-title" className="heading-lg mt-5">
+          <h2 id="faq-title" className="heading-lg">
             {title}
           </h2>
           <p className="lede mt-5 max-w-sm">{lede}</p>

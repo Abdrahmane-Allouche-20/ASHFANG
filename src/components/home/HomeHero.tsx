@@ -15,13 +15,10 @@ export default function HomeHero() {
 
       <div className="container-page grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-10">
         <div>
-          <p className="eyebrow fade-up" style={{ "--d": "0ms" } as CSSProperties}>
-            International cybersecurity company
-          </p>
           <h1
             id="hero-title"
-            className="heading-xl fade-up mt-7 text-[clamp(2.6rem,1.1rem+4vw,4.35rem)]"
-            style={{ "--d": "100ms" } as CSSProperties}
+            className="heading-xl fade-up text-[clamp(2.6rem,1.1rem+4vw,4.35rem)]"
+            style={{ "--d": "0ms" } as CSSProperties}
           >
             Cybersecurity for organizations that{" "}
             <span className="heading-dim">can&apos;t afford to get breached.</span>

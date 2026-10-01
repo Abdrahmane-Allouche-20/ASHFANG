@@ -48,8 +48,7 @@ export default function Contact({ defaultTopic }: { defaultTopic?: string } = {}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[700px] bg-[radial-gradient(45%_40%_at_22%_50%,rgba(139,92,246,0.10),transparent_70%)]" />
       <div className="container-page grid grid-cols-1 gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
         <Reveal>
-          <p className="eyebrow">Contact</p>
-          <h1 id="contact-title" className="heading-lg mt-5">
+          <h1 id="contact-title" className="heading-lg">
             Let&apos;s secure <span className="heading-dim">what matters.</span>
           </h1>
           <p className="lede mt-5 max-w-md">

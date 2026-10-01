@@ -20,7 +20,6 @@ export default function ServicesPage() {
     <>
       <PageHeader
         crumbs={[{ name: "Services", path: "/services" }]}
-        eyebrow="Services"
         title={
           <>
             Security services, <span className="heading-dim">delivered by engineers.</span>
@@ -34,10 +33,7 @@ export default function ServicesPage() {
           <div className="container-page">
             <Reveal className="mb-8 grid grid-cols-1 gap-3 border-t border-line pt-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-end">
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-subtle">
-                  {String(ci + 1).padStart(2, "0")}
-                </p>
-                <h2 id={`${c.id}-title`} className="mt-3 font-display text-3xl font-semibold tracking-[-0.03em]">
+                <h2 id={`${c.id}-title`} className="font-display text-3xl font-semibold tracking-[-0.03em]">
                   {c.name}
                 </h2>
               </div>

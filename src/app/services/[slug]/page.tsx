@@ -50,7 +50,6 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
           { name: "Services", path: "/services" },
           { name: service.title, path: `/services/${service.slug}` },
         ]}
-        eyebrow={category.name}
         title={
           <span className="inline-flex flex-col gap-5">
             <span className="icon-chip h-12 w-12 rounded-2xl">
@@ -125,8 +124,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       <section className="relative py-16 md:py-20">
         <div className="container-page">
           <Reveal>
-            <p className="eyebrow">How we work</p>
-            <h2 className="mt-5 font-display text-3xl font-semibold tracking-[-0.03em]">
+            <h2 className="font-display text-3xl font-semibold tracking-[-0.03em]">
               Every engagement follows the same disciplined loop.
             </h2>
           </Reveal>

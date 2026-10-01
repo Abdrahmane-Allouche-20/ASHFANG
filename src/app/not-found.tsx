@@ -4,7 +4,6 @@ import PageHeader from "@/components/layout/PageHeader";
 export default function NotFound() {
   return (
     <PageHeader
-      eyebrow="404"
       title="This page doesn't exist."
       lede="The link may be broken or the page may have moved."
     >
