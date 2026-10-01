@@ -65,5 +65,6 @@ automatically. Footer social links appear once a URL is added to `SOCIALS`.
 | Violet (primary) | `#8B5CF6` |
 | Cyan (secondary) | `#22D3EE` |
 | Fonts | Geist · Instrument Serif (accents) · Geist Mono |
+| Logo | `public/brand/mark.svg` — icon only; the CYNGUARD wordmark is live text in `src/components/ui/Logo.tsx` |
 
 Contact: `cyngard.support@gmail.com`

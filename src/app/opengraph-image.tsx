@@ -29,7 +29,7 @@ export default async function OpengraphImage() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={markSrc} width={58} height={76} alt="" />
+          <img src={markSrc} width={62} height={76} alt="" />
           <div style={{ fontSize: 30, fontWeight: 600, letterSpacing: 9 }}>CYNGUARD</div>
         </div>
 
