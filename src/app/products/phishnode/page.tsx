@@ -12,10 +12,11 @@ import JsonLd from "@/components/seo/JsonLd";
 const product = PRODUCTS.find((p) => p.slug === "phishnode")!;
 
 export const metadata: Metadata = pageMetadata({
-  title: "PhishNode — Phishing Triage Platform",
+  title: "PhishNode — Phishing Reporting & Triage Platform",
   description:
     "PhishNode by Cynguard: one-click phishing reporting, threat-intelligence enrichment, analyst verdicts, and automatic response for SOC teams and MSSPs.",
   path: "/products/phishnode",
+  image: "/products/phishnode/opengraph-image",
   keywords: ["PhishNode", "phishing triage", "phishing reporting", "SOC platform", "report phishing button", "email threat analysis"],
 });
 
@@ -24,7 +25,7 @@ export default function PhishNodePage() {
     <>
       <JsonLd data={productSchema(product, [...PHISHNODE.steps.map((x) => x.title), ...PHISHNODE.features.map((f) => f.title)])} />
         <ProductHero
-          mark={<PhishNodeMark className="h-11 w-11" />}
+          mark={<PhishNodeMark className="h-11 w-11" priority />}
           name="PhishNode"
           category={product.category}
           title={

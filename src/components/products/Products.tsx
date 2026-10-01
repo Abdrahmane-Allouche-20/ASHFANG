@@ -7,6 +7,8 @@ import SpotlightGroup from "@/components/ui/SpotlightGroup";
 import { LeakShieldAlerts, LeakShieldMark, PhishNodeFlow, PhishNodeMark } from "@/components/products/ProductVisuals";
 
 export default function Products({ heading = true }: { heading?: boolean }) {
+  // Without the section heading, product names sit directly under the page's h1.
+  const Name = heading ? "h3" : "h2";
   return (
     <section id="products" aria-label="Products" className={heading ? "relative py-24 md:py-32" : "relative pb-20"}>
       <div className="container-page">
@@ -46,7 +48,7 @@ export default function Products({ heading = true }: { heading?: boolean }) {
                   <div className="flex items-center gap-3.5">
                     {p.slug === "phishnode" ? <PhishNodeMark /> : <LeakShieldMark />}
                     <div>
-                      <h3 className="font-display text-2xl font-semibold tracking-[-0.03em]">{p.name}</h3>
+                      <Name className="font-display text-2xl font-semibold tracking-[-0.03em]">{p.name}</Name>
                       <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-subtle">{p.category}</p>
                     </div>
                   </div>

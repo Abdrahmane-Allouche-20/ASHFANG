@@ -5,6 +5,7 @@ import type { Globe as CobeGlobe } from "cobe";
 import { cn } from "@/lib/cn";
 
 const MARKERS: { location: [number, number]; size: number }[] = [
+  { location: [52.1, 19.4], size: 0.055 }, // Poland (headquarters)
   { location: [40.7128, -74.006], size: 0.045 }, // New York
   { location: [37.7749, -122.4194], size: 0.035 }, // San Francisco
   { location: [51.5072, -0.1276], size: 0.035 }, // London
@@ -65,7 +66,9 @@ export default function Globe({ className }: { className?: string }) {
     io.observe(canvas);
     window.addEventListener("resize", onResize);
 
-    import("cobe").then(({ default: createGlobe }) => {
+    // The globe is decoration: start it once the browser is idle so it never
+    // competes with the page's main content for the main thread.
+    const start = () => import("cobe").then(({ default: createGlobe }) => {
       if (destroyed) return;
       globe = createGlobe(canvas, {
         devicePixelRatio: dpr,
@@ -86,9 +89,13 @@ export default function Globe({ className }: { className?: string }) {
       visible = visible || onScreen();
       play();
     });
+    const idle = "requestIdleCallback" in window;
+    const startId = idle ? window.requestIdleCallback(start, { timeout: 2500 }) : window.setTimeout(start, 1200);
 
     return () => {
       destroyed = true;
+      if (idle) window.cancelIdleCallback(startId);
+      else window.clearTimeout(startId);
       cancelAnimationFrame(raf);
       io.disconnect();
       window.removeEventListener("resize", onResize);

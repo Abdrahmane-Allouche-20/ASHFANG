@@ -11,10 +11,11 @@ import JsonLd from "@/components/seo/JsonLd";
 const product = PRODUCTS.find((p) => p.slug === "leakshield")!;
 
 export const metadata: Metadata = pageMetadata({
-  title: "LeakShield — Breach & OSINT Monitoring",
+  title: "LeakShield — Data Breach & OSINT Monitoring Platform",
   description:
     "LeakShield monitors paste sites, breach databases, and public sources for your domains and credentials, correlates assets with the NVD, and alerts in real time.",
   path: "/products/leakshield",
+  image: "/products/leakshield/opengraph-image",
   keywords: ["LeakShield", "data breach monitoring", "OSINT monitoring", "leaked credentials", "dark web monitoring", "paste site monitoring", "NVD"],
 });
 

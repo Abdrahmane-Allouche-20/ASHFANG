@@ -54,7 +54,7 @@ export default function Contact({ defaultTopic }: { defaultTopic?: string } = {}
           </h1>
           <p className="lede mt-5 max-w-md">
             Tell us what you&apos;re protecting. We reply fast, in plain language, with a clear next
-            step — no sales runaround.
+            step — no sales runaround. Based in Poland, working with clients worldwide.
           </p>
 
           <ol className="mt-10 space-y-5">

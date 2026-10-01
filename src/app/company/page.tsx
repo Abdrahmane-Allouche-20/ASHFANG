@@ -63,7 +63,7 @@ export default function CompanyPage() {
             About Cynguard. <span className="heading-dim">Think like an attacker, defend like an engineer.</span>
           </>
         }
-        lede="Cynguard is an international cybersecurity company. We combine in-house security products with engineer-led services to help organizations find their weaknesses, watch for threats, and respond when it matters."
+        lede="Cynguard is an international cybersecurity company headquartered in Poland. We combine in-house security products with engineer-led services to help organizations find their weaknesses, watch for threats, and respond when it matters."
       />
 
       <section className="relative pb-16">
@@ -93,9 +93,9 @@ export default function CompanyPage() {
               International by design.
             </h2>
             <p className="lede mt-5 max-w-lg">
-              We work with clients across North America, Europe, Africa and the Middle East, and
-              Asia-Pacific — with fast, clear, timezone-aware communication and reporting in English
-              and French.
+              Headquartered in Poland, we work with clients across North America, Europe, Africa and
+              the Middle East, and Asia-Pacific — with fast, clear, timezone-aware communication and
+              reporting in English and French.
             </p>
             <div className="card mt-10 p-6">
               <p className="mb-4 font-mono text-[10px] tracking-[0.16em] text-subtle">LOCAL TIME ACROSS OUR CLIENT REGIONS</p>

@@ -1,13 +1,29 @@
 "use client";
 
-import { useId, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useId, useState, type ReactNode } from "react";
+import { motion } from "framer-motion";
 import { ArrowUpRight, Plus } from "lucide-react";
-import { FAQS, SITE } from "@/lib/site";
+import { FAQS, SITE, type Faq } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 
-export default function FAQ() {
+/**
+ * Accordion of questions. Every answer stays in the HTML (collapsed ones are
+ * hidden and inert), so search engines and AI crawlers can read all of them.
+ */
+export default function FAQ({
+  items = FAQS,
+  title = (
+    <>
+      Questions, <span className="heading-dim">answered.</span>
+    </>
+  ),
+  lede = "Straight answers about how we work. Anything else? Ask an engineer directly.",
+}: {
+  items?: Faq[];
+  title?: ReactNode;
+  lede?: string;
+}) {
   const [open, setOpen] = useState<number | null>(0);
   const baseId = useId();
 
@@ -17,11 +33,9 @@ export default function FAQ() {
         <Reveal className="lg:sticky lg:top-32 lg:self-start">
           <p className="eyebrow">FAQ</p>
           <h2 id="faq-title" className="heading-lg mt-5">
-            Questions, <span className="heading-dim">answered.</span>
+            {title}
           </h2>
-          <p className="lede mt-5 max-w-sm">
-            Straight answers about how we work. Anything else? Ask an engineer directly.
-          </p>
+          <p className="lede mt-5 max-w-sm">{lede}</p>
           <a
             href={`mailto:${SITE.email}`}
             className="group mt-7 inline-flex items-center gap-1.5 text-[15px] text-fg underline decoration-line-strong underline-offset-[6px] transition-colors hover:decoration-violet-soft"
@@ -33,7 +47,7 @@ export default function FAQ() {
 
         <Reveal delay={0.08}>
           <ul className="border-t border-line">
-            {FAQS.map((f, i) => {
+            {items.map((f, i) => {
               const isOpen = open === i;
               const panelId = `${baseId}-panel-${i}`;
               const buttonId = `${baseId}-button-${i}`;
@@ -68,22 +82,18 @@ export default function FAQ() {
                       </span>
                     </button>
                   </h3>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        id={panelId}
-                        role="region"
-                        aria-labelledby={buttonId}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                        className="overflow-hidden"
-                      >
-                        <p className="max-w-2xl pb-7 pr-12 text-[15px] leading-relaxed text-muted">{f.a}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <motion.div
+                    id={panelId}
+                    role="region"
+                    aria-labelledby={buttonId}
+                    inert={!isOpen}
+                    initial={false}
+                    animate={isOpen ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="max-w-2xl pb-7 pr-12 text-[15px] leading-relaxed text-muted">{f.a}</p>
+                  </motion.div>
                 </li>
               );
             })}

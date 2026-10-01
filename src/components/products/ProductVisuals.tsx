@@ -287,13 +287,15 @@ export function LeakShieldExposure() {
 
 /* ---------------- Marks ---------------- */
 
-export function PhishNodeMark({ className }: { className?: string }) {
+export function PhishNodeMark({ className, priority }: { className?: string; priority?: boolean }) {
+  // Shown at 36–44px, so request a 64px source (128px on retina) instead of the 512px file.
   return (
     <Image
       src="/brand/phishnode.png"
       alt=""
-      width={512}
-      height={512}
+      width={64}
+      height={64}
+      priority={priority}
       className={cn("h-9 w-9 drop-shadow-[0_0_14px_rgba(59,130,246,0.55)]", className)}
     />
   );
