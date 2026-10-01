@@ -27,7 +27,6 @@ export default function Approach() {
       <div className="container-page">
         <SectionHeading
           id="approach-title"
-          eyebrow="How we work"
           title={
             <>
               A clear path to <span className="heading-dim">closed risk.</span>

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Contact from "@/components/sections/Contact";
 import FAQ from "@/components/sections/FAQ";
-import { pageMetadata } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
+import { contactPageSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Cynguard — Talk to a Security Engineer",
   description:
-    "Contact Cynguard about managed SOC, penetration testing, PhishNode, LeakShield, or any security challenge. Free, no-obligation assessments.",
+    "Contact Cynguard, a Poland-based cybersecurity company, about managed SOC, penetration testing, PhishNode, LeakShield, or a free, no-obligation assessment.",
   path: "/contact",
 });
 
@@ -19,6 +20,7 @@ export default async function ContactPage({
   const defaultTopic = typeof topic === "string" ? topic : undefined;
   return (
     <>
+      <JsonLd data={contactPageSchema()} />
       <Contact key={defaultTopic} defaultTopic={defaultTopic} />
       <FAQ />
     </>

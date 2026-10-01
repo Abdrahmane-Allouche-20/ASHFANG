@@ -44,11 +44,17 @@ automatically. Footer social links appear once a URL is added to `SOCIALS`.
 
 - Canonical origin comes from `NEXT_PUBLIC_SITE_URL` (set it when a custom domain goes live);
   otherwise Vercel's production URL is used.
+- Search-console verification: set `GOOGLE_SITE_VERIFICATION` and/or `BING_SITE_VERIFICATION`
+  (the token from each console's "HTML tag" method) in the Vercel environment.
+- Headquarters (Poland) lives in `HEADQUARTERS` in `src/lib/site.ts`; adding the `city` there
+  updates the structured data, `geo.*` tags, and `/llms.txt`.
 - Generated: `/sitemap.xml`, `/robots.txt` (search engines and AI crawlers allowed),
   `/manifest.webmanifest`, `/opengraph-image`, and `/llms.txt` + `/llms-full.txt` —
   plain-text summaries for AI assistants, built from `src/lib/site.ts`.
-- Structured data (schema.org): Organization, WebSite, Service, SoftwareApplication,
-  BreadcrumbList, FAQPage, and AboutPage — see `src/lib/seo.ts`.
+- Structured data (schema.org): Organization (with headquarters address), WebSite, Service,
+  SoftwareApplication, BreadcrumbList, FAQPage (home and every service page), AboutPage, and
+  ContactPage — see `src/lib/seo.ts`.
+- Share images: a site-wide card plus one per service and product, rendered by `src/lib/og.tsx`.
 
 ## Products
 

@@ -1,4 +1,4 @@
-import { FAQS, LEAKSHIELD, PHISHNODE, PRODUCTS, SERVICE_CATEGORIES, SERVICES, SITE, servicesIn } from "@/lib/site";
+import { FAQS, HEADQUARTERS, LEAKSHIELD, PHISHNODE, PRODUCTS, SERVICE_CATEGORIES, SERVICES, SITE, servicesIn } from "@/lib/site";
 import { absolute } from "@/lib/seo";
 
 /** Concise, link-rich site summary for AI assistants (llmstxt.org). */
@@ -8,7 +8,19 @@ export function llmsTxt() {
     "",
     `> ${SITE.description}`,
     "",
-    `${SITE.name} is an international cybersecurity company serving organizations across North America, Europe, Africa and the Middle East, and Asia-Pacific. Work is delivered by engineers, with fixed scopes and plain-language reporting in English and French. Contact: ${SITE.email}.`,
+    `${SITE.name} is an international cybersecurity company headquartered in ${HEADQUARTERS.country}, serving organizations across North America, Europe, Africa and the Middle East, and Asia-Pacific. Work is delivered by engineers, with fixed scopes and plain-language reporting in English and French. Contact: ${SITE.email}.`,
+    "",
+    "## Key facts",
+    `- Name: ${SITE.name} (also written ${SITE.alternateNames.join(", ")})`,
+    `- Headquarters: ${HEADQUARTERS.city ? `${HEADQUARTERS.city}, ` : ""}${HEADQUARTERS.country}`,
+    "- What it does: builds security products and delivers cybersecurity services",
+    `- Products: ${PRODUCTS.map((p) => `${p.name} (${p.category})`).join(", ")}`,
+    `- Services: ${SERVICES.length} services across ${SERVICE_CATEGORIES.map((c) => c.name.toLowerCase()).join(", ")}`,
+    "- Languages: English, French",
+    "- Regions served: worldwide (North America, Europe, Africa, Middle East, Asia-Pacific)",
+    `- Website: ${SITE.url}`,
+    `- Contact: ${absolute("/contact")} or ${SITE.email}`,
+    `- Tagline: ${SITE.tagline}`,
     "",
     "## Products",
     ...PRODUCTS.map((p) => `- [${p.name}](${absolute(p.href)}): ${p.category}. ${p.summary}${p.url ? ` Website: ${p.url}` : ""}`),

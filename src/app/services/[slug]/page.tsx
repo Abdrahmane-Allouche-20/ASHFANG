@@ -2,13 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, ArrowUpRight, Check, FileCheck2 } from "lucide-react";
-import { APPROACH, PRODUCTS, SERVICE_CATEGORIES, SERVICES } from "@/lib/site";
+import { APPROACH, PRODUCTS, SERVICE_CATEGORIES, SERVICES, serviceFaqs } from "@/lib/site";
 import PageHeader from "@/components/layout/PageHeader";
 import CTABand from "@/components/layout/CTABand";
+import FAQ from "@/components/sections/FAQ";
 import Reveal from "@/components/ui/Reveal";
 import { LeakShieldMark, PhishNodeMark } from "@/components/products/ProductVisuals";
 import JsonLd from "@/components/seo/JsonLd";
-import { pageMetadata, serviceSchema } from "@/lib/seo";
+import { faqSchema, pageMetadata, serviceSchema } from "@/lib/seo";
 
 type Params = { slug: string };
 
@@ -21,11 +22,11 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const service = SERVICES.find((s) => s.slug === slug);
   if (!service) return {};
   return pageMetadata({
-    title: `${service.title} Services`,
-    description:
-      service.summary.length < 110 ? `${service.summary} Delivered by Cynguard engineers, worldwide.` : service.summary,
+    title: service.seoTitle,
+    description: service.seoDescription,
     path: `/services/${service.slug}`,
-    keywords: [service.title, `${service.title} services`, `${service.title} company`, "Cynguard"],
+    keywords: [service.title, `${service.title} services`, `${service.title} company`, `${service.title} Poland`, "Cynguard"],
+    image: `/services/${service.slug}/opengraph-image`,
   });
 }
 
@@ -39,16 +40,16 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
   const related = SERVICES.filter((s) => s.category === service.category && s.slug !== service.slug);
   const Icon = service.icon;
   const contactHref = `/contact?topic=${encodeURIComponent(service.title)}`;
+  const faqs = serviceFaqs(service);
 
   return (
     <>
-      <JsonLd data={serviceSchema(service)} />
+      <JsonLd data={[serviceSchema(service), faqSchema(faqs)]} />
       <PageHeader
         crumbs={[
           { name: "Services", path: "/services" },
           { name: service.title, path: `/services/${service.slug}` },
         ]}
-        eyebrow={category.name}
         title={
           <span className="inline-flex flex-col gap-5">
             <span className="icon-chip h-12 w-12 rounded-2xl">
@@ -123,8 +124,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       <section className="relative py-16 md:py-20">
         <div className="container-page">
           <Reveal>
-            <p className="eyebrow">How we work</p>
-            <h2 className="mt-5 font-display text-3xl font-semibold tracking-[-0.03em]">
+            <h2 className="font-display text-3xl font-semibold tracking-[-0.03em]">
               Every engagement follows the same disciplined loop.
             </h2>
           </Reveal>
@@ -139,6 +139,16 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
           </ol>
         </div>
       </section>
+
+      <FAQ
+        items={faqs}
+        title={
+          <>
+            {service.title}, <span className="heading-dim">answered.</span>
+          </>
+        }
+        lede={`What a ${service.title} engagement with Cynguard covers, what you receive, and how to start.`}
+      />
 
       {related.length > 0 && (
         <section className="relative py-8">

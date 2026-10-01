@@ -3,18 +3,16 @@ import Reveal from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
 
 /**
- * Section header: eyebrow, headline, and supporting copy.
+ * Section header: headline and supporting copy.
  * `split` puts the copy beside the headline on large screens.
  */
 export default function SectionHeading({
-  eyebrow,
   title,
   description,
   align = "split",
   id,
   className,
 }: {
-  eyebrow: string;
   title: ReactNode;
   description?: ReactNode;
   align?: "split" | "center" | "left";
@@ -32,8 +30,7 @@ export default function SectionHeading({
       )}
     >
       <div>
-        <p className="eyebrow">{eyebrow}</p>
-        <h2 id={id} className="heading-lg mt-5">
+        <h2 id={id} className="heading-lg">
           {title}
         </h2>
       </div>

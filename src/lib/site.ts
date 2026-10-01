@@ -23,15 +23,23 @@ function resolveSiteUrl() {
 
 export const SITE = {
   name: "Cynguard",
+  /** Other spellings of the brand, so search engines and AI assistants link them to us. */
+  alternateNames: ["CYNGUARD", "Cyngard"],
   tagline: "Think like an attacker. Defend like an engineer.",
   description:
-    "Cynguard is an international cybersecurity company. We build PhishNode and LeakShield, and deliver managed SOC, penetration testing, code review, and security engineering to organizations worldwide.",
+    "Cynguard is an international cybersecurity company headquartered in Poland. We build PhishNode and LeakShield, and deliver managed SOC, penetration testing, code review, and security engineering to organizations worldwide.",
   email: "cyngard.support@gmail.com",
   /**
    * Canonical origin. Set NEXT_PUBLIC_SITE_URL once a custom domain is live;
    * otherwise Vercel's production URL is used.
    */
   url: resolveSiteUrl(),
+};
+
+/** Registered headquarters. Set `city` once it is public; it then appears in structured data. */
+export const HEADQUARTERS: { country: string; countryCode: string; city?: string } = {
+  country: "Poland",
+  countryCode: "PL",
 };
 
 /** Add a profile URL to show the icon in the footer. Empty links are hidden. */
@@ -68,6 +76,10 @@ export type Service = {
   category: ServiceCategory;
   icon: LucideIcon;
   title: string;
+  /** Search result title; the brand is appended automatically. */
+  seoTitle: string;
+  /** Search result description, ideally 140–160 characters. */
+  seoDescription: string;
   summary: string;
   intro: string;
   includes: string[];
@@ -82,6 +94,9 @@ export const SERVICES: Service[] = [
     category: "offensive",
     icon: Crosshair,
     title: "Penetration Testing",
+    seoTitle: "Penetration Testing Services — Web, API & Network",
+    seoDescription:
+      "Manual penetration testing of web apps, APIs, and networks by Cynguard engineers. OWASP and PTES-aligned, with a prioritized fix plan and a free retest.",
     summary: "Real-world attacks on your web apps, APIs, and networks — with a clear map to close every door.",
     intro:
       "Automated scanners find the obvious. Our engineers chain weaknesses together the way attackers do, prove the impact, and rank every finding by what it means for your business.",
@@ -105,6 +120,9 @@ export const SERVICES: Service[] = [
     category: "offensive",
     icon: Swords,
     title: "Red Teaming",
+    seoTitle: "Red Teaming — Adversary Simulation & MITRE ATT&CK",
+    seoDescription:
+      "Goal-driven red team engagements: social engineering, initial access, and lateral movement, with a MITRE ATT&CK detection gap analysis for your defenders.",
     summary: "Goal-driven adversary simulation that tests how well you detect and respond.",
     intro:
       "A penetration test asks “where are the holes?” A red team engagement asks “could an attacker reach our crown jewels — and would we notice?” We agree objectives with you, then pursue them quietly.",
@@ -126,6 +144,9 @@ export const SERVICES: Service[] = [
     category: "offensive",
     icon: Code2,
     title: "Secure Code Review",
+    seoTitle: "Secure Code Review — Manual Source Code Audits",
+    seoDescription:
+      "Engineer-led secure code review of the paths that handle money, data, and identity. Findings mapped to files and lines, with fixes developers can apply.",
     summary: "Engineer-led audits that catch the vulnerabilities scanners miss — before they ship.",
     intro:
       "We read your code the way an attacker would, focusing on the paths that handle money, data, and identity. Every finding comes with a fix your developers can apply the same day.",
@@ -147,6 +168,9 @@ export const SERVICES: Service[] = [
     category: "defense",
     icon: Radar,
     title: "Managed SOC",
+    seoTitle: "Managed SOC — Alert Monitoring, Triage & Response",
+    seoDescription:
+      "Managed SOC service: Cynguard analysts monitor your alerts, triage what matters, enrich with threat intelligence, and escalate with context. No in-house SOC.",
     summary: "Our analysts monitor, triage, and respond to threats for you — no in-house SOC required.",
     intro:
       "Building a security operations center takes people, tooling, and years. With Cynguard, you get an operating SOC from day one: our analysts watch your environment, triage what matters, and escalate with context when action is needed.",
@@ -169,6 +193,9 @@ export const SERVICES: Service[] = [
     category: "defense",
     icon: Siren,
     title: "Incident Response",
+    seoTitle: "Incident Response — Containment, Forensics & Recovery",
+    seoDescription:
+      "Incident response from triage and containment to forensic root-cause analysis, recovery, and post-incident hardening, led by Cynguard engineers.",
     summary: "Contain the attack, find the root cause, recover — and close the gap that let it in.",
     intro:
       "When something goes wrong, speed and clarity matter more than anything. We help you contain the threat, investigate what happened, restore operations, and harden your environment so it doesn't happen again.",
@@ -191,6 +218,9 @@ export const SERVICES: Service[] = [
     category: "defense",
     icon: MailWarning,
     title: "Email Phishing Protection",
+    seoTitle: "Email Phishing Protection — Reporting & Triage",
+    seoDescription:
+      "Phishing protection built on PhishNode: one-click reporting for employees, threat-intel enrichment, analyst verdicts, and SIEM integration via webhooks.",
     summary: "Detect, triage, and neutralize phishing before it reaches the people who'll click.",
     intro:
       "Most breaches still start in the inbox. We deploy PhishNode so employees can report suspicious emails in one click, then triage every report, close the loop with the reporter, and push confirmed threats into your security stack.",
@@ -213,6 +243,9 @@ export const SERVICES: Service[] = [
     category: "defense",
     icon: ShieldAlert,
     title: "Data Leak & Breach Monitoring",
+    seoTitle: "Data Breach & Leaked Credential Monitoring",
+    seoDescription:
+      "Continuous OSINT monitoring of paste sites and breach databases for your domains, keywords, and credentials, with real-time alerts. Powered by LeakShield.",
     summary: "Know the moment your credentials, data, or assets are exposed.",
     intro:
       "Breaches rarely announce themselves. We use LeakShield to continuously watch public sources, paste sites, and breach databases for your domains, keywords, and credentials — and to match your assets against known vulnerabilities — so you can act before attackers do.",
@@ -235,6 +268,9 @@ export const SERVICES: Service[] = [
     category: "advisory",
     icon: Cloud,
     title: "Cloud Security",
+    seoTitle: "Cloud Security — Configuration Review & Hardening",
+    seoDescription:
+      "Cloud security reviews of identities, network exposure, storage, and logging, with a prioritized misconfiguration report and a roadmap to least privilege.",
     summary: "Configuration reviews and hardening for your cloud accounts, identities, and workloads.",
     intro:
       "Most cloud breaches come from misconfiguration, not zero-days. We review how your accounts, identities, networks, and workloads are set up, and help you move to least privilege without slowing your teams down.",
@@ -255,6 +291,9 @@ export const SERVICES: Service[] = [
     category: "advisory",
     icon: ClipboardCheck,
     title: "Compliance & Risk",
+    seoTitle: "Compliance & Risk — ISO 27001 and NIST CSF",
+    seoDescription:
+      "Gap assessments against ISO 27001 or NIST CSF, a risk register and treatment plan, policy review, and audit readiness, with a board-ready roadmap.",
     summary: "Gap assessments and roadmaps aligned with ISO 27001 and NIST CSF.",
     intro:
       "Frameworks are only useful when they turn into decisions. We assess where you stand against the standards your customers and regulators expect, and give you a roadmap written for decision-makers.",
@@ -275,6 +314,9 @@ export const SERVICES: Service[] = [
     category: "advisory",
     icon: GraduationCap,
     title: "Security Awareness",
+    seoTitle: "Security Awareness Training & Phishing Simulations",
+    seoDescription:
+      "Role-based security awareness training and realistic phishing simulation campaigns, with PhishNode feedback that keeps employees reporting real threats.",
     summary: "Practical training and phishing simulations that turn employees into a line of defense.",
     intro:
       "People are targeted every day. We train them with short, practical sessions and realistic simulations — and with PhishNode, every real report they make gets a response, which keeps them reporting.",
@@ -296,6 +338,9 @@ export const SERVICES: Service[] = [
     category: "advisory",
     icon: Layout,
     title: "Web & App Development",
+    seoTitle: "Secure Web & App Development — Security by Design",
+    seoDescription:
+      "Web and mobile products built secure by design: secure authentication and access control, automated security checks in CI, and a documented handover.",
     summary: "Modern products built secure from the first commit, not patched after the breach.",
     intro:
       "Our engineers design and build web and mobile products with security in the architecture from day one — authentication, data protection, and secure deployment included.",
@@ -374,7 +419,7 @@ export const WHY = [
   },
   {
     title: "Global & responsive",
-    text: "Built for clients across the US, Europe, Asia, and Africa — fast, clear, timezone-aware communication.",
+    text: "Headquartered in Poland, built for clients across the US, Europe, Asia, and Africa — fast, clear, timezone-aware communication.",
   },
   {
     title: "Clarity over jargon",
@@ -384,6 +429,7 @@ export const WHY = [
 
 /** Cities shown with live local time in the "Global & responsive" tile. */
 export const CLOCKS = [
+  { city: "Poland · HQ", tz: "Europe/Warsaw" },
   { city: "New York", tz: "America/New_York" },
   { city: "London", tz: "Europe/London" },
   { city: "Algiers", tz: "Africa/Algiers" },
@@ -421,10 +467,52 @@ export const FAQS = [
     a: "Yes. We remediate, retest, and verify until the risk is genuinely closed. And when you're building something new, our development team ships it secure from the first commit.",
   },
   {
+    q: "Where is Cynguard based?",
+    a: "Cynguard is headquartered in Poland and works with organizations worldwide, with communication and reporting in English and French.",
+  },
+  {
     q: "Do you work with teams outside your region?",
-    a: "Yes. We work with clients across the US, Europe, Asia, and Africa, with fast, clear, timezone-aware communication.",
+    a: "Yes. From our base in Poland we work with clients across the US, Europe, Asia, and Africa, with fast, clear, timezone-aware communication.",
   },
 ];
+
+export type Faq = { q: string; a: string };
+
+/** "Web application testing" → "web application testing"; acronyms such as "OWASP" stay as they are. */
+const lowerFirst = (t: string) => (/^[A-Z][a-z\s]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t);
+/** Joins items into a sentence list; semicolons only when an item has its own commas. */
+const listOf = (items: string[]) => {
+  if (items.length < 2) return items.join("");
+  const sep = items.some((t) => t.includes(",")) ? "; " : ", ";
+  return `${items.slice(0, -1).map(lowerFirst).join(sep)}${sep}and ${lowerFirst(items[items.length - 1])}`;
+};
+
+/** Questions answered on each service page, built only from that service's own details. */
+export function serviceFaqs(s: Service): Faq[] {
+  const product = PRODUCTS.find((p) => p.slug === s.product);
+  return [
+    {
+      q: `What does ${s.title} from Cynguard include?`,
+      a: `${s.summary} It covers ${listOf(s.includes)}.`,
+    },
+    {
+      q: `What do we receive from a ${s.title} engagement?`,
+      a: `Deliverables include: ${listOf(s.deliverables)}.`,
+    },
+    ...(product
+      ? [
+          {
+            q: `Which platform is ${s.title} delivered with?`,
+            a: `${product.name}, Cynguard's in-house ${lowerFirst(product.category)} platform. ${product.summary}`,
+          },
+        ]
+      : []),
+    {
+      q: `How do we start a ${s.title} project?`,
+      a: `Tell us what you want to protect. An engineer replies with a fixed scope and a clear next step, and the work then follows the same four steps as every engagement: ${listOf(APPROACH.map((a) => a.title))}.`,
+    },
+  ];
+}
 
 /* ---------- Products ---------- */
 

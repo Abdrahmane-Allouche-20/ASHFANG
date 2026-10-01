@@ -15,7 +15,7 @@ export default function Clocks() {
   }, []);
 
   return (
-    <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3 md:grid-cols-5 md:gap-x-4">
+    <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3">
       {CLOCKS.map((c) => {
         const time = now
           ? new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: c.tz }).format(now)

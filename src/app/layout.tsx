@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import { SITE } from "@/lib/site";
+import { HEADQUARTERS, SITE } from "@/lib/site";
 import SmoothScroll from "@/components/SmoothScroll";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Nav from "@/components/Nav";
@@ -25,16 +25,25 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
   variable: "--font-instrument",
   display: "swap",
+  // Only used by the optional .accent style, so keep it off the critical path.
+  preload: false,
 });
 
 // Kept under ~160 characters so search results show it in full.
 const META_DESCRIPTION =
-  "International cybersecurity company offering managed SOC, penetration testing, code review, and incident response — makers of PhishNode and LeakShield.";
+  "Poland-based international cybersecurity company: managed SOC, penetration testing, code review, and incident response. Makers of PhishNode and LeakShield.";
+const HOME_TITLE = `${SITE.name} — International Cybersecurity Company Based in ${HEADQUARTERS.country}`;
+
+// Search-console ownership tokens, set in the deployment environment when available.
+const verification: Metadata["verification"] = {
+  ...(process.env.GOOGLE_SITE_VERIFICATION ? { google: process.env.GOOGLE_SITE_VERIFICATION } : {}),
+  ...(process.env.BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.BING_SITE_VERIFICATION } } : {}),
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — International Cybersecurity Company`,
+    default: HOME_TITLE,
     template: `%s · ${SITE.name}`,
   },
   description: META_DESCRIPTION,
@@ -46,6 +55,8 @@ export const metadata: Metadata = {
   keywords: [
     "Cynguard",
     "cybersecurity company",
+    `cybersecurity company ${HEADQUARTERS.country}`,
+    `penetration testing ${HEADQUARTERS.country}`,
     "managed SOC",
     "penetration testing",
     "red teaming",
@@ -59,7 +70,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/" },
   openGraph: {
-    title: `${SITE.name} — International Cybersecurity Company`,
+    title: HOME_TITLE,
     description: META_DESCRIPTION,
     url: "/",
     siteName: SITE.name,
@@ -68,7 +79,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — International Cybersecurity Company`,
+    title: HOME_TITLE,
     description: META_DESCRIPTION,
   },
   robots: {
@@ -77,7 +88,12 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
   formatDetection: { email: false, telephone: false, address: false },
-  other: { "llms-txt": "/llms.txt" },
+  verification,
+  other: {
+    "llms-txt": "/llms.txt",
+    "geo.region": HEADQUARTERS.countryCode,
+    "geo.placename": HEADQUARTERS.city ? `${HEADQUARTERS.city}, ${HEADQUARTERS.country}` : HEADQUARTERS.country,
+  },
 };
 
 export const viewport: Viewport = {

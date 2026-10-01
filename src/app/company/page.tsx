@@ -57,13 +57,12 @@ export default function CompanyPage() {
       />
       <PageHeader
         crumbs={[{ name: "Company", path: "/company" }]}
-        eyebrow="Company"
         title={
           <>
             About Cynguard. <span className="heading-dim">Think like an attacker, defend like an engineer.</span>
           </>
         }
-        lede="Cynguard is an international cybersecurity company. We combine in-house security products with engineer-led services to help organizations find their weaknesses, watch for threats, and respond when it matters."
+        lede="Cynguard is an international cybersecurity company headquartered in Poland. We combine in-house security products with engineer-led services to help organizations find their weaknesses, watch for threats, and respond when it matters."
       />
 
       <section className="relative pb-16">
@@ -88,14 +87,13 @@ export default function CompanyPage() {
       <section aria-labelledby="global-title" className="relative py-24 md:py-32">
         <div className="container-page grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <Reveal>
-            <p className="eyebrow">Global reach</p>
-            <h2 id="global-title" className="heading-lg mt-5">
+            <h2 id="global-title" className="heading-lg">
               International by design.
             </h2>
             <p className="lede mt-5 max-w-lg">
-              We work with clients across North America, Europe, Africa and the Middle East, and
-              Asia-Pacific — with fast, clear, timezone-aware communication and reporting in English
-              and French.
+              Headquartered in Poland, we work with clients across North America, Europe, Africa and
+              the Middle East, and Asia-Pacific — with fast, clear, timezone-aware communication and
+              reporting in English and French.
             </p>
             <div className="card mt-10 p-6">
               <p className="mb-4 font-mono text-[10px] tracking-[0.16em] text-subtle">LOCAL TIME ACROSS OUR CLIENT REGIONS</p>

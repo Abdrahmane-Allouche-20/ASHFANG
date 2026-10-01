@@ -12,10 +12,11 @@ import JsonLd from "@/components/seo/JsonLd";
 const product = PRODUCTS.find((p) => p.slug === "phishnode")!;
 
 export const metadata: Metadata = pageMetadata({
-  title: "PhishNode — Phishing Triage Platform",
+  title: "PhishNode — Phishing Reporting & Triage Platform",
   description:
     "PhishNode by Cynguard: one-click phishing reporting, threat-intelligence enrichment, analyst verdicts, and automatic response for SOC teams and MSSPs.",
   path: "/products/phishnode",
+  image: "/products/phishnode/opengraph-image",
   keywords: ["PhishNode", "phishing triage", "phishing reporting", "SOC platform", "report phishing button", "email threat analysis"],
 });
 
@@ -24,7 +25,7 @@ export default function PhishNodePage() {
     <>
       <JsonLd data={productSchema(product, [...PHISHNODE.steps.map((x) => x.title), ...PHISHNODE.features.map((f) => f.title)])} />
         <ProductHero
-          mark={<PhishNodeMark className="h-11 w-11" />}
+          mark={<PhishNodeMark className="h-11 w-11" priority />}
           name="PhishNode"
           category={product.category}
           title={
@@ -51,7 +52,6 @@ export default function PhishNodePage() {
 
         <Section id="how">
           <SectionHeading
-            eyebrow="How it works"
             title={
               <>
                 From <span className="heading-dim">report</span> to response, automatically.
@@ -65,8 +65,7 @@ export default function PhishNodePage() {
         <Section className="pt-0 md:pt-0">
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
             <Reveal>
-              <p className="eyebrow">Enrichment</p>
-              <h2 className="heading-lg mt-5">
+              <h2 className="heading-lg">
                 Evidence first, <span className="heading-dim">verdict second.</span>
               </h2>
               <p className="lede mt-5 max-w-md">
@@ -102,7 +101,6 @@ export default function PhishNodePage() {
 
         <Section className="pt-0 md:pt-0">
           <SectionHeading
-            eyebrow="Platform"
             title={
               <>
                 Built for security teams — <span className="heading-dim">and the MSSPs</span> that serve them.
@@ -114,7 +112,6 @@ export default function PhishNodePage() {
 
         <Section className="pt-0 md:pt-0">
           <SectionHeading
-            eyebrow="Service tiers"
             title={
               <>
                 Run it yourself, or <span className="heading-dim">let us run it.</span>

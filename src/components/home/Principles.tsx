@@ -10,7 +10,6 @@ export default function Principles() {
       <div className="container-page">
         <SectionHeading
           id="why-title"
-          eyebrow="Why Cynguard"
           title={
             <>
               The team that breaks it <span className="heading-dim">knows how to guard it.</span>

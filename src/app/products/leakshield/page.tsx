@@ -11,10 +11,11 @@ import JsonLd from "@/components/seo/JsonLd";
 const product = PRODUCTS.find((p) => p.slug === "leakshield")!;
 
 export const metadata: Metadata = pageMetadata({
-  title: "LeakShield — Breach & OSINT Monitoring",
+  title: "LeakShield — Data Breach & OSINT Monitoring Platform",
   description:
     "LeakShield monitors paste sites, breach databases, and public sources for your domains and credentials, correlates assets with the NVD, and alerts in real time.",
   path: "/products/leakshield",
+  image: "/products/leakshield/opengraph-image",
   keywords: ["LeakShield", "data breach monitoring", "OSINT monitoring", "leaked credentials", "dark web monitoring", "paste site monitoring", "NVD"],
 });
 
@@ -50,7 +51,6 @@ export default function LeakShieldPage() {
 
       <Section id="how">
         <SectionHeading
-          eyebrow="How it works"
           title={
             <>
               From raw threat data <span className="heading-dim">to action.</span>
@@ -64,8 +64,7 @@ export default function LeakShieldPage() {
       <Section className="pt-0 md:pt-0">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
           <Reveal>
-            <p className="eyebrow">Coverage</p>
-            <h2 className="heading-lg mt-5">
+            <h2 className="heading-lg">
               What LeakShield <span className="heading-dim">watches for you.</span>
             </h2>
             <ul className="card mt-8 divide-y divide-line">
@@ -86,7 +85,6 @@ export default function LeakShieldPage() {
 
       <Section className="pt-0 md:pt-0">
         <SectionHeading
-          eyebrow="Platform"
           title={
             <>
               Engineered for <span className="heading-dim">continuous monitoring.</span>

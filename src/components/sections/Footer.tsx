@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight, Github, Linkedin, Twitter } from "lucide-react";
-import { PRODUCTS, SERVICES, SITE, SOCIALS } from "@/lib/site";
+import { HEADQUARTERS, PRODUCTS, SERVICES, SITE, SOCIALS } from "@/lib/site";
 import Logo from "@/components/ui/Logo";
 
 const SOCIAL_ICONS = { LinkedIn: Linkedin, X: Twitter, GitHub: Github };
@@ -17,8 +17,8 @@ export default function Footer() {
         <div className="max-w-xs">
           <Logo />
           <p className="mt-5 text-[14.5px] leading-relaxed text-muted">
-            An international cybersecurity company building security products and delivering expert
-            services to organizations worldwide.
+            An international cybersecurity company headquartered in {HEADQUARTERS.country}, building
+            security products and delivering expert services to organizations worldwide.
           </p>
           {socials.length > 0 && (
             <ul className="mt-6 flex gap-2">
