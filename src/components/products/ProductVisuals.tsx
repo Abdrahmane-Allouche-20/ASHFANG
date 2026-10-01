@@ -1,25 +1,32 @@
 import Image from "next/image";
 import { Check, Lock, Paperclip, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/cn";
+import Beam from "@/components/ui/Beam";
 import StatusOrb from "@/components/ui/StatusOrb";
 
 /* Illustrative product views for PhishNode and LeakShield (sample data only). */
 
+const WINDOW_SHADOW = "shadow-[0_40px_100px_-40px_rgba(139,92,246,0.45),0_24px_60px_-30px_rgba(0,0,0,0.9)]";
+
+/** App window chrome. `working` runs a border beam to show the product busy. */
 function Window({
   title,
   children,
   className,
   right,
+  working,
 }: {
   title: string;
   children: React.ReactNode;
   className?: string;
   right?: React.ReactNode;
+  working?: boolean;
 }) {
-  return (
+  const frame = (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[1.1rem] border border-line-strong bg-[linear-gradient(180deg,#151520,#0a0a10)] shadow-[0_40px_100px_-40px_rgba(139,92,246,0.45),0_24px_60px_-30px_rgba(0,0,0,0.9)]",
+        "relative overflow-hidden rounded-[1.1rem] border border-line-strong bg-[linear-gradient(180deg,#151520,#0a0a10)]",
+        !working && WINDOW_SHADOW,
         className,
       )}
     >
@@ -38,6 +45,13 @@ function Window({
       </div>
       {children}
     </div>
+  );
+  if (!working) return frame;
+  // The beam clips its wrapper, so the window's outer shadow moves onto it.
+  return (
+    <Beam size="md" colorVariant="ocean" className={cn("rounded-[1.1rem]", WINDOW_SHADOW)}>
+      {frame}
+    </Beam>
   );
 }
 
@@ -69,7 +83,7 @@ const ACTIONS = ["Reporter emailed", "Security manager alerted", "SIEM webhook d
 /** Analyst queue + open report, as seen in the PhishNode dashboard. */
 export function PhishNodeConsole() {
   return (
-    <Window title="phishnode · email queue" right={<span className="hidden sm:inline">SAMPLE</span>}>
+    <Window title="phishnode · email queue" right={<span className="hidden sm:inline">SAMPLE</span>} working>
       <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
         <ul className="border-b border-line md:border-b-0 md:border-r">
           {QUEUE.map((q, i) => (
@@ -208,7 +222,7 @@ const SEV_CLASS = { critical: "sev sev-critical", high: "sev sev-high", medium: 
 /** Real-time exposure alert feed, as seen in the LeakShield dashboard. */
 export function LeakShieldAlerts({ compact }: { compact?: boolean }) {
   return (
-    <Window title="leakshield · exposure alerts" right={<span className="hidden sm:inline">SAMPLE</span>}>
+    <Window title="leakshield · exposure alerts" right={<span className="hidden sm:inline">SAMPLE</span>} working>
       <div className="flex items-center gap-2.5 border-b border-line px-4 py-2.5">
         <StatusOrb className="-my-1 shrink-0" />
         <span className="font-mono text-[10px] tracking-[0.12em] text-subtle">MONITORING</span>
