@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 import { SITE } from "@/lib/site";
 import Reveal from "@/components/ui/Reveal";
+import CtaBeam from "@/components/ui/CtaBeam";
 
 export default function CTABand({
   title = "Let's talk about your security.",
@@ -27,10 +28,12 @@ export default function CTABand({
             <p className="mt-3 text-[15.5px] leading-relaxed text-muted">{text}</p>
           </div>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row md:mt-0 md:shrink-0">
-            <Link href={href} className="btn btn-primary btn-lg">
-              {label}
-              <ArrowRight size={16} className="btn-arrow" />
-            </Link>
+            <CtaBeam>
+              <Link href={href} className="btn btn-primary btn-lg w-full">
+                {label}
+                <ArrowRight size={16} className="btn-arrow" />
+              </Link>
+            </CtaBeam>
             <a href={`mailto:${SITE.email}`} className="btn btn-secondary btn-lg">
               <Mail size={16} />
               Email us

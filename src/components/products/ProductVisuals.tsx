@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Check, Lock, Paperclip, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/cn";
+import StatusOrb from "@/components/ui/StatusOrb";
 
 /* Illustrative product views for PhishNode and LeakShield (sample data only). */
 
@@ -44,7 +45,7 @@ function Window({
 
 const QUEUE = [
   { from: "HR Payroll", subject: "Verify your bank details before Friday", status: "In review", verdict: "phishing" },
-  { from: "DocuSign", subject: "Contract awaiting your signature", status: "New", verdict: null },
+  { from: "DocuSign", subject: "Contract awaiting your signature", status: "Enriching", verdict: null },
   { from: "IT Helpdesk", subject: "Mailbox storage almost full", status: "Done", verdict: "suspicious" },
   { from: "Finance", subject: "Q3 budget review — agenda", status: "Done", verdict: "clean" },
 ] as const;
@@ -94,7 +95,7 @@ export function PhishNodeConsole() {
               {q.verdict ? (
                 <span className={cn(VERDICT_CLASS[q.verdict], "shrink-0")}>{q.verdict}</span>
               ) : (
-                <span className="sev shrink-0 border-line-strong text-muted">new</span>
+                <StatusOrb className="shrink-0" />
               )}
             </li>
           ))}
@@ -209,7 +210,7 @@ export function LeakShieldAlerts({ compact }: { compact?: boolean }) {
   return (
     <Window title="leakshield · exposure alerts" right={<span className="hidden sm:inline">SAMPLE</span>}>
       <div className="flex items-center gap-2.5 border-b border-line px-4 py-2.5">
-        <span className="live-dot scale-75" />
+        <StatusOrb className="-my-1 shrink-0" />
         <span className="font-mono text-[10px] tracking-[0.12em] text-subtle">MONITORING</span>
         <span className="truncate font-mono text-[11px] text-fg">yourcompany.com · 4 keywords · 12 assets</span>
       </div>

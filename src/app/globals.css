@@ -335,6 +335,20 @@ html.lenis body {
       0 14px 44px -10px rgba(139, 92, 246, 0.8),
       0 0 70px -24px rgba(34, 211, 238, 0.7);
   }
+  /* BorderBeam clips its wrapper, so the primary button's outer glow moves here. */
+  .cta-beam {
+    border-radius: 999px;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 10px 30px -10px rgba(139, 92, 246, 0.55);
+    transition: box-shadow 0.35s ease;
+  }
+  .cta-beam:hover {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.25),
+      0 14px 44px -10px rgba(139, 92, 246, 0.8),
+      0 0 70px -24px rgba(34, 211, 238, 0.7);
+  }
   .btn-secondary {
     background-color: rgba(255, 255, 255, 0.04);
     color: var(--color-fg);
@@ -557,25 +571,6 @@ html.lenis body {
     background-size: 16px 16px;
   }
 
-  /* Live status dot with a soft ping. */
-  .live-dot {
-    position: relative;
-    display: inline-block;
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 999px;
-    background: var(--color-ok);
-    box-shadow: 0 0 10px rgba(52, 211, 153, 0.7);
-  }
-  .live-dot::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: inherit;
-    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-  }
-
   /* ---------- Form ---------- */
   .field {
     width: 100%;
@@ -657,13 +652,6 @@ html.lenis body {
 @keyframes marquee {
   to {
     transform: translateX(-50%);
-  }
-}
-@keyframes ping {
-  75%,
-  100% {
-    transform: scale(2.4);
-    opacity: 0;
   }
 }
 @keyframes blink {
