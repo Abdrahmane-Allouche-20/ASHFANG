@@ -14,12 +14,12 @@ export default function Logo({
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <Image
-        src="/brand/mark.png"
+        src="/brand/mark.svg"
         alt=""
-        width={240}
-        height={316}
+        width={1002}
+        height={1223}
         priority={priority}
-        className={cn("h-7 w-auto drop-shadow-[0_0_14px_rgba(139,92,246,0.45)]", markClassName)}
+        className={cn("h-8 w-auto drop-shadow-[0_0_14px_rgba(139,92,246,0.45)]", markClassName)}
       />
       <span className="font-display text-[0.95rem] font-semibold tracking-[0.24em] text-fg">
         CYNGUARD
