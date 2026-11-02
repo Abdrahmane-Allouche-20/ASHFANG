@@ -22,12 +22,12 @@ function resolveSiteUrl() {
 }
 
 export const SITE = {
-  name: "Cynguard",
+  name: "Ashfang",
   /** Other spellings of the brand, so search engines and AI assistants link them to us. */
-  alternateNames: ["CYNGUARD", "Cyngard"],
+  alternateNames: ["ASHFANG"],
   tagline: "Think like an attacker. Defend like an engineer.",
   description:
-    "Cynguard is an international cybersecurity company headquartered in Poland. We build PhishNode and LeakShield, and deliver managed SOC, penetration testing, code review, and security engineering to organizations worldwide.",
+    "Ashfang is an international cybersecurity company headquartered in Poland. We build PhishNode and LeakShield, and deliver managed SOC, penetration testing, code review, and security engineering to organizations worldwide.",
   email: "cyngard.support@gmail.com",
   /**
    * Canonical origin. Set NEXT_PUBLIC_SITE_URL once a custom domain is live;
@@ -96,7 +96,7 @@ export const SERVICES: Service[] = [
     title: "Penetration Testing",
     seoTitle: "Penetration Testing Services — Web, API & Network",
     seoDescription:
-      "Manual penetration testing of web apps, APIs, and networks by Cynguard engineers. OWASP and PTES-aligned, with a prioritized fix plan and a free retest.",
+      "Manual penetration testing of web apps, APIs, and networks by Ashfang engineers. OWASP and PTES-aligned, with a prioritized fix plan and a free retest.",
     summary: "Real-world attacks on your web apps, APIs, and networks — with a clear map to close every door.",
     intro:
       "Automated scanners find the obvious. Our engineers chain weaknesses together the way attackers do, prove the impact, and rank every finding by what it means for your business.",
@@ -170,10 +170,10 @@ export const SERVICES: Service[] = [
     title: "Managed SOC",
     seoTitle: "Managed SOC — Alert Monitoring, Triage & Response",
     seoDescription:
-      "Managed SOC service: Cynguard analysts monitor your alerts, triage what matters, enrich with threat intelligence, and escalate with context. No in-house SOC.",
+      "Managed SOC service: Ashfang analysts monitor your alerts, triage what matters, enrich with threat intelligence, and escalate with context. No in-house SOC.",
     summary: "Our analysts monitor, triage, and respond to threats for you — no in-house SOC required.",
     intro:
-      "Building a security operations center takes people, tooling, and years. With Cynguard, you get an operating SOC from day one: our analysts watch your environment, triage what matters, and escalate with context when action is needed.",
+      "Building a security operations center takes people, tooling, and years. With Ashfang, you get an operating SOC from day one: our analysts watch your environment, triage what matters, and escalate with context when action is needed.",
     includes: [
       "Continuous alert monitoring and triage",
       "Phishing report triage on PhishNode",
@@ -195,7 +195,7 @@ export const SERVICES: Service[] = [
     title: "Incident Response",
     seoTitle: "Incident Response — Containment, Forensics & Recovery",
     seoDescription:
-      "Incident response from triage and containment to forensic root-cause analysis, recovery, and post-incident hardening, led by Cynguard engineers.",
+      "Incident response from triage and containment to forensic root-cause analysis, recovery, and post-incident hardening, led by Ashfang engineers.",
     summary: "Contain the attack, find the root cause, recover — and close the gap that let it in.",
     intro:
       "When something goes wrong, speed and clarity matter more than anything. We help you contain the threat, investigate what happened, restore operations, and harden your environment so it doesn't happen again.",
@@ -467,8 +467,8 @@ export const FAQS = [
     a: "Yes. We remediate, retest, and verify until the risk is genuinely closed. And when you're building something new, our development team ships it secure from the first commit.",
   },
   {
-    q: "Where is Cynguard based?",
-    a: "Cynguard is headquartered in Poland and works with organizations worldwide, with communication and reporting in English and French.",
+    q: "Where is Ashfang based?",
+    a: "Ashfang is headquartered in Poland and works with organizations worldwide, with communication and reporting in English and French.",
   },
   {
     q: "Do you work with teams outside your region?",
@@ -492,7 +492,7 @@ export function serviceFaqs(s: Service): Faq[] {
   const product = PRODUCTS.find((p) => p.slug === s.product);
   return [
     {
-      q: `What does ${s.title} from Cynguard include?`,
+      q: `What does ${s.title} from Ashfang include?`,
       a: `${s.summary} It covers ${listOf(s.includes)}.`,
     },
     {
@@ -503,7 +503,7 @@ export function serviceFaqs(s: Service): Faq[] {
       ? [
           {
             q: `Which platform is ${s.title} delivered with?`,
-            a: `${product.name}, Cynguard's in-house ${lowerFirst(product.category)} platform. ${product.summary}`,
+            a: `${product.name}, Ashfang's in-house ${lowerFirst(product.category)} platform. ${product.summary}`,
           },
         ]
       : []),
@@ -618,8 +618,8 @@ export const PHISHNODE = {
     },
     {
       name: "Managed service",
-      text: "Cynguard analysts run triage for you. Your team keeps full visibility while we handle the queue.",
-      points: ["Triage by Cynguard analysts", "Service activity reports", "Shared intelligence coverage"],
+      text: "Ashfang analysts run triage for you. Your team keeps full visibility while we handle the queue.",
+      points: ["Triage by Ashfang analysts", "Service activity reports", "Shared intelligence coverage"],
     },
   ],
 };

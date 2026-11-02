@@ -19,10 +19,10 @@ export default function CTABand({
     <section className="relative py-20 md:py-28">
       <div className="container-page">
         <Reveal>
-          <Beam size="pulse-outside" colorVariant="ocean">
-            <div className="relative isolate overflow-hidden rounded-[1.5rem] border border-line-strong bg-[linear-gradient(180deg,#110f1d,#09090f)] px-6 py-14 sm:px-12 md:flex md:items-center md:justify-between md:gap-10 md:py-16">
+          <Beam size="pulse-outside" colorVariant="mono">
+            <div className="relative isolate overflow-hidden rounded-[1.5rem] border border-line-strong bg-[linear-gradient(180deg,#110508,#050505)] px-6 py-14 sm:px-12 md:flex md:items-center md:justify-between md:gap-10 md:py-16">
               <span className="edge-light" />
-              <div aria-hidden className="absolute -right-24 top-1/2 -z-10 h-[420px] w-[520px] -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(139,92,246,0.28),transparent)]" />
+              <div aria-hidden className="absolute -right-24 top-1/2 -z-10 h-[420px] w-[520px] -translate-y-1/2 bg-[radial-gradient(closest-side,rgba(219,2,16,0.28),transparent)]" />
               <div className="max-w-xl">
                 <h2 className="font-display text-[clamp(1.75rem,1.2rem+1.8vw,2.6rem)] font-semibold leading-tight tracking-[-0.03em]">
                   {title}

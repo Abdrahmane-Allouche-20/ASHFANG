@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
     title: service.seoTitle,
     description: service.seoDescription,
     path: `/services/${service.slug}`,
-    keywords: [service.title, `${service.title} services`, `${service.title} company`, `${service.title} Poland`, "Cynguard"],
+    keywords: [service.title, `${service.title} services`, `${service.title} company`, `${service.title} Poland`, "Ashfang"],
     image: `/services/${service.slug}/opengraph-image`,
   });
 }
@@ -78,7 +78,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
             <ul className="mt-6 space-y-3.5">
               {service.includes.map((it) => (
                 <li key={it} className="flex items-start gap-3 text-[15px] leading-snug text-[#dcdce8]">
-                  <span className="mt-px flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[rgba(34,211,238,0.12)] text-cyan">
+                  <span className="mt-px flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full bg-[rgba(219,2,16,0.12)] text-cyan">
                     <Check size={11} strokeWidth={3} />
                   </span>
                   {it}
@@ -147,7 +147,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
             {service.title}, <span className="heading-dim">answered.</span>
           </>
         }
-        lede={`What a ${service.title} engagement with Cynguard covers, what you receive, and how to start.`}
+        lede={`What a ${service.title} engagement with Ashfang covers, what you receive, and how to start.`}
       />
 
       {related.length > 0 && (

@@ -15,13 +15,13 @@ export async function renderOgImage({
 }: {
   eyebrow?: string;
   title: string;
-  /** Optional second headline line, set in lilac. */
+  /** Optional second headline line, set in the brand red. */
   accent?: string;
   /** Optional supporting sentence under the headline. */
   text?: string;
   footer?: string;
 }) {
-  const mark = await readFile(join(process.cwd(), "public/brand/mark.png"));
+  const mark = await readFile(join(process.cwd(), "public/logo title without bg.png"));
   const markSrc = `data:image/png;base64,${mark.toString("base64")}`;
   const big = !text;
 
@@ -35,21 +35,20 @@ export async function renderOgImage({
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px 80px",
-          backgroundColor: "#07070b",
+          backgroundColor: "#000000",
           backgroundImage:
-            "radial-gradient(circle at 50% -10%, rgba(139,92,246,0.45), rgba(7,7,11,0) 60%), radial-gradient(circle at 95% 110%, rgba(34,211,238,0.22), rgba(7,7,11,0) 45%)",
-          color: "#f4f4f8",
+            "radial-gradient(circle at 50% -10%, rgba(219,2,16,0.3), rgba(0,0,0,0) 60%), radial-gradient(circle at 95% 110%, rgba(192,192,192,0.16), rgba(0,0,0,0) 45%)",
+          color: "#ffffff",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={markSrc} width={62} height={76} alt="" />
-          <div style={{ fontSize: 30, fontWeight: 600, letterSpacing: 9 }}>CYNGUARD</div>
+          <img src={markSrc} width={250} height={52} alt="" />
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
           {eyebrow && (
-            <div style={{ fontSize: 24, letterSpacing: 5, textTransform: "uppercase", color: "#67e8f9", marginBottom: 22 }}>
+            <div style={{ fontSize: 24, letterSpacing: 5, textTransform: "uppercase", color: "#db0210", marginBottom: 22 }}>
               {eyebrow}
             </div>
           )}
@@ -64,16 +63,16 @@ export async function renderOgImage({
             }}
           >
             <div>{title}</div>
-            {accent && <div style={{ color: "#b9a6ff" }}>{accent}</div>}
+            {accent && <div style={{ color: "#db0210" }}>{accent}</div>}
           </div>
           {text && (
-            <div style={{ marginTop: 26, fontSize: 32, lineHeight: 1.35, color: "#a3a3b8", maxWidth: 980 }}>{text}</div>
+            <div style={{ marginTop: 26, fontSize: 32, lineHeight: 1.35, color: "#c0c0c0", maxWidth: 980 }}>{text}</div>
           )}
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, color: "#a3a3b8" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 24, color: "#c0c0c0" }}>
           <div>{footer}</div>
-          <div style={{ color: "#67e8f9" }}>{SITE.url.replace(/^https:\/\//, "")}</div>
+          <div style={{ color: "#db0210" }}>{SITE.url.replace(/^https:\/\//, "")}</div>
         </div>
       </div>
     ),

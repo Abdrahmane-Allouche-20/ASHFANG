@@ -14,7 +14,7 @@ const product = PRODUCTS.find((p) => p.slug === "phishnode")!;
 export const metadata: Metadata = pageMetadata({
   title: "PhishNode — Phishing Reporting & Triage Platform",
   description:
-    "PhishNode by Cynguard: one-click phishing reporting, threat-intelligence enrichment, analyst verdicts, and automatic response for SOC teams and MSSPs.",
+    "PhishNode by Ashfang: one-click phishing reporting, threat-intelligence enrichment, analyst verdicts, and automatic response for SOC teams and MSSPs.",
   path: "/products/phishnode",
   image: "/products/phishnode/opengraph-image",
   keywords: ["PhishNode", "phishing triage", "phishing reporting", "SOC platform", "report phishing button", "email threat analysis"],

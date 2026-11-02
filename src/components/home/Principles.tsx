@@ -3,7 +3,7 @@ import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Stats from "@/components/sections/why/Stats";
 
-/** Why Cynguard — plain principles plus key numbers. */
+/** Why Ashfang — plain principles plus key numbers. */
 export default function Principles() {
   return (
     <section id="why" aria-labelledby="why-title" className="relative py-24 md:py-32">

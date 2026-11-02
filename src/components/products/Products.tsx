@@ -28,7 +28,7 @@ export default function Products({ heading = true }: { heading?: boolean }) {
           {PRODUCTS.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.08} className="flex">
               <article data-spot className="card flex w-full min-w-0 flex-col">
-                <div className="relative h-[260px] overflow-hidden rounded-t-[inherit] border-b border-line bg-[radial-gradient(80%_70%_at_50%_100%,rgba(139,92,246,0.14),transparent_70%)]">
+                <div className="relative h-[260px] overflow-hidden rounded-t-[inherit] border-b border-line bg-[radial-gradient(80%_70%_at_50%_100%,rgba(219,2,16,0.14),transparent_70%)]">
                   <div aria-hidden className="dot-grid absolute inset-0 [mask-image:linear-gradient(180deg,#000,transparent_85%)]" />
                   <div aria-hidden className="relative flex h-full items-center">
                     {p.slug === "phishnode" ? (

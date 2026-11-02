@@ -40,13 +40,13 @@ export default function Approach() {
           <div aria-hidden className="absolute bottom-6 left-[1.19rem] top-6 w-px bg-line lg:hidden">
             <motion.div
               style={{ scaleY: reduce ? 1 : progress }}
-              className="h-full w-full origin-top bg-[linear-gradient(180deg,#a78bfa,#22d3ee)]"
+              className="h-full w-full origin-top bg-[linear-gradient(180deg,#db0210,#c0c0c0)]"
             />
           </div>
           <div aria-hidden className="absolute left-[1.19rem] right-8 top-[1.19rem] hidden h-px bg-line lg:block">
             <motion.div
               style={{ scaleX: reduce ? 1 : progress }}
-              className="h-full w-full origin-left bg-[linear-gradient(90deg,#a78bfa,#22d3ee)]"
+              className="h-full w-full origin-left bg-[linear-gradient(90deg,#db0210,#c0c0c0)]"
             />
           </div>
 
@@ -59,7 +59,7 @@ export default function Approach() {
                     className={cn(
                       "absolute left-0 top-0 flex h-[2.4rem] w-[2.4rem] items-center justify-center rounded-full border font-mono text-[12px] transition-all duration-500 lg:relative",
                       on
-                        ? "border-[rgba(167,139,250,0.6)] bg-[#161225] text-fg shadow-[0_0_24px_-4px_rgba(139,92,246,0.7)]"
+                        ? "border-[rgba(219,2,16,0.6)] bg-[#1a0507] text-fg shadow-[0_0_24px_-4px_rgba(219,2,16,0.7)]"
                         : "border-line-strong bg-base text-subtle",
                     )}
                   >
@@ -74,7 +74,7 @@ export default function Approach() {
                       className={cn(
                         "mt-5 inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-[12.5px] transition-colors duration-500",
                         on
-                          ? "border-[rgba(34,211,238,0.25)] bg-[rgba(34,211,238,0.06)] text-[#d6f7fc]"
+                          ? "border-[rgba(192,192,192,0.25)] bg-[rgba(192,192,192,0.06)] text-[#c0c0c0]"
                           : "border-line bg-fill text-muted",
                       )}
                     >

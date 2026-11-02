@@ -24,7 +24,7 @@ export default function HomeHero() {
             <span className="heading-dim">can&apos;t afford to get breached.</span>
           </h1>
           <p className="lede fade-up mt-7 max-w-xl sm:text-lg" style={{ "--d": "220ms" } as CSSProperties}>
-            Cynguard builds security products — PhishNode and LeakShield — and delivers managed SOC,
+            Ashfang builds security products — PhishNode and LeakShield — and delivers managed SOC,
             penetration testing, code review, and security engineering for clients around the world.
           </p>
           <div
@@ -42,12 +42,12 @@ export default function HomeHero() {
         </div>
 
         <div className="fade-up relative mx-auto w-full max-w-[560px]" style={{ "--d": "300ms" } as CSSProperties}>
-          <div aria-hidden className="absolute inset-[14%] rounded-full bg-[radial-gradient(closest-side,rgba(139,92,246,0.32),transparent)] blur-2xl" />
+          <div aria-hidden className="absolute inset-[14%] rounded-full bg-[radial-gradient(closest-side,rgba(219,2,16,0.32),transparent)] blur-2xl" />
           <Globe />
           <ul className="absolute inset-x-0 bottom-2 flex flex-wrap justify-center gap-2">
             {REGIONS.map((r) => (
               <li key={r} className="chip glass border-line-strong text-[10.5px]">
-                <span className="h-1.5 w-1.5 rounded-full bg-cyan" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#db0210]" />
                 {r}
               </li>
             ))}

@@ -5,9 +5,9 @@ import JsonLd from "@/components/seo/JsonLd";
 import { contactPageSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact Cynguard — Talk to a Security Engineer",
+  title: "Contact Ashfang — Talk to a Security Engineer",
   description:
-    "Contact Cynguard, a Poland-based cybersecurity company, about managed SOC, penetration testing, PhishNode, LeakShield, or a free, no-obligation assessment.",
+    "Contact Ashfang, a Poland-based cybersecurity company, about managed SOC, penetration testing, PhishNode, LeakShield, or a free, no-obligation assessment.",
   path: "/contact",
 });
 

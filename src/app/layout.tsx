@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   publisher: SITE.name,
   category: "Cybersecurity",
   keywords: [
-    "Cynguard",
+    "Ashfang",
     "cybersecurity company",
     `cybersecurity company ${HEADQUARTERS.country}`,
     `penetration testing ${HEADQUARTERS.country}`,
@@ -88,6 +88,10 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
   formatDetection: { email: false, telephone: false, address: false },
+  icons: {
+    icon: "/logo without bg.png",
+    shortcut: "/logo without bg.png",
+  },
   verification,
   other: {
     "llms-txt": "/llms.txt",
@@ -97,7 +101,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07070b",
+  themeColor: "#000000",
   colorScheme: "dark",
 };
 

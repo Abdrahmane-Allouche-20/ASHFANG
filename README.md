@@ -1,6 +1,6 @@
-# Cynguard — Landing Page
+# Ashfang — Landing Page
 
-The official website of **Cynguard** — an international cybersecurity company building PhishNode and LeakShield and delivering managed SOC, penetration testing, code review, and security engineering.
+The official website of **Ashfang** — an international cybersecurity company building PhishNode and LeakShield and delivering managed SOC, penetration testing, code review, and security engineering.
 
 > Think like an attacker. Defend like an engineer.
 
@@ -71,6 +71,6 @@ automatically. Footer social links appear once a URL is added to `SOCIALS`.
 | Violet (primary) | `#8B5CF6` |
 | Cyan (secondary) | `#22D3EE` |
 | Fonts | Geist · Instrument Serif (accents) · Geist Mono |
-| Logo | `public/brand/mark.svg` — icon only; the CYNGUARD wordmark is live text in `src/components/ui/Logo.tsx` |
+| Logo | `public/logo title without bg.png` — the Ashfang wordmark used by the site |
 
 Contact: `cyngard.support@gmail.com`

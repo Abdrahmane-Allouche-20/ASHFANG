@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import PageHeader from "@/components/layout/PageHeader";
@@ -11,9 +12,9 @@ import JsonLd from "@/components/seo/JsonLd";
 import { absolute, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Cynguard — International Cybersecurity Company",
+  title: "About Ashfang — International Cybersecurity Company",
   description:
-    "Cynguard combines in-house security products with engineer-led services for clients across North America, Europe, Africa & the Middle East, and Asia-Pacific.",
+    "Ashfang combines in-house security products with engineer-led services for clients across North America, Europe, Africa & the Middle East, and Asia-Pacific.",
   path: "/company",
 });
 
@@ -51,7 +52,7 @@ export default function CompanyPage() {
         data={{
           "@type": "AboutPage",
           url: absolute("/company"),
-          name: "About Cynguard",
+          name: "About Ashfang",
           about: { "@id": `${absolute("/")}/#organization` },
         }}
       />
@@ -59,10 +60,23 @@ export default function CompanyPage() {
         crumbs={[{ name: "Company", path: "/company" }]}
         title={
           <>
-            About Cynguard. <span className="heading-dim">Think like an attacker, defend like an engineer.</span>
+            About Ashfang. <span className="heading-dim">Think like an attacker, defend like an engineer.</span>
           </>
         }
-        lede="Cynguard is an international cybersecurity company headquartered in Poland. We combine in-house security products with engineer-led services to help organizations find their weaknesses, watch for threats, and respond when it matters."
+        lede="Ashfang is an international cybersecurity company headquartered in Poland. We combine in-house security products with engineer-led services to help organizations find their weaknesses, watch for threats, and respond when it matters."
+        visual={
+          <div className="relative w-full max-w-[360px]">
+            <div aria-hidden className="absolute inset-[18%] rounded-full bg-[radial-gradient(closest-side,rgba(219,2,16,0.25),transparent)] blur-3xl" />
+            <Image
+              src="/full logo without bg.png"
+              alt="Ashfang company logo"
+              width={1112}
+              height={1112}
+              priority
+              className="relative h-auto w-full object-contain drop-shadow-[0_0_30px_rgba(219,2,16,0.18)]"
+            />
+          </div>
+        }
       />
 
       <section className="relative pb-16">
@@ -101,7 +115,7 @@ export default function CompanyPage() {
             </div>
           </Reveal>
           <Reveal delay={0.1} className="relative mx-auto w-full max-w-[520px]">
-            <div aria-hidden className="absolute inset-[14%] rounded-full bg-[radial-gradient(closest-side,rgba(139,92,246,0.3),transparent)] blur-2xl" />
+            <div aria-hidden className="absolute inset-[14%] rounded-full bg-[radial-gradient(closest-side,rgba(219,2,16,0.3),transparent)] blur-2xl" />
             <Globe />
           </Reveal>
         </div>

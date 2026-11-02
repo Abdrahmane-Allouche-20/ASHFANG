@@ -80,9 +80,9 @@ export default function Globe({ className }: { className?: string }) {
         diffuse: 1.2,
         mapSamples: 16000,
         mapBrightness: 5,
-        baseColor: [0.3, 0.27, 0.5],
-        markerColor: [0.4, 0.88, 0.98],
-        glowColor: [0.33, 0.24, 0.72],
+        baseColor: [0.75, 0.75, 0.75],
+        markerColor: [0.86, 0.008, 0.06],
+        glowColor: [0.86, 0.008, 0.06],
         markers: MARKERS,
       });
       canvas.style.opacity = "1";

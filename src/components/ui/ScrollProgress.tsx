@@ -11,7 +11,7 @@ export default function ScrollProgress() {
       aria-hidden
       style={{
         scaleX,
-        background: "linear-gradient(90deg, #8b5cf6, #22d3ee 60%, #a78bfa)",
+        background: "linear-gradient(90deg, #db0210, #c0c0c0 60%, #db0210)",
       }}
       className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-px origin-left"
     />

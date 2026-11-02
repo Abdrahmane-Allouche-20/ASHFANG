@@ -73,7 +73,7 @@ export default function FAQ({
                         className={cn(
                           "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ease-premium",
                           isOpen
-                            ? "rotate-45 border-[rgba(167,139,250,0.5)] bg-[rgba(139,92,246,0.15)] text-violet-pale"
+                            ? "rotate-45 border-[rgba(219,2,16,0.5)] bg-[rgba(219,2,16,0.15)] text-violet-pale"
                             : "border-line-strong text-muted group-hover:text-fg",
                         )}
                       >

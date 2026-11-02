@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { Check, Lock, Paperclip, ShieldCheck } from "lucide-react";
+import { Check, Lock, Paperclip } from "lucide-react";
 import { cn } from "@/lib/cn";
 import Beam from "@/components/ui/Beam";
 import StatusOrb from "@/components/ui/StatusOrb";
 
 /* Illustrative product views for PhishNode and LeakShield (sample data only). */
 
-const WINDOW_SHADOW = "shadow-[0_40px_100px_-40px_rgba(139,92,246,0.45),0_24px_60px_-30px_rgba(0,0,0,0.9)]";
+const WINDOW_SHADOW = "shadow-[0_40px_100px_-40px_rgba(219,2,16,0.45),0_24px_60px_-30px_rgba(0,0,0,0.9)]";
 
 /** App window chrome. `working` runs a border beam to show the product busy. */
 function Window({
@@ -49,7 +49,7 @@ function Window({
   if (!working) return frame;
   // The beam clips its wrapper, so the window's outer shadow moves onto it.
   return (
-    <Beam size="md" colorVariant="ocean" className={cn("rounded-[1.1rem]", WINDOW_SHADOW)}>
+    <Beam size="md" colorVariant="mono" className={cn("rounded-[1.1rem]", WINDOW_SHADOW)}>
       {frame}
     </Beam>
   );
@@ -91,7 +91,7 @@ export function PhishNodeConsole() {
               key={q.subject}
               className={cn(
                 "flex items-center gap-3 border-b border-line px-4 py-3 last:border-0",
-                i === 0 && "bg-[rgba(139,92,246,0.08)] shadow-[inset_2px_0_0_#a78bfa]",
+                i === 0 && "bg-[rgba(219,2,16,0.08)] shadow-[inset_2px_0_0_#db0210]",
               )}
             >
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-fill-strong font-mono text-[10px] text-muted">
@@ -181,11 +181,11 @@ export function PhishNodeFlow() {
       <div className="flex items-center">
         {steps.map((s, i) => (
           <div key={s} className="flex flex-1 items-center last:flex-none">
-            <span className="rounded-full border border-[rgba(103,232,249,0.3)] bg-[rgba(34,211,238,0.08)] px-3 py-1 font-mono text-[10.5px] text-cyan-soft">
+            <span className="rounded-full border border-[rgba(219,2,16,0.3)] bg-[rgba(219,2,16,0.08)] px-3 py-1 font-mono text-[10.5px] text-cyan-soft">
               {s}
             </span>
             {i < steps.length - 1 && (
-              <span className="mx-1.5 h-px flex-1 bg-[linear-gradient(90deg,rgba(103,232,249,0.5),rgba(167,139,250,0.5))]" />
+              <span className="mx-1.5 h-px flex-1 bg-[linear-gradient(90deg,rgba(192,192,192,0.5),rgba(219,2,16,0.5))]" />
             )}
           </div>
         ))}
@@ -288,29 +288,27 @@ export function LeakShieldExposure() {
 /* ---------------- Marks ---------------- */
 
 export function PhishNodeMark({ className, priority }: { className?: string; priority?: boolean }) {
-  // Shown at 36–44px, so request a 64px source (128px on retina) instead of the 512px file.
   return (
     <Image
-      src="/brand/phishnode.png"
-      alt=""
-      width={64}
-      height={64}
+      src="/Products/phishnode.png"
+      alt="PhishNode"
+      width={512}
+      height={512}
       priority={priority}
-      className={cn("h-9 w-9 drop-shadow-[0_0_14px_rgba(59,130,246,0.55)]", className)}
+      className={cn("h-9 w-9 object-contain drop-shadow-[0_0_14px_rgba(37,99,235,0.55)]", className)}
     />
   );
 }
 
-export function LeakShieldMark({ className }: { className?: string }) {
+export function LeakShieldMark({ className, priority }: { className?: string; priority?: boolean }) {
   return (
-    <span
-      className={cn(
-        "flex h-9 w-9 items-center justify-center rounded-[0.7rem] bg-[linear-gradient(145deg,#a78bfa,#6d28d9)] text-white shadow-[0_0_20px_-4px_rgba(139,92,246,0.8),inset_0_1px_0_rgba(255,255,255,0.35)]",
-        className,
-      )}
-    >
-      <ShieldCheck size={19} strokeWidth={2.2} />
-    </span>
+    <Image
+      src="/Products/leakshiled.png"
+      alt="LeakShield"
+      width={512}
+      height={512}
+      priority={priority}
+      className={cn("h-9 w-9 object-contain drop-shadow-[0_0_14px_rgba(37,174,235,0.45)]", className)}
+    />
   );
 }
-

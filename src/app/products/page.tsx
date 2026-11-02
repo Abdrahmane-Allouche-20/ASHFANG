@@ -10,7 +10,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Security Products — PhishNode & LeakShield",
   description:
-    "PhishNode for phishing reporting and triage, and LeakShield for data breach and OSINT monitoring — use them on your own or with Cynguard's managed services.",
+    "PhishNode for phishing reporting and triage, and LeakShield for data breach and OSINT monitoring — use them on your own or with Ashfang's managed services.",
   path: "/products",
 });
 
@@ -19,7 +19,7 @@ const PAIRINGS = [
     product: "PhishNode",
     service: "Managed SOC",
     href: "/services/managed-soc",
-    text: "Run PhishNode yourself, or let Cynguard analysts triage every report for you as part of our managed SOC.",
+    text: "Run PhishNode yourself, or let Ashfang analysts triage every report for you as part of our managed SOC.",
   },
   {
     product: "LeakShield",

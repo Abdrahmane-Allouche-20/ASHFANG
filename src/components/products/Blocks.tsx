@@ -118,7 +118,7 @@ export function Steps({ steps }: { steps: { title: string; text: string }[] }) {
     <ol className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       {steps.map((s, i) => (
         <Reveal as="li" key={s.title} delay={i * 0.08} className="card p-6 sm:p-7">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(167,139,250,0.5)] bg-[#161225] font-mono text-[12px] text-fg shadow-[0_0_20px_-6px_rgba(139,92,246,0.7)]">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(219,2,16,0.5)] bg-[#1a0507] font-mono text-[12px] text-fg shadow-[0_0_20px_-6px_rgba(219,2,16,0.7)]">
             {String(i + 1).padStart(2, "0")}
           </span>
           <h3 className="mt-5 font-display text-xl font-semibold tracking-[-0.02em]">{s.title}</h3>
@@ -142,7 +142,7 @@ export function FeatureGrid({
       {items.map((f, i) => (
         <Reveal key={f.title} delay={(i % 3) * 0.06} className="flex">
           <article data-spot className="card w-full min-w-0 p-6 sm:p-7">
-            <span className="block h-px w-8 bg-[linear-gradient(90deg,#a78bfa,#22d3ee)]" />
+            <span className="block h-px w-8 bg-[linear-gradient(90deg,#db0210,#c0c0c0)]" />
             <h3 className="mt-5 font-display text-lg font-semibold tracking-[-0.02em]">{f.title}</h3>
             <p className="mt-2.5 text-[14.5px] leading-relaxed text-muted">{f.text}</p>
           </article>

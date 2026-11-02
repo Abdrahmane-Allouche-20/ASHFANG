@@ -11,7 +11,7 @@ export default function Footer() {
 
   return (
     <footer className="relative isolate overflow-hidden border-t border-line">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_100%,rgba(139,92,246,0.12),transparent_70%)]" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-[420px] bg-[radial-gradient(60%_80%_at_50%_100%,rgba(219,2,16,0.12),transparent_70%)]" />
 
       <div className="container-page grid grid-cols-1 gap-12 pb-10 pt-16 sm:grid-cols-2 md:pt-20 lg:grid-cols-[1.4fr_0.9fr_1.2fr_0.8fr_1.1fr] lg:gap-8">
         <div className="max-w-xs">
@@ -78,7 +78,7 @@ export default function Footer() {
         <FooterColumn title="Company">
           <li>
             <Link href="/company" className="footer-link">
-              About Cynguard
+              About Ashfang
             </Link>
           </li>
           <li>
@@ -111,7 +111,7 @@ export default function Footer() {
       <div className="container-page">
         <div className="divider-x" />
         <div className="flex flex-col items-center justify-between gap-4 py-7 text-[12.5px] text-subtle sm:flex-row">
-          <p>© {new Date().getFullYear()} Cynguard. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Ashfang. All rights reserved.</p>
           <p>{SITE.tagline}</p>
         </div>
       </div>
